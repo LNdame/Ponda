@@ -35,7 +35,13 @@
         <activity
             android:name=".views.project.ProjectList"
             android:label="@string/title_activity_project_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
+            android:name=".contentprovider.AttendeeContentProvider"
+            android:authorities="cite.ansteph.ponda.contentprovider.attendeecontentprovider"
+            android:enabled="true"
+            android:exported="false"></provider>
     </application>
 
 </manifest>
