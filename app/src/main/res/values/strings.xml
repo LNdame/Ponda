@@ -10,4 +10,5 @@
     <string name="title_activity_attendee_list">Attendees</string>
     <string name="title_activity_client_list">Clients</string>
     <string name="title_activity_project_list">Projects</string>
+    <string name="title_activity_edit_client">EditClient</string>
 </resources>

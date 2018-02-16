@@ -8,4 +8,5 @@ public interface Tables {
 ;
 
     String ATTENDEE_TABLE = "attendee";
+    String CLIENT_TABLE = "client";
 }

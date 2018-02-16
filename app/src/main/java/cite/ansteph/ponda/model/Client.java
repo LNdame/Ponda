@@ -1,15 +1,24 @@
 package cite.ansteph.ponda.model;
 
+import java.io.Serializable;
+
 /**
  * Created by loicstephan on 2018/02/12.
  */
 
-public class Client {
+public class Client implements Serializable {
     int id;
 
     String name ,websiteUrl,telephone,contactPerson,contactPhone,email;
 
     public Client() {
+    }
+
+//delete after use
+    public Client(int id,String name, String contactPerson) {
+        this.id = id;
+        this.name = name;
+        this.contactPerson = contactPerson;
     }
 
     public Client(String name, String websiteUrl, String telephone, String contactPerson, String contactPhone, String email) {

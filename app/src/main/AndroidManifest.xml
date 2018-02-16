@@ -41,6 +41,22 @@
             android:name=".contentprovider.AttendeeContentProvider"
             android:authorities="cite.ansteph.ponda.contentprovider.attendeecontentprovider"
             android:enabled="true"
+            android:exported="false" />
+
+        <activity
+            android:name=".views.client.EditClient"
+            android:label="@string/title_activity_edit_client"
+            android:parentActivityName=".views.client.ClientList"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cite.ansteph.ponda.views.client.ClientList" />
+        </activity>
+
+        <provider
+            android:name=".contentprovider.ClientContentProvider"
+            android:authorities="cite.ansteph.ponda.contentprovider.clientcontentprovider"
+            android:enabled="true"
             android:exported="false"></provider>
     </application>
 

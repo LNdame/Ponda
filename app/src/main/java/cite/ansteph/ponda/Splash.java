@@ -1,7 +1,10 @@
 package cite.ansteph.ponda;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import cite.ansteph.ponda.views.client.ClientList;
 
 public class Splash extends AppCompatActivity {
 
@@ -9,5 +12,28 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
+
+        Thread timerThread = new Thread() {
+            public void run() {
+                try {
+                    sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    /**
+                     * Call this function whenever you want to check user login
+                     * This will redirect user to Login is he is not
+                     * logged in
+                     * */
+                  //  sessionManager.checkLogin();
+                     Intent intent = new Intent(getApplicationContext(), ClientList.class);
+                    startActivity(intent);
+                }
+            }
+        };
+        timerThread.start();
+
     }
 }

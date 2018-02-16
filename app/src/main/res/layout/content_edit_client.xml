@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cite.ansteph.ponda.views.client.EditClient"
+    tools:showIn="@layout/activity_edit_client">
+
+
+
+
+        <EditText
+            android:id="@+id/edtname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Name"
+            android:ems="10"
+            android:inputType="textPersonName"
+            />
+
+        <EditText
+            android:id="@+id/edtweburl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Website Url"
+            android:ems="10"
+            android:inputType="text"
+            />
+
+        <EditText
+            android:id="@+id/edttelephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Telephone"
+            android:ems="10"
+            android:layout_marginBottom="16dp"
+            android:inputType="numberSigned" />
+
+
+        <EditText
+            android:id="@+id/edtcontactname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Contact Person Name"
+            android:ems="10"
+            android:inputType="text"
+            />
+
+
+        <EditText
+            android:id="@+id/edtcontacttel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Contact Person Telephone"
+            android:ems="10"
+            android:layout_marginBottom="16dp"
+            android:inputType="numberSigned" />
+
+
+        <EditText
+            android:id="@+id/edtemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Email"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            />
+
+        />
+
+
+
+
+</LinearLayout>
