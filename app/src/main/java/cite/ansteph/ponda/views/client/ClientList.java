@@ -36,6 +36,8 @@ public class ClientList extends AppCompatActivity
     ClientRecyclerAdapter mClientAdapter;
 
 
+    //Change for the sake of change
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
