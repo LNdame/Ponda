@@ -7,13 +7,20 @@ package cite.ansteph.ponda.model;
 public class LoicTest {
 
     int id;
-    String Name;
+    String Name, surname;
 
     public LoicTest(int id, String name) {
         this.id = id;
         Name = name;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
     public int getId() {
         return id;
