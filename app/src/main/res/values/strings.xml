@@ -11,4 +11,6 @@
     <string name="title_activity_client_list">Clients</string>
     <string name="title_activity_project_list">Projects</string>
     <string name="title_activity_edit_client">EditClient</string>
+    <string name="title_activity_edit_project">EditProject</string>
+    <string name="select_client">Select Client</string>
 </resources>

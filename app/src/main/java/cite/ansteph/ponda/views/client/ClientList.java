@@ -36,8 +36,6 @@ public class ClientList extends AppCompatActivity
     ClientRecyclerAdapter mClientAdapter;
 
 
-    //Change for the sake of change
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +65,7 @@ public class ClientList extends AppCompatActivity
 
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-       clientRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        clientRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 
         mClientList = retrieveClients();//setupList();// new ArrayList<>();
 

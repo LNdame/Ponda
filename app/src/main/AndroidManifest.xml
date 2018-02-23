@@ -44,6 +44,22 @@
             android:exported="false" />
 
         <activity
+            android:name=".views.project.EditProject"
+            android:label="@string/title_activity_edit_project"
+            android:parentActivityName=".views.project.ProjectList"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cite.ansteph.ponda.views.project.ProjectList" />
+        </activity>
+
+        <provider
+            android:name=".contentprovider.ProjectContentProvider"
+            android:authorities="cite.ansteph.ponda.contentprovider.projectcontentprovider"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity
             android:name=".views.client.EditClient"
             android:label="@string/title_activity_edit_client"
             android:parentActivityName=".views.client.ClientList"

@@ -8,4 +8,11 @@
     tools:context="cite.ansteph.ponda.views.project.ProjectList"
     tools:showIn="@layout/app_bar_project_list">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
 </android.support.constraint.ConstraintLayout>
