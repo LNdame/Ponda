@@ -16,7 +16,10 @@ public class Project implements Serializable {
 
     }
 
-
+    public Project(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
     //delete after use
     public Project(int id, int clientId, String name, String projManName) {
         this.id = id;

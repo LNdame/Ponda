@@ -8,31 +8,32 @@ public class Meeting {
 
     int id,clientId,projectId ;
 
-    String projectManagersRef,site, startDate,endDate;
+    String projectManagersRef,site, meetingDate, startTime;
 
 
 
     public Meeting() {
     }
 
-    public Meeting(int id, int clientId, int projectId, String projectManagersRef, String site, String startDate, String endDate) {
+    public Meeting(int id, int clientId, int projectId, String projectManagersRef, String site, String meetingDate, String startTime) {
         this.id = id;
         this.clientId = clientId;
         this.projectId = projectId;
         this.projectManagersRef = projectManagersRef;
         this.site = site;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.meetingDate = meetingDate;
+        this.startTime = startTime;
+
     }
 
 
-    public Meeting(int clientId, int projectId, String projectManagersRef, String site, String startDate, String endDate) {
+    public Meeting(int clientId, int projectId, String projectManagersRef, String site, String meetingDate, String startTime) {
         this.clientId = clientId;
         this.projectId = projectId;
         this.projectManagersRef = projectManagersRef;
         this.site = site;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.meetingDate = meetingDate;
+        this.startTime = startTime;
     }
 
 
@@ -76,19 +77,19 @@ public class Meeting {
         this.site = site;
     }
 
-    public String getStartDate() {
-        return startDate;
+    public String getMeetingDate() {
+        return meetingDate;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setMeetingDate(String meetingDate) {
+        this.meetingDate = meetingDate;
     }
 
-    public String getEndDate() {
-        return endDate;
+    public String getStartTime() { return startTime;}
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
+
 }

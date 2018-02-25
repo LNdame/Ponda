@@ -6,14 +6,13 @@ package cite.ansteph.ponda.api.columns;
 
 public interface MeetingColumns extends DataColumns {
 
-
+    String PROJECT_MANAGER_REF="project_managers_ref"  ;
     String CLIENT_ID  = "client_id";
     String PROJECT_ID  = "project_id";
     String SITE = "site";
     String START_DATE = "start_date";
-    String END_DATE = "end_date";
-  String PROJECT_MANAGER_REF="project_managers_ref"  ;
+    String START_TIME = "end_time";
 
-    String[]PROJECTION = new String[]{_ID,CLIENT_ID,PROJECT_ID,SITE,START_DATE,END_DATE};
+    String[]PROJECTION = new String[]{_ID,PROJECT_MANAGER_REF,CLIENT_ID,PROJECT_ID,SITE,START_DATE, START_TIME};
 
 }
