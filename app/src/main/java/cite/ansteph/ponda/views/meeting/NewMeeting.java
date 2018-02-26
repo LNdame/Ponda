@@ -302,7 +302,7 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         String project = String.valueOf(projSpinner);
 
         mMeetingAdd.setProjectManagersRef( ((EditText)findViewById(R.id.edtprojectmgrref)).getText().toString()  );
-        mMeetingAdd.setClientId(1);//Integer.parseInt(client));
+        //mMeetingAdd.setClientId(1);//Integer.parseInt(client));
         mMeetingAdd.setProjectId(1); //Integer.parseInt(project));
         mMeetingAdd.setSite( ((EditText)findViewById(R.id.edtsite)).getText().toString()  );
         mMeetingAdd.setMeetingDate( ((TextView)findViewById(R.id.tvdate)).getText().toString()  );
