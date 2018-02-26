@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -34,7 +35,7 @@ public class EditProject extends AppCompatActivity {
     private Spinner mSpinClient;
     ArrayList <Client> mClientlist;
     CustomClientListAdapter customClientListAdapter;
-
+    int selectedClient;
     private int mYear, mMonth, mDay;
     Project mProjectEdited;
 
@@ -178,6 +179,25 @@ public class EditProject extends AppCompatActivity {
         customClientListAdapter = new CustomClientListAdapter(mClientlist, this);
 
         mSpinClient.setAdapter(customClientListAdapter);
+
+        mSpinClient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // TODO Auto-generated method stub
+                Client selected = (Client) parent.getItemAtPosition(position);
+
+                selectedClient = selected.getId();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+        });
     }
 
     private ArrayList<Client> populatelist() {
@@ -214,7 +234,7 @@ public class EditProject extends AppCompatActivity {
         mProjectEdited.setName( ((EditText)findViewById(R.id.edtname)).getText().toString()  );
 
 
-        //mProjectEdited.setClientId((Integer.parseInt(((EditText)findViewById(R.id.edtcleintid)).getText().toString())));
+        mProjectEdited.setClientId(selectedClient);
         //mProjectEdited.( ((EditText)findViewById(R.id.edttelephone)).getText().toString()  );
         mProjectEdited.setStartDate( ((TextView)findViewById(R.id.edtstartdate)).getText().toString()  );
         mProjectEdited.setEndDate( ((TextView)findViewById(R.id.edtenddate)).getText().toString()  );

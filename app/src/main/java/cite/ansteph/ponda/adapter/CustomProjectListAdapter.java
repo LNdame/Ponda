@@ -38,7 +38,7 @@ public class CustomProjectListAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return mProjectList.get(position);
     }
 
     @Override

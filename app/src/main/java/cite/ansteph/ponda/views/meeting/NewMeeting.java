@@ -17,9 +17,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -58,6 +62,7 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
     LinearLayout cNewMeeting, cMeetingFragment;
     RecyclerView meetingItemRecyclerView;
     MeetingItemRecyclerAdapter mMeetingItemAdapter;
+    Integer selectedClient, selectedProject;
 
 
 
@@ -237,11 +242,49 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         mClientAdapter = new CustomClientListAdapter(mClientList, this);
         clientSpinner.setAdapter(mClientAdapter);
 
+        clientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // TODO Auto-generated method stub
+                Client selected = (Client) parent.getItemAtPosition(position);
+
+                selectedClient = selected.getId();
+
+                //PositionDisplay.setText("Item Position is = " + Hold );
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+        });
+
+
         projectSpinner = (Spinner) findViewById(R.id.spproject);
         mProjectList = populateProjectList();
         mProjectAdapter = new CustomProjectListAdapter(mProjectList, this);
         projectSpinner.setAdapter(mProjectAdapter);
 
+        projectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // TODO Auto-generated method stub
+                Project selected = (Project) parent.getItemAtPosition(position);
+                selectedProject = selected.getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub
+
+            }
+        });
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         meetingItemRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
@@ -293,17 +336,16 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
 
     private void prepareSaving() {
         //retrieving the corresponding value
-        Spinner clientSpinner = (Spinner)findViewById(R.id.spclient);
-        clientSpinner.getSelectedItemId();
-        String client = String.valueOf(clientSpinner);
-
-        Spinner projSpinner = (Spinner)findViewById(R.id.spproject);
-        projSpinner.getSelectedItem();
-        String project = String.valueOf(projSpinner);
+//        //Spinner clientSpinner = (Spinner)findViewById(R.id.spclient);
+//        String client = String.valueOf(clientSpinner);
+//
+//        //Spinner projSpinner = (Spinner)findViewById(R.id.spproject);
+//        projectSpinner.getSelectedItem().toString();
+//        String project = String.valueOf(projectSpinner);
 
         mMeetingAdd.setProjectManagersRef( ((EditText)findViewById(R.id.edtprojectmgrref)).getText().toString()  );
-        //mMeetingAdd.setClientId(1);//Integer.parseInt(client));
-        mMeetingAdd.setProjectId(1); //Integer.parseInt(project));
+        mMeetingAdd.setClientId(selectedClient);
+        mMeetingAdd.setProjectId(selectedProject);
         mMeetingAdd.setSite( ((EditText)findViewById(R.id.edtsite)).getText().toString()  );
         mMeetingAdd.setMeetingDate( ((TextView)findViewById(R.id.tvdate)).getText().toString()  );
         mMeetingAdd.setStartTime( ((TextView)findViewById(R.id.tvstarttime)).getText().toString()  );
