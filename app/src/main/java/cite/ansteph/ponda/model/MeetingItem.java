@@ -14,6 +14,13 @@ int id, meetingId ;
     public MeetingItem() {
     }
 
+    //populate
+    public MeetingItem(int id, int meetingId, String itemName) {
+        this.id = id;
+        this.meetingId = meetingId;
+        this.itemName = itemName;
+    }
+
     public MeetingItem(int id, int meetingId, String itemName, String position, String status) {
         this.id = id;
         this.meetingId = meetingId;
