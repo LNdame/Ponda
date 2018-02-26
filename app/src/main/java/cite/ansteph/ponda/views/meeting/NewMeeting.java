@@ -313,10 +313,10 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
     private void fillFields() {
 //        ((Spinner)findViewById(R.id.spclient)).setText(mMeetingAdd.getProjectManagersRef());
 //        ((Spinner)findViewById(R.id.spproject)).setText(mMeetingAdd.getSite());
-        ((EditText)findViewById(R.id.edtprojectmgrref)).setText(mMeetingAdd.getProjectManagersRef());
-        ((EditText)findViewById(R.id.edtsite)).setText(mMeetingAdd.getSite());
-        ((TextView)findViewById(R.id.tvdate)).setText(mMeetingAdd.getMeetingDate());
-        ((TextView)findViewById(R.id.tvstarttime)).setText(mMeetingAdd.getStartTime());
+//        ((EditText)findViewById(R.id.edtprojectmgrref)).setText(mMeetingAdd.getProjectManagersRef());
+//        ((EditText)findViewById(R.id.edtsite)).setText(mMeetingAdd.getSite());
+//        ((TextView)findViewById(R.id.tvdate)).setText(mMeetingAdd.getMeetingDate());
+//        ((TextView)findViewById(R.id.tvstarttime)).setText(mMeetingAdd.getStartTime());
 
     }
 
