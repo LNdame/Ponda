@@ -52,13 +52,13 @@ public class EditClient extends AppCompatActivity {
                 //step 2 insert or update : if getId !=0 null update else insert
 
                 if(mClientEdited.getId()!=0) {
-                 int done =    updateClient(mClientEdited);
-                 if(done==1)
-                    startActivity(new Intent(getApplicationContext(), ClientList.class));
+                    int done =    updateClient(mClientEdited);
+                    if(done==1)
+                        startActivity(new Intent(getApplicationContext(), ClientList.class));
                 }else{
                     int done =  insertClient(mClientEdited);
                     if(done==1)
-                    startActivity(new Intent(getApplicationContext(), ClientList.class));
+                        startActivity(new Intent(getApplicationContext(), ClientList.class));
                 }
 
 

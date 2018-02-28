@@ -1,22 +1,36 @@
 package cite.ansteph.ponda.views.attendee;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.ArrayList;
 
 import cite.ansteph.ponda.R;
+import cite.ansteph.ponda.adapter.AttendeeRecyclerAdapter;
+import cite.ansteph.ponda.api.ContentType;
+import cite.ansteph.ponda.api.columns.AttendeeColumns;
+import cite.ansteph.ponda.model.Attendee;
 
 public class AttendeeList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    RecyclerView attendeeRecyclerView;
+    ArrayList<Attendee> mAttendeeList;
+    AttendeeRecyclerAdapter mAttendeeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +43,7 @@ public class AttendeeList extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), EditAttendee.class));
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -42,6 +57,47 @@ public class AttendeeList extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        attendeeRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+
+        mAttendeeList = retrieveAttendees();//setupList();// new ArrayList<>();
+
+        mAttendeeAdapter  = new AttendeeRecyclerAdapter(mAttendeeList,  this);
+        attendeeRecyclerView.setLayoutManager(mLayoutManager);
+        attendeeRecyclerView.setAdapter(mAttendeeAdapter);
+    }
+
+    private ArrayList<Attendee> retrieveAttendees()
+    {
+        ContentResolver resolver = getContentResolver();
+
+        Cursor cursor = resolver.query(ContentType.ATTENDEE_CONTENT_URI, AttendeeColumns.PROJECTION, null, null,null);
+        ArrayList<Attendee> activities = new ArrayList<>();
+
+        if(cursor.moveToFirst()){
+            do{
+                Attendee activity = new Attendee(
+                        ((cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.FIRSTNAME))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.SURNAME))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.ORGANSATION))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.TELEPHONE))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.CELLPHONE))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.FAX))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.EMAIL)))
+                );
+
+                activities.add(activity);
+
+            }while(cursor.moveToNext());
+        }
+
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return activities;
     }
 
     @Override

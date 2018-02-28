@@ -11,17 +11,22 @@ public class Client implements Serializable {
 
     String name ,websiteUrl,telephone,contactPerson,contactPhone,email;
 
-    public Client() {
+    public Client(){}
+
+    public Client(int id, String name) {
+        this.id = id;
+        this.name = name;
+
     }
 
-//delete after use
+    //delete after use
     public Client(int id,String name, String contactPerson) {
         this.id = id;
         this.name = name;
         this.contactPerson = contactPerson;
     }
 
-    public Client(String name, String websiteUrl, String telephone, String contactPerson, String contactPhone, String email) {
+    public Client( String name, String websiteUrl, String telephone, String contactPerson, String contactPhone, String email) {
         this.name = name;
         this.websiteUrl = websiteUrl;
         this.telephone = telephone;

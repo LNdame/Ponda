@@ -7,53 +7,51 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import cite.ansteph.ponda.R;
-import cite.ansteph.ponda.model.Client;
-import cite.ansteph.ponda.views.client.EditClient;
+import cite.ansteph.ponda.model.Attendee;
+import cite.ansteph.ponda.views.attendee.EditAttendee;
 
-/**
- * Created by loicstephan on 2018/02/16.
- */
 
-public class ClientRecyclerAdapter extends RecyclerView.Adapter<ClientRecyclerAdapter.ViewHolder> {
+public class AttendeeRecyclerAdapter extends RecyclerView.Adapter<AttendeeRecyclerAdapter.ViewHolder> {
 
-    public ArrayList<Client> mClients;
+    public ArrayList<Attendee> mAttendees;
+
     Context mContext;
 
-    public ClientRecyclerAdapter() {
+    public AttendeeRecyclerAdapter() {
     }
 
-    public ClientRecyclerAdapter(ArrayList<Client> mClients, Context mContext) {
-        this.mClients = mClients;
+    public AttendeeRecyclerAdapter(ArrayList<Attendee> mAttendees, Context mContext) {
+        this.mAttendees = mAttendees;
         this.mContext = mContext;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.client_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.attendee_list_item, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder,  final int position) {
-        holder.mTextView.setText(mClients.get(position).getName());
+    public void onBindViewHolder(AttendeeRecyclerAdapter.ViewHolder holder, final int position) {
+        holder.mTextView.setText(mAttendees.get(position).getFirstname());
         //   holder.mIcon.setLetter(mBookList.get(position).getTitle());
 
-        holder.mAddText.setText(String.valueOf(mClients.get(position).getContactPerson())  );
+        holder.mAddText.setText(String.valueOf(mAttendees.get(position).getOrganisation())  );
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("item", "clicked");
-                Intent i = new Intent(mContext, EditClient.class);
-                i.putExtra("client", mClients.get(position));
+                Intent i = new Intent(mContext, EditAttendee.class);
+
+                i.putExtra("attendee", mAttendees.get(position));
                 mContext.startActivity(i);
             }
         });
@@ -62,7 +60,7 @@ public class ClientRecyclerAdapter extends RecyclerView.Adapter<ClientRecyclerAd
 
     @Override
     public int getItemCount() {
-        return mClients.size();
+        return mAttendees.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
