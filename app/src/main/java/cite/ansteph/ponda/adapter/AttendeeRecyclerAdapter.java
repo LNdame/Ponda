@@ -84,7 +84,7 @@ public class AttendeeRecyclerAdapter extends RecyclerView.Adapter<AttendeeRecycl
         @Override
         public void onClick(View v) {
             int position = getLayoutPosition();
-            // recyclerViewClickListener.onRecyclerViewListItemClicked(v, position);
+            //recyclerViewClickListener.onRecyclerViewListItemClicked(v, position);
 
 
         }

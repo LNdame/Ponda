@@ -28,6 +28,9 @@
             android:name=".views.attendee.AttendeeList"
             android:label="@string/title_activity_attendee_list"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".views.attendee.EditAttendee" />
+
         <activity
             android:name=".views.client.ClientList"
             android:label="@string/title_activity_client_list"
@@ -52,6 +55,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cite.ansteph.ponda.views.project.ProjectList" />
         </activity>
+
+        <activity
+            android:name=".views.popups.ApologiesPop"
+            android:theme="@style/AppTheme.CustomTheme"></activity>
+        <activity
+            android:name=".views.popups.AttendancePop"
+            android:theme="@style/AppTheme.CustomTheme"></activity>
 
         <provider
             android:name=".contentprovider.ProjectContentProvider"
