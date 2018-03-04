@@ -1,6 +1,5 @@
 package cite.ansteph.ponda.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,12 @@ import java.util.ArrayList;
 
 import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.model.MeetingItem;
+import cite.ansteph.ponda.views.popups.ApologiesPop;
 import cite.ansteph.ponda.views.popups.AttendancePop;
+import cite.ansteph.ponda.views.popups.ContractDetailsPop;
+import cite.ansteph.ponda.views.popups.MattersArisingPop;
+import cite.ansteph.ponda.views.popups.PreviousMinutesPop;
+import cite.ansteph.ponda.views.popups.ProgrammePop;
 
 /**
  * Created by Wendy on 2018/02/22.
@@ -45,7 +49,6 @@ public class MeetingItemRecyclerAdapter extends RecyclerView.Adapter<MeetingItem
     @Override
     public void onBindViewHolder(ViewHolder holder,  final int position) {
         holder.mTextView.setText(mMeetingItem.get(position).getItemName());
-        //   holder.mIcon.setLetter(mBookList.get(position).getTitle());
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +57,6 @@ public class MeetingItemRecyclerAdapter extends RecyclerView.Adapter<MeetingItem
                 Log.d("item", "clicked");
 
                 int itemID = mMeetingItem.get(position).getMeetingId();
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
 
                 if(itemID == 1){
 
@@ -63,31 +65,27 @@ public class MeetingItemRecyclerAdapter extends RecyclerView.Adapter<MeetingItem
 
                 }
                 else if(itemID == 2 ){
-
-
+                    i = new Intent(mContext, ApologiesPop.class);
                 }
                 else if(itemID == 3 ){
 
+                    i = new Intent(mContext, PreviousMinutesPop.class);
 
                 }
                 else if(itemID == 4 ){
-
+                    i = new Intent(mContext, MattersArisingPop.class);
 
                 }
                 else if(itemID == 5 ){
-
+                    i = new Intent(mContext, ContractDetailsPop.class);
 
                 }
                 else if(itemID == 6 ){
-
+                    i = new Intent(mContext, ProgrammePop.class);
 
                 }
-//                SharedPreferences sharedPref = mContext.getSharedPreferences("myprefs", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPref.edit();
-//                int selected_background = android.R.color.white;
-//                editor.putInt("background_resource", selected_background);
-//                editor.apply();
 
+                i.putExtra("meetingitem", mMeetingItem.get(position));
                 mContext.startActivity(i);
 
                 //i.putExtra("meetingitem", mMeetingItem.get(position));

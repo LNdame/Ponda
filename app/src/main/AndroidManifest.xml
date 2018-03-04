@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash">
+        <activity android:name="Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -58,11 +58,28 @@
 
         <activity
             android:name=".views.popups.ApologiesPop"
-            android:theme="@style/AppTheme.CustomTheme"></activity>
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
         <activity
             android:name=".views.popups.AttendancePop"
-            android:theme="@style/AppTheme.CustomTheme"></activity>
-
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity
+            android:name=".views.popups.ContractDetailsPop"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity
+            android:name=".views.popups.MattersArisingPop"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity
+            android:name=".views.popups.PreviousMinutesPop"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
+        <activity
+            android:name=".views.popups.ProgrammePop"
+            android:theme="@style/AppTheme.CustomTheme">
+        </activity>
         <provider
             android:name=".contentprovider.ProjectContentProvider"
             android:authorities="cite.ansteph.ponda.contentprovider.projectcontentprovider"
