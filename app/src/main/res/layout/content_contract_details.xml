@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cite.ansteph.ponda.views.popups.ContractDetailsPop">
+    <!--tools:showIn="@layout/pop_contract_details">-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_weight="1"
+            android:text="Acceptance of Tender" />
+
+        <TextView
+            android:id="@+id/tvacceptancedate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_weight="1"
+            android:text="Site Handover" />
+
+        <TextView
+            android:id="@+id/tvhandoverdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etcontractperiod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Overall Contract Period"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_weight="2"
+            android:text="Sectional Completion" />
+        <RadioButton
+            android:id="@+id/rbYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"/>
+        <RadioButton
+            android:id="@+id/rbNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"/>
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/etcontractvalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contract Value"/>
+    <EditText
+        android:id="@+id/etcontractdocumnets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contract Documents"/>
+
+    <EditText
+        android:id="@+id/etpricedbills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Priced Bills of Quantities"/>
+
+    <EditText
+        android:id="@+id/etworkmanscompensation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Workman's Compensation Insurance"/>
+    <EditText
+        android:id="@+id/ethandovercertificate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Site Handover Certification"/>
+
+    <EditText
+        android:id="@+id/etbankguarantee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Bank Guarantee"/>
+
+    <EditText
+        android:id="@+id/etextentionwithcosts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Extention of Time (With Costs)"/>
+
+    <EditText
+        android:id="@+id/etextentionwithoutcosts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Extention of Time (Without Costs)"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_weight="1"
+            android:text="Practical Completion Date" />
+
+        <TextView
+            android:id="@+id/tvpracticalcompletiondate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+</LinearLayout>
