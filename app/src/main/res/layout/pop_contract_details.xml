@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:background="@color/popup"
+    android:fitsSystemWindows="true"
+    android:weightSum="3"
+    tools:context="cite.ansteph.ponda.views.popups.ContractDetailsPop">
+
+
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:layout_weight="1">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            app:title="@string/title_pop_contract_details"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:weightSum="3"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_weight="1"
+            android:text="Acceptance of Tender" />
+
+        <TextView
+            android:id="@+id/tvacceptancedate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:weightSum="3">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_weight="1"
+            android:text="Site Handover" />
+
+        <TextView
+            android:id="@+id/tvhandoverdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etcontractperiod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Overall Contract Period"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_weight="2"
+            android:text="Sectional Completion" />
+        <RadioButton
+            android:id="@+id/rbYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"/>
+        <RadioButton
+            android:id="@+id/rbNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"/>
+
+    </LinearLayout>
+    <EditText
+        android:id="@+id/etcontractvalue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contract Value"
+        android:layout_weight="1"/>
+    <EditText
+        android:id="@+id/etcontractdocumnets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contract Documents"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:id="@+id/etpricedbills"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Priced Bills of Quantities"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:id="@+id/etworkmanscompensation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Workman's Compensation Insurance"
+        android:layout_weight="1"/>
+    <EditText
+        android:id="@+id/ethandovercertificate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Site Handover Certification"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:id="@+id/etbankguarantee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Bank Guarantee"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:id="@+id/etextentionwithcosts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Extention of Time (With Costs)"
+        android:layout_weight="1"/>
+
+    <EditText
+        android:id="@+id/etextentionwithoutcosts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Extention of Time (Without Costs)"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:layout_weight="1"
+            android:text="Practical Completion Date" />
+
+        <TextView
+            android:id="@+id/tvpracticalcompletiondate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+    </LinearLayout>
+    </LinearLayout>
+    <include
+        layout="@layout/app_bar_popup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+</LinearLayout>
