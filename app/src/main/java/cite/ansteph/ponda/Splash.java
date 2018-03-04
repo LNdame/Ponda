@@ -1,10 +1,14 @@
 package cite.ansteph.ponda;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
+import cite.ansteph.ponda.model.Attendee;
+import cite.ansteph.ponda.views.attendee.AttendeeList;
+import cite.ansteph.ponda.views.client.ClientList;
 import cite.ansteph.ponda.views.meeting.NewMeeting;
+import cite.ansteph.ponda.views.project.ProjectList;
 
 public class Splash extends AppCompatActivity {
 
