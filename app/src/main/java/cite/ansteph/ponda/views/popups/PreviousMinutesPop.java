@@ -1,9 +1,12 @@
 package cite.ansteph.ponda.views.popups;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import cite.ansteph.ponda.R;
@@ -12,11 +15,12 @@ import cite.ansteph.ponda.R;
  * Created by Wendy on 2018/03/02.
  */
 
-public class PreviousMinutesPop extends Activity{
+public class PreviousMinutesPop extends Activity {
     TextView tvCancel, tvSave;
+    private LinearLayout parentLinearLayout;
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pop_previous_minutes);
 
@@ -44,5 +48,19 @@ public class PreviousMinutesPop extends Activity{
                 finish();
             }
         });
+        parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
+
+    }
+
+    public void onAddField(View v) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View rowView = inflater.inflate(R.layout.fields_previous_minutes, null);
+        // Add the new row before the add fields_arising_matters button.
+        parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
+    }
+
+    public void onDelete(View v) {
+        parentLinearLayout.removeView((View) v.getParent());
     }
 }
+
