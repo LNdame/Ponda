@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/meetingLytContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:background="@drawable/meeting_item_back"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="80dp">
+
+        <TextView
+            android:id="@+id/txtItemNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:text="1" />
+
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/txtItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Attendees" />
+
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_gravity="right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+
+
+            <ImageButton
+                android:id="@+id/imgbtnCloseSub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/green_back"
+                app:srcCompat="@drawable/ic_done_black_24dp" />
+
+            <ImageButton
+                android:id="@+id/imgbtnOpenSub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
+
+
+        </RelativeLayout>
+    </FrameLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:background="@drawable/just_border"
+        android:id="@+id/subItemContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:paddingBottom="15dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Attending" />
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:textStyle="italic|normal"
+        android:textSize="9sp"
+        android:text="Swipe left to remove a selected preference." />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/attendeerecyclerview"
+
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:text="Attendee Pool" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/poolrecyclerview"
+
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+    </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

@@ -73,12 +73,17 @@
             android:name=".contentprovider.ClientContentProvider"
             android:authorities="cite.ansteph.ponda.contentprovider.clientcontentprovider"
             android:enabled="true"
-            android:exported="false"></provider>
+            android:exported="false" />
         <provider
             android:name=".contentprovider.MeetingContentProvider"
             android:authorities="cite.ansteph.ponda.contentprovider.meetingcontentprovider"
             android:enabled="true"
             android:exported="false" />
+
+        <activity
+            android:name=".views.lmeeting.StartMeeting"
+            android:label="@string/title_activity_start_meeting"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

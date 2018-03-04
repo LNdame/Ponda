@@ -17,4 +17,28 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="title_text">
+
+
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_margin">2dp</item>
+
+
+        <item name="android:textSize">@dimen/headline</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="edit_box">
+
+
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_margin">2dp</item>
+        <item name="android:minHeight">40dp</item>
+
+        <item name="android:textSize">@dimen/headline</item>
+        <item name="android:background"> @drawable/edit_border</item>
+    </style>
+
+
 </resources>

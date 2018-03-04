@@ -14,5 +14,6 @@
     <string name="title_activity_edit_project">EditProject</string>
     <string name="select_client">Select Client</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="title_activity_start_meeting">New Meeting</string>
+    <string name="delete">DELETE</string>
 </resources>
