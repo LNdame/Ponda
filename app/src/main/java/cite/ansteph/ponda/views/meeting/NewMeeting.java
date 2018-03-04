@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
@@ -60,7 +61,8 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
     RecyclerView meetingItemRecyclerView;
     MeetingItemRecyclerAdapter mMeetingItemAdapter;
     Integer selectedClient, selectedProject;
-
+    Context mContext;
+    DrawerLayout drawerLayout;
 
 
     Meeting mMeetingAdd;
@@ -73,7 +75,7 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_meeting);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -118,6 +120,12 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
             }
         });
 
+//        int selected_background = android.R.color.holo_green_dark;
+////                editor.putInt("background_resource", selected_background);
+////                editor.apply();
+//
+//        backgroundSet(selected_background);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -133,6 +141,7 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         tvStartTime = (TextView) findViewById(R.id.tvstarttime);
         cNewMeeting = (LinearLayout) findViewById(R.id.cNewMeeting);
         cMeetingFragment = (LinearLayout) findViewById(R.id.cMeetingFragment);
+
 
 
         Date now = new Date();
@@ -300,6 +309,12 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
 
     }
 
+//    private void backgroundSet(int selected_background) {
+//        SharedPreferences sharedPref = getSharedPreferences("my_prefs", NewMeeting.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        editor.putInt("background_resource", selected_background);
+//        editor.commit();
+//    }
 
 
     private ArrayList<Project> populateProjectList() {
@@ -337,8 +352,6 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         items.add(new MeetingItem(4,4,"Matters Arising"));
         items.add(new MeetingItem(5,5,"Contract Details"));
         items.add(new MeetingItem(6,6,"Programme"));
-
-
         return  items;
     }
 
