@@ -3,6 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_linear_layout"
     android:layout_height="match_parent"
     android:background="@color/popup"
     tools:context="cite.ansteph.ponda.views.popups.ProgrammePop">
@@ -22,6 +23,38 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
+    <Button
+        android:id="@+id/add_field_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Row"
+        android:onClick="onAddField"
+        android:layout_gravity="bottom|end"
+        android:paddingRight="25dp"        />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <EditText
+            android:id="@+id/etprogramme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="top|left"
+            android:lines="10"
+            android:maxLines="15"
+            android:minLines="3"/>
+
+        <Button
+            android:id="@+id/btdelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/ic_delete"
+            android:onClick="onDelete"/>
+    </LinearLayout>
+
 
     <include
         layout="@layout/app_bar_popup"

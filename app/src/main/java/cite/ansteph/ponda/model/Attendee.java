@@ -15,6 +15,11 @@ public class Attendee implements Serializable {
     public Attendee() {
     }
 
+    public Attendee(int id, String firstname, String surname) {
+        this.id = id;
+        this.firstname = firstname;
+        this.surname = surname;
+    }
 
 
     public Attendee(String firstname, String surname, String organisation, String telephone, String cellphone, String fax, String email) {

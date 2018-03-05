@@ -10,4 +10,14 @@
     <dimen name="dots_margin_bottom">20dp</dimen>
     <dimen name="list_item_avatar_size">40dp</dimen>
 
+    <dimen name="heading1">34sp</dimen>
+    <dimen name="headline">24sp</dimen>
+    <dimen name="body_regular">14sp</dimen>
+    <dimen name="caption">12sp</dimen>
+    <dimen name="title">20sp</dimen>
+    <dimen name="subheading">16sp</dimen>
+    <dimen name="padd_10">10dp</dimen>
+    <dimen name="ic_delete">30dp</dimen>
+    <dimen name="thumbnail">90dp</dimen>
+
 </resources>
