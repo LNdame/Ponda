@@ -12,5 +12,6 @@ public class ContentType {
     public static final Uri CLIENT_CONTENT_URI = Uri.parse("content://cite.ansteph.ponda.contentprovider.clientcontentprovider/ponda");
     public static final Uri PROJECT_CONTENT_URI = Uri.parse("content://cite.ansteph.ponda.contentprovider.projectcontentprovider/ponda");
     public static final Uri MEETING_CONTENT_URI = Uri.parse("content://cite.ansteph.ponda.contentprovider.meetingcontentprovider/ponda");
+    public static final Uri MEETING_HISTORY_CONTENT_URI = Uri.parse("content://cite.ansteph.ponda.contentprovider.meetinghistorycontentprovider/ponda");
 
 }

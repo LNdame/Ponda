@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
@@ -17,13 +18,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -59,11 +57,12 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
     ArrayList<MeetingItem> mMeetingItem;
     CustomClientListAdapter mClientAdapter;
     CustomProjectListAdapter mProjectAdapter;
-    LinearLayout cNewMeeting, cMeetingFragment;
+    LinearLayout cNewMeeting, cMeetingFragment, popAttendance;
     RecyclerView meetingItemRecyclerView;
     MeetingItemRecyclerAdapter mMeetingItemAdapter;
     Integer selectedClient, selectedProject;
-
+    Context mContext;
+    DrawerLayout drawerLayout;
 
 
     Meeting mMeetingAdd;
@@ -76,7 +75,7 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_meeting);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+       // setSupportActionBar(toolbar);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -121,6 +120,12 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
             }
         });
 
+//        int selected_background = android.R.color.holo_green_dark;
+////                editor.putInt("background_resource", selected_background);
+////                editor.apply();
+//
+//        backgroundSet(selected_background);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -132,9 +137,12 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
 
 
         tvDate = (TextView) findViewById(R.id.tvdate);
+
         tvStartTime = (TextView) findViewById(R.id.tvstarttime);
         cNewMeeting = (LinearLayout) findViewById(R.id.cNewMeeting);
         cMeetingFragment = (LinearLayout) findViewById(R.id.cMeetingFragment);
+
+
 
         Date now = new Date();
         SimpleDateFormat dateFormatter, timeFormatter;
@@ -294,7 +302,20 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         meetingItemRecyclerView.setLayoutManager(mLayoutManager);
         meetingItemRecyclerView.setAdapter(mMeetingItemAdapter);
 
+
+
+
+
+
     }
+
+//    private void backgroundSet(int selected_background) {
+//        SharedPreferences sharedPref = getSharedPreferences("my_prefs", NewMeeting.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        editor.putInt("background_resource", selected_background);
+//        editor.commit();
+//    }
+
 
     private ArrayList<Project> populateProjectList() {
         ContentResolver resolver = getContentResolver();
@@ -330,7 +351,7 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         items.add(new MeetingItem(3,3,"Minutes of Previous Meeting"));
         items.add(new MeetingItem(4,4,"Matters Arising"));
         items.add(new MeetingItem(5,5,"Contract Details"));
-
+        items.add(new MeetingItem(6,6,"Programme"));
         return  items;
     }
 

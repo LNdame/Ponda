@@ -21,6 +21,7 @@ public class Attendee implements Serializable {
         this.surname = surname;
     }
 
+
     public Attendee(String firstname, String surname, String organisation, String telephone, String cellphone, String fax, String email) {
         this.firstname = firstname;
         this.surname = surname;
@@ -41,6 +42,13 @@ public class Attendee implements Serializable {
         this.fax = fax;
         this.email = email;
     }
+
+    public Attendee(int id, String firstname, String surname) {
+        this.id = id;
+        this.firstname = firstname;
+        this.surname = surname;
+    }
+
 
     public int getId() {
         return id;
