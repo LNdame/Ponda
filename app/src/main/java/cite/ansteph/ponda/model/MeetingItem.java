@@ -14,6 +14,11 @@ int id, meetingId ;
     public MeetingItem() {
     }
 
+    public MeetingItem(String itemName, String position) {
+        this.itemName = itemName;
+        this.position = position;
+    }
+
     //populate
     public MeetingItem(int id, int meetingId, String itemName) {
         this.id = id;

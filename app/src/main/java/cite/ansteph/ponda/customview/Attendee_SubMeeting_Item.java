@@ -26,6 +26,7 @@ import cite.ansteph.ponda.adapter.AttendingRecyclerAdapter;
 import cite.ansteph.ponda.helper.RecyclerItemTouchHelper;
 import cite.ansteph.ponda.listener.RecyclerViewClickListener;
 import cite.ansteph.ponda.model.Attendee;
+import cite.ansteph.ponda.model.MeetingItem;
 
 /**
  * Created by loicstephan on 2018/03/04.
@@ -54,6 +55,8 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
     LinearLayout containerLyt;
     private Context mContext;
 
+    private MeetingItem meetingItem;
+
     public Attendee_SubMeeting_Item(Context context) {
         super(context);
         mContext = context;
@@ -68,7 +71,18 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
         super(context, attrs, defStyleAttr);
     }
 
+    public MeetingItem getMeetingItem() {
+        return meetingItem;
+    }
 
+    public void setMeetingItem(MeetingItem meetingItem) {
+        this.meetingItem = meetingItem;
+        if(meetingItem!=null)
+        {
+            txtItemNumber.setText(meetingItem.getPosition());
+            txtItemTitle.setText(meetingItem.getItemName());
+        }
+    }
     public  void initViews(Context context)
     {
         LayoutInflater.from(context).inflate(R.layout.attendees_meeting_item, this);
@@ -239,4 +253,7 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
             */
         }
     }
+
+
+
 }

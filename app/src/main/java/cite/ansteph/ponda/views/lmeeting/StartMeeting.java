@@ -18,7 +18,11 @@ import android.widget.LinearLayout;
 import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.customview.Attendee_SubMeeting_Item;
 import cite.ansteph.ponda.customview.Meeting_Item;
+import cite.ansteph.ponda.customview.PaymentCert_MeetingItem;
+import cite.ansteph.ponda.customview.VariousOrder_MeetingItem;
 import cite.ansteph.ponda.model.Meeting;
+import cite.ansteph.ponda.model.MeetingItem;
+import cite.ansteph.ponda.template.MeetingTemplate;
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordDatePickerFragment;
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordTimePickerFragment;
 
@@ -55,7 +59,7 @@ public class StartMeeting extends AppCompatActivity
 
         meetItemContainer = (LinearLayout) findViewById(R.id.meetingitem_container);
 
-        addAttMeetingItem();
+       // addAttMeetingItem();
 
     }
 
@@ -82,15 +86,47 @@ public class StartMeeting extends AppCompatActivity
     void addAttMeetingItem()
     {
         Attendee_SubMeeting_Item attendee_subMeeting_item = new Attendee_SubMeeting_Item(this);
+        VariousOrder_MeetingItem variousOrder_meetingItem = new VariousOrder_MeetingItem(this);
+        PaymentCert_MeetingItem paymentCert_meetingItem = new PaymentCert_MeetingItem(this);
+        meetItemContainer.addView(paymentCert_meetingItem);
+        meetItemContainer.addView(variousOrder_meetingItem);
         meetItemContainer.addView(attendee_subMeeting_item);
     }
 
     private void addMeetItem(int count)
     {
 
-        for(int i =0; i<count; i++)
+
+
+
+
+        for(int i =0; i<MeetingTemplate.Template.length; i++)
         {
-            Meeting_Item meeting_item = new  Meeting_Item(this);
+            LinearLayout meeting_item = null;
+
+            int templateType= MeetingTemplate.TemplateTypeOrder[i];
+
+            switch (templateType)
+            {
+                case MeetingTemplate.TemplateType.COMMON_ITEM : meeting_item = new Meeting_Item(this);
+                    ((Meeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+
+                case MeetingTemplate.TemplateType.ATTENDEE_ITEM :meeting_item = new Attendee_SubMeeting_Item(this) ;
+                ((Attendee_SubMeeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+
+
+                case MeetingTemplate.TemplateType.PAYMENT_CERTIFICATE_ITEM :meeting_item = new PaymentCert_MeetingItem(this) ;
+                ((PaymentCert_MeetingItem)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+
+                case MeetingTemplate.TemplateType.VARIOUS_ORDER_ITEM : meeting_item = new VariousOrder_MeetingItem(this) ;
+                ((VariousOrder_MeetingItem)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+
+                default:meeting_item = new Meeting_Item(this);
+                    ((Meeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+
+
+            }
+
 
             meetItemContainer.addView(meeting_item);
 

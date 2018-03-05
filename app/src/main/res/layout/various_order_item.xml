@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:id="@+id/meetingLytContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/meetingLytContainer"
+   android:orientation="vertical">
 
     <FrameLayout
         android:background="@drawable/meeting_item_back"
@@ -26,7 +26,7 @@
             android:id="@+id/txtItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Attendees" />
+            android:text="Various Order Meeting" />
 
         <RelativeLayout
             android:layout_margin="5dp"
@@ -55,6 +55,7 @@
         </RelativeLayout>
     </FrameLayout>
 
+
     <android.support.v4.widget.NestedScrollView
         android:visibility="gone"
         android:background="@drawable/just_border"
@@ -63,60 +64,30 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:paddingBottom="15dp"
+            android:paddingBottom="50dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-    <TextView
+            <LinearLayout
+                android:id="@+id/subItemMeetingLyt"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="350dp">
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:text="Attending" />
-    <TextView
+                <com.inqbarna.tablefixheaders.TableFixHeaders
+                    android:id="@+id/table"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="horizontal|vertical" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            </LinearLayout>
 
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:textStyle="italic|normal"
-        android:textSize="9sp"
-        android:text="Swipe left to remove a selected preference." />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/attendeerecyclerview"
-
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
-
-    </android.support.v7.widget.RecyclerView>
-
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:text="Attendee Pool" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/poolrecyclerview"
-
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
-
-    </android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
 
     </android.support.v4.widget.NestedScrollView>
+
+
+
 </LinearLayout>
