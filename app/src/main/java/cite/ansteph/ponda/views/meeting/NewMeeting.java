@@ -352,6 +352,10 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         items.add(new MeetingItem(4,4,"Matters Arising"));
         items.add(new MeetingItem(5,5,"Contract Details"));
         items.add(new MeetingItem(6,6,"Programme"));
+        items.add(new MeetingItem(7,7,"Delays"));
+        items.add(new MeetingItem(8,8,"Cash Flow"));
+        items.add(new MeetingItem(9,9,"Payment Certificates"));
+        items.add(new MeetingItem(10,10,"Progress"));
         return  items;
     }
 
