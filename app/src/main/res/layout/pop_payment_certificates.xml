@@ -5,9 +5,103 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:background="@color/popup"
-    tools:context="cite.ansteph.ponda.views.popups.ProgrammePop">
+    tools:context="cite.ansteph.ponda.views.popups.PaymentCertificatesPop">
+
+    <!--<TableLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--<TableRow>-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_no"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_no"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_no"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_no"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_no"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_no"/>-->
+        <!--</TableRow>-->
+        <!--<TableRow>-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_drawings_issued"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_drawings_issued"/>-->
+        <!--</TableRow>-->
+        <!--<TableRow>-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_paid"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_paid"/>-->
+        <!--</TableRow>-->
+        <!--<TableRow>-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_date_due"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_date_due"/>-->
+        <!--</TableRow>-->
+        <!--<TableRow>-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_days_late"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_days_late"/>-->
+        <!--</TableRow>-->
+        <!--<TableRow>-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_signed"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_signed"/>-->
+        <!--</TableRow>-->
+        <!--<TableRow>-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_amount"-->
+                <!--android:padding="3dp" />-->
+            <!--<TextView-->
+                <!--android:text="@string/title_pop_payment_certificates_amount"/>-->
+        <!--</TableRow>-->
+    <!--</TableLayout>-->
 
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TableRow
+
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/title_pop_payment_certificates_date_due" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/title_pop_payment_certificates_date_due" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/title_pop_payment_certificates_date_due" />
+        </TableRow>
+    </TableLayout>
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -43,5 +43,14 @@
     <string name="title_pop_meetings">Meetings</string>
     <string name="title_pop_approval_of_meeting">Approval of Minutes</string>
 
+    <string name="title_pop_payment_certificates_no">Payment Certificate No.</string>
+    <string name="title_pop_payment_certificates_issued_date">Issue Date</string>
+    <string name="title_pop_payment_certificates_paid">Paid</string>
+    <string name="title_pop_payment_certificates_date_due">Date Due</string>
+    <string name="title_pop_payment_certificates_days_late">Days Late</string>
+    <string name="title_pop_payment_certificates_signed">Signed Copy on File</string>
+    <string name="title_pop_payment_certificates_amount">Amount(Inc Vat)</string>
+
+
 
 </resources>
