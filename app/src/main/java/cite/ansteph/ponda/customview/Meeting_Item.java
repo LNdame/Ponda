@@ -93,9 +93,19 @@ public class Meeting_Item extends LinearLayout {
         });
 
 
+        btnAddSub = (Button) findViewById(R.id.btnAddSub) ;
+       final SubMeeting_Item subItem = new SubMeeting_Item(context);
 
-        SubMeeting_Item subItem = new SubMeeting_Item(context);
-        lytSubItemMeeting.addView(subItem);
+        btnAddSub.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                lytSubItemMeeting.addView(subItem);
+            }
+        });
+
+        //SubMeeting_Item subItem = new SubMeeting_Item(context);
+        //lytSubItemMeeting.addView(subItem);
 
 
     }

@@ -43,11 +43,7 @@ public class Attendee implements Serializable {
         this.email = email;
     }
 
-    public Attendee(int id, String firstname, String surname) {
-        this.id = id;
-        this.firstname = firstname;
-        this.surname = surname;
-    }
+
 
 
     public int getId() {
