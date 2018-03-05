@@ -16,4 +16,34 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_start_meeting">New Meeting</string>
     <string name="delete">DELETE</string>
+
+
+
+    <string name="title_pop_attendance">Attendance Register</string>
+    <string name="title_pop_apologies">Apologies</string>
+    <string name="title_pop_previous_minutes">Minutes of Previous Meeting</string>
+    <string name="title_pop_matters_arising">Matters Arising</string>
+    <string name="title_pop_contract_details">Contract Details</string>
+    <string name="title_pop_programme">Programme</string>
+    <string name="title_pop_delays">Delays</string>
+    <string name="title_pop_cash_flow">Cash Flow</string>
+    <string name="title_pop_payment_certificates">Payment Certificates</string>
+    <string name="title_pop_progress">Progress</string>
+    <string name="title_pop_daily_work_schedules">Daily Work Schedules</string>
+    <string name="title_pop_plant_and_labour_report">Plant and Labour Report</string>
+    <string name="title_pop_drawings_issued">Drawings Issued</string>
+    <string name="title_pop_information_required">Information Required</string>
+    <string name="title_pop_nominated_sub_contractors">Nominated Sub Contractors</string>
+    <string name="title_pop_domestic_sub_contractors">Domestic Sub Contractors</string>
+    <string name="title_pop_structural">Structural</string>
+    <string name="title_pop_independent_development_trust">Independent Development Trust</string>
+    <string name="title_pop_social_facilitation">Social Facilitation</string>
+    <string name="title_pop_contract_instructions">Contract Instructions</string>
+    <string name="title_pop_variation_orders">Variation Orders</string>
+    <string name="title_pop_health_safety">Health and Safety</string>
+    <string name="title_pop_commissioning_testing">Commissioning and Testing</string>
+    <string name="title_pop_general">General</string>
+    <string name="title_pop_meetings">Meetings</string>
+    <string name="title_pop_approval_of_meeting">Approval of Minutes</string>
+
 </resources>
