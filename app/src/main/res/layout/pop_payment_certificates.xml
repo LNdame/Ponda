@@ -4,8 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
-    android:background="@color/popup"
-    tools:context="cite.ansteph.ponda.views.popups.ProgrammePop">
+
+    tools:context="cite.ansteph.ponda.views.popups.PaymentCertificatesPop">
+
 
 
     <android.support.design.widget.AppBarLayout

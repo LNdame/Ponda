@@ -6,7 +6,7 @@
     android:id="@+id/parent_linear_layout"
     android:layout_height="match_parent"
     android:background="@color/popup"
-    tools:context="cite.ansteph.ponda.views.popups.ProgrammePop">
+    tools:context="cite.ansteph.ponda.views.popups.MeetingsPop">
 
 
     <android.support.design.widget.AppBarLayout

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="cite.ansteph.ponda.views.lmeeting.StartMeeting"
+    tools:showIn="@layout/app_bar_start_meeting">
+
+
+    <LinearLayout
+        android:padding="@dimen/activity_vertical_margin"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:background="@color/colorAccent"
+            android:elevation="12dp"
+
+            android:padding="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+               android:fontFamily="sans-serif"
+                android:layout_margin="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/headline"
+                android:textStyle="bold"
+                android:text="Project Manager Reference" />
+
+            <EditText
+                style="@style/edit_box"
+                android:id="@+id/edtprojectmgrref"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="DoEEC/02/17"
+                android:ems="10"
+                android:inputType="text"
+                />
+
+
+
+                <TextView
+                    style="@style/title_text"
+                    android:id="@+id/tvclient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:text="Client" />
+
+                <Spinner
+                    android:id="@+id/spclient"
+                    android:background="@drawable/spin_back"
+                    android:layout_height="?android:listPreferredItemHeight"
+                    android:layout_width="match_parent"
+
+                    />
+
+
+
+
+
+                <TextView
+                    style="@style/title_text"
+                    android:id="@+id/tvproject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Project" />
+
+                <Spinner
+                    android:id="@+id/spproject"
+                    android:layout_height="?android:listPreferredItemHeight"
+                    android:background="@drawable/spin_back"
+                    android:layout_width="match_parent"
+
+                   />
+
+
+            <TextView
+                style="@style/title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:text="Site" />
+
+            <EditText
+                style="@style/edit_box"
+                android:id="@+id/edtsite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Site"
+                android:ems="10"
+                android:layout_marginBottom="16dp"
+                android:inputType="text" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="?android:listPreferredItemHeight"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="2018-03-01"
+                    android:clickable="true"
+                    android:onClick="onStartDateClicked"
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/ic_date_range_black_24dp"
+                    android:drawableRight="@drawable/ic_arrow_down_black_24dp"
+                    android:paddingRight="16dp"
+                    android:id="@+id/txtstartdateday" />
+
+
+
+                <TextView
+                    android:paddingLeft="16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="?android:listPreferredItemHeight"
+                    android:layout_weight="1"
+                    android:text="16:00"
+                    android:clickable="true"
+                    android:onClick="onStartTimeClicked"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:drawableLeft="@drawable/ic_access_time_black_24dp"
+                    android:drawableRight="@drawable/ic_arrow_down_black_24dp"
+                    android:id="@+id/txtstartdatetime" />
+
+
+            </LinearLayout>
+
+            <TextView
+                style="@style/title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:text="Venue" />
+
+            <EditText
+                style="@style/edit_box"
+                android:id="@+id/edtVenue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:layout_marginBottom="16dp"
+                android:inputType="text" />
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="17dp"
+                    android:layout_weight="1"
+                    android:text="Cancel" />
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:text="Save"
+                    android:onClick="onSaveClicked"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/meetingitem_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
