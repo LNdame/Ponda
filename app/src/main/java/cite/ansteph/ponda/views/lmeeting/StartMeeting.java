@@ -1,5 +1,8 @@
 package cite.ansteph.ponda.views.lmeeting;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,22 +17,41 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 import cite.ansteph.ponda.R;
+import cite.ansteph.ponda.adapter.CustomClientListAdapter;
+import cite.ansteph.ponda.adapter.CustomProjectListAdapter;
+import cite.ansteph.ponda.api.ContentType;
+import cite.ansteph.ponda.api.columns.ClientColumns;
+import cite.ansteph.ponda.api.columns.ProjectColumns;
 import cite.ansteph.ponda.customview.Attendee_SubMeeting_Item;
 import cite.ansteph.ponda.customview.Meeting_Item;
 import cite.ansteph.ponda.customview.PaymentCert_MeetingItem;
 import cite.ansteph.ponda.customview.VariousOrder_MeetingItem;
+import cite.ansteph.ponda.model.Client;
 import cite.ansteph.ponda.model.Meeting;
 import cite.ansteph.ponda.model.MeetingItem;
+import cite.ansteph.ponda.model.Project;
 import cite.ansteph.ponda.template.MeetingTemplate;
+import cite.ansteph.ponda.views.attendee.AttendeeList;
+import cite.ansteph.ponda.views.client.ClientList;
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordDatePickerFragment;
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordTimePickerFragment;
+import cite.ansteph.ponda.views.meeting.MeetingHistory;
+import cite.ansteph.ponda.views.project.ProjectList;
 
 public class StartMeeting extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    Spinner mSpinClient, mSpinProject;
+    ArrayList<Client> mClientList;
+    ArrayList<Project> mProjectList;
+    ArrayList<MeetingItem> mMeetingItem;
+    CustomClientListAdapter mClientAdapter;
+    CustomProjectListAdapter mProjectAdapter;
     LinearLayout meetItemContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +82,22 @@ public class StartMeeting extends AppCompatActivity
         meetItemContainer = (LinearLayout) findViewById(R.id.meetingitem_container);
 
        // addAttMeetingItem();
+
+        //load the spinner
+        mSpinClient = (Spinner)findViewById(R.id.spclient);
+        mClientList = retrieveClients();
+        mClientAdapter = new CustomClientListAdapter(mClientList, this);
+        mSpinClient.setAdapter(mClientAdapter);
+
+
+        mSpinProject = (Spinner)findViewById(R.id.spproject);
+        mProjectList = retrieveProjects();
+        mProjectAdapter = new CustomProjectListAdapter(mProjectList, this);
+        mSpinProject.setAdapter(mProjectAdapter);
+
+        //end load the spinner
+
+
 
     }
 
@@ -177,22 +215,89 @@ public class StartMeeting extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_meet_hist) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+            startActivity(new Intent(getApplicationContext(), MeetingHistory.class));
+        } else if (id == R.id.nav_new_meeting) {
+         //   startActivity(new Intent(getApplicationContext(), StartMeeting.class));
+        } else if (id == R.id.nav_attendee) {
+            startActivity(new Intent(getApplicationContext(), AttendeeList.class));
+        } else if (id == R.id.nav_client) {
+            startActivity(new Intent(getApplicationContext(), ClientList.class));
+        } else if (id == R.id.nav_project) {
+            startActivity(new Intent(getApplicationContext(), ProjectList.class));
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            startActivity(new Intent(getApplicationContext(), StartMeeting.class));
+        }else if (id == R.id.nav_about) {
+            startActivity(new Intent(getApplicationContext(), StartMeeting.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+
+    private ArrayList<Client> retrieveClients() {
+        ContentResolver resolver = getContentResolver();
+
+        Cursor cursor = resolver.query(ContentType.CLIENT_CONTENT_URI, ClientColumns.PROJECTION, null, null,null);
+        ArrayList<Client> clients = new ArrayList<>();
+
+        if(cursor.moveToFirst()){
+            do{
+                Client item = new Client(
+                        ((cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0),
+                        (cursor.getString(cursor.getColumnIndex(ClientColumns.NAME))),
+                        (cursor.getString(cursor.getColumnIndex(ClientColumns.WEBSITE_URL))),
+                        (cursor.getString(cursor.getColumnIndex(ClientColumns.TELEPHONE))),
+                        (cursor.getString(cursor.getColumnIndex(ClientColumns.CONTACT_PERSON))),
+                        (cursor.getString(cursor.getColumnIndex(ClientColumns.CONTACT_PHONE))),
+                        (cursor.getString(cursor.getColumnIndex(ClientColumns.EMAIL)))
+                );
+
+                clients.add(item);
+
+            }while(cursor.moveToNext());
+        }
+
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return clients;
+    }
+
+
+    private ArrayList<Project> retrieveProjects() {
+        ContentResolver resolver = getContentResolver();
+
+        Cursor cursor = resolver.query(ContentType.PROJECT_CONTENT_URI, ProjectColumns.PROJECTION, null, null,null);
+        ArrayList<Project> projects = new ArrayList<>();
+
+        if(cursor.moveToFirst()){
+            do{
+                Project item = new Project(
+                        ((cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0),
+                        (cursor.getString(cursor.getColumnIndex(ProjectColumns.NAME))),
+                        (cursor.getInt(cursor.getColumnIndex(ProjectColumns.CLIENT_ID))),
+                        (cursor.getString(cursor.getColumnIndex(ProjectColumns.START_DATE))),
+                        (cursor.getString(cursor.getColumnIndex(ProjectColumns.END_DATE))),
+                        (cursor.getString(cursor.getColumnIndex(ProjectColumns.PROJ_MAN_NAME)))
+                );
+
+                projects.add(item);
+
+            }while(cursor.moveToNext());
+        }
+
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return projects;
+    }
+
 }

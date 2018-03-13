@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">Pond</string>
+    <string name="app_name">Ponda</string>
     <string name="title_activity_new_meeting">New Meeting</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="delete">DELETE</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_meeting_history">Meeting History</string>
@@ -13,7 +15,7 @@
     <string name="title_activity_edit_client">Edit Client</string>
     <string name="title_activity_edit_project">Edit Project</string>
     <string name="title_activity_edit_attendee">Edit Attendee</string>
-
+    <string name="title_activity_start_meeting">Start Meeting</string>
 
     <string name="select_client">Select Client</string>
     <string name="title_pop_attendance">Attendance Register</string>

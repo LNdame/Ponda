@@ -25,6 +25,10 @@ import cite.ansteph.ponda.adapter.AttendeeRecyclerAdapter;
 import cite.ansteph.ponda.api.ContentType;
 import cite.ansteph.ponda.api.columns.AttendeeColumns;
 import cite.ansteph.ponda.model.Attendee;
+import cite.ansteph.ponda.views.client.ClientList;
+import cite.ansteph.ponda.views.lmeeting.StartMeeting;
+import cite.ansteph.ponda.views.meeting.MeetingHistory;
+import cite.ansteph.ponda.views.project.ProjectList;
 
 public class AttendeeList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -138,18 +142,21 @@ public class AttendeeList extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_meet_hist) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
+            startActivity(new Intent(getApplicationContext(), MeetingHistory.class));
+        } else if (id == R.id.nav_new_meeting) {
+            startActivity(new Intent(getApplicationContext(), StartMeeting.class));
+        } else if (id == R.id.nav_attendee) {
+        //    startActivity(new Intent(getApplicationContext(), AttendeeList.class));
+        } else if (id == R.id.nav_client) {
+            startActivity(new Intent(getApplicationContext(), ClientList.class));
+        } else if (id == R.id.nav_project) {
+            startActivity(new Intent(getApplicationContext(), ProjectList.class));
         } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            startActivity(new Intent(getApplicationContext(), StartMeeting.class));
+        }else if (id == R.id.nav_about) {
+            startActivity(new Intent(getApplicationContext(), StartMeeting.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
