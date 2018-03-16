@@ -16,27 +16,11 @@ public class Project implements Serializable {
 
     }
 
-    public Project(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+//    public Project(int id, String name) {
+//        this.id = id;
+//        this.name = name;
+//    }
     //delete after use
-    public Project(int id, int clientId, String name, String projManName) {
-        this.id = id;
-        this.clientId = clientId;
-        this.name = name;
-        this.projManName = projManName;
-    }
-
-    public Project(int clientId, String name, String startDate, String endDate, String projManName) {
-        this.name = name;
-        this.clientId = clientId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.projManName = projManName;
-    }
-
-
     public Project(int id, String name, int clientId, String startDate, String endDate, String projManName) {
         this.id = id;
         this.name = name;
@@ -45,6 +29,24 @@ public class Project implements Serializable {
         this.endDate = endDate;
         this.projManName = projManName;
     }
+
+    public Project(String name, int clientId, String startDate, String endDate, String projManName) {
+        this.name = name;
+        this.clientId = clientId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.projManName = projManName;
+    }
+
+
+//    public Project(int id, String name, int clientId, String startDate, String endDate, String projManName) {
+//        this.id = id;
+//        this.name = name;
+//        this.clientId = clientId;
+//        this.startDate = startDate;
+//        this.endDate = endDate;
+//        this.projManName = projManName;
+//    }
 
     public int getId() {
         return id;
@@ -55,11 +57,11 @@ public class Project implements Serializable {
     }
 
     public int getClientId() {
-        return id;
+        return clientId;
     }
 
-    public void setClientId(int id) {
-        this.id = id;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
     public String getName() {

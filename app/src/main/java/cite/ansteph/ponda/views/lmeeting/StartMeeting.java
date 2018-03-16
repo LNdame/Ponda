@@ -106,7 +106,8 @@ public class StartMeeting extends AppCompatActivity
 
 
         mSpinProject = (Spinner)findViewById(R.id.spproject);
-        mProjectList =setupList();// retrieveProjects();
+        //mProjectList =setupList();// retrieveProjects();
+        mProjectList = retrieveProjects();
         mProjectAdapter = new CustomProjectListAdapter(mProjectList, this);
         mSpinProject.setAdapter(mProjectAdapter);
 
@@ -149,9 +150,9 @@ public class StartMeeting extends AppCompatActivity
     {
         ArrayList<Project>  arrayL = new ArrayList<>();
 
-        arrayL.add(new Project (1,1, "Tony Company","John Black"));
-        arrayL.add(new Project (2, 2,"Goodwill Construction","Pete Jameson"));
-        arrayL.add(new Project (3,3,"Turin Plet Arch","Jason Jack "));
+//        arrayL.add(new Project (1,1, "Tony Company","John Black"));
+//        arrayL.add(new Project (2, 2,"Goodwill Construction","Pete Jameson"));
+//        arrayL.add(new Project (3,3,"Turin Plet Arch","Jason Jack "));
 
 
 

@@ -25,11 +25,16 @@ import cite.ansteph.ponda.views.project.EditProject;
 
 public class ProjectRecyclerAdapter extends RecyclerView.Adapter<ProjectRecyclerAdapter.ViewHolder> {
 
-    ArrayList<Project> mProjects;
+    public ArrayList<Project> mProjects;
     Context mContext;
 
-    public ProjectRecyclerAdapter(Activity activity, ArrayList<Client> mClientlist) {
+    public ProjectRecyclerAdapter(){
+
     }
+
+//
+//    public ProjectRecyclerAdapter(Activity activity, ArrayList<Client> mClientlist) {
+//    }
 
     public ProjectRecyclerAdapter(ArrayList<Project> mProjects, Context mContext) {
         this.mProjects = mProjects;
@@ -44,7 +49,7 @@ public class ProjectRecyclerAdapter extends RecyclerView.Adapter<ProjectRecycler
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder,  final int position) {
+    public void onBindViewHolder(ProjectRecyclerAdapter.ViewHolder holder,  final int position) {
         holder.mTextView.setText(mProjects.get(position).getName());
         //   holder.mIcon.setLetter(mBookList.get(position).getTitle());
 

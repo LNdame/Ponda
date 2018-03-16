@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import cite.ansteph.ponda.model.Attendee;
+import cite.ansteph.ponda.model.Project;
 import cite.ansteph.ponda.views.attendee.AttendeeList;
 import cite.ansteph.ponda.views.client.ClientList;
 import cite.ansteph.ponda.views.lmeeting.StartMeeting;
@@ -33,8 +34,9 @@ public class Splash extends AppCompatActivity {
                      * logged in
                      * */
                   //  sessionManager.checkLogin();
-                     Intent intent = new Intent(getApplicationContext(), StartMeeting.class);
+                    Intent intent = new Intent(getApplicationContext(), StartMeeting.class);
                     startActivity(intent);
+
                 }
             }
         };

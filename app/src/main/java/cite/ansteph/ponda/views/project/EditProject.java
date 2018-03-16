@@ -8,12 +8,17 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -30,13 +35,17 @@ import cite.ansteph.ponda.api.columns.ProjectColumns;
 import cite.ansteph.ponda.model.Client;
 import cite.ansteph.ponda.model.Project;
 
-public class EditProject extends AppCompatActivity {
+public class EditProject extends AppCompatActivity implements NavigationView.OnCreateContextMenuListener  {
 
-    private Spinner mSpinClient;
+    Spinner mSpinClient;
     ArrayList <Client> mClientlist;
     CustomClientListAdapter customClientListAdapter;
-    int selectedClient;
-    private int mYear, mMonth, mDay;
+    Integer selectedClient;
+    int mYear, mMonth, mDay;
+    int selectedClientID;
+    int mLastInserted;
+    String seletedMonth, selectedDay;
+    LinearLayout projItemContainer;
     Project mProjectEdited;
 
     @Override
@@ -45,12 +54,13 @@ public class EditProject extends AppCompatActivity {
         setContentView(R.layout.activity_edit_project);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         //Start Date
-        final TextView pickStartDate = (TextView)findViewById(R.id.edtstartdate);
+        //final TextView pickStartDate = (TextView)findViewById(R.id.edtstartdate);
         final TextView startDate = (TextView) findViewById(R.id.start_date);
 
         //End Date
-        final TextView pickEndDate = (TextView)findViewById(R.id.edtenddate);
+        //final TextView pickEndDate = (TextView)findViewById(R.id.edtenddate);
         final TextView endDate = (TextView) findViewById(R.id.end_date);
 
         final Calendar myCalendar = Calendar.getInstance();
@@ -59,7 +69,7 @@ public class EditProject extends AppCompatActivity {
         SimpleDateFormat dateFormatter;
         dateFormatter = new SimpleDateFormat("MM-dd-yyyy");
         startDate.setText(dateFormatter.format(now));
-        endDate.setText(dateFormatter.format(now));
+            endDate.setText(dateFormatter.format(now));
 
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,41 +245,18 @@ public class EditProject extends AppCompatActivity {
 
     void prepareSaving()
     {
-
         //retrieving the corresponding value
-
         mProjectEdited.setName( ((EditText)findViewById(R.id.edtname)).getText().toString()  );
-
-
         mProjectEdited.setClientId(selectedClient);
-        //mProjectEdited.( ((EditText)findViewById(R.id.edttelephone)).getText().toString()  );
-        mProjectEdited.setStartDate( ((TextView)findViewById(R.id.edtstartdate)).getText().toString()  );
-        mProjectEdited.setEndDate( ((TextView)findViewById(R.id.edtenddate)).getText().toString()  );
         mProjectEdited.setProjManName( ((EditText)findViewById(R.id.edtprojectmanname)).getText().toString()  );
-
-
-
     }
-
-
 
     void fillFields()
     {
         //filling the corresponding value
-
         ((EditText)findViewById(R.id.edtname)).setText(mProjectEdited.getName());
-        //((EditText)findViewById(R.id.edtcleintid)).setText(mProjectEdited.getClientId());
-        ((TextView)findViewById(R.id.edtstartdate)).setText(mProjectEdited.getStartDate());
-        ((TextView)findViewById(R.id.edtenddate)).setText(mProjectEdited.getEndDate());
         ((EditText)findViewById(R.id.edtprojectmanname)).setText(mProjectEdited.getProjManName());
-        //((EditText)findViewById(R.id.edtemail)).setText(mProjectEdited.getEmail());
-
-
     }
-
-
-
-
 
     public int insertProject(Project aProject){
 
@@ -281,11 +268,8 @@ public class EditProject extends AppCompatActivity {
             values.put(ProjectColumns.START_DATE,aProject.getStartDate()) ;
             values.put(ProjectColumns.END_DATE,aProject.getEndDate()) ;
             values.put(ProjectColumns.PROJ_MAN_NAME,aProject.getProjManName()) ;
-            //values.put(ProjectColumns.EMAIL,aClient.getEmail()) ;
-
 
             getContentResolver().insert(ContentType.PROJECT_CONTENT_URI, values);
-
 
             return 1;
 
@@ -295,10 +279,7 @@ public class EditProject extends AppCompatActivity {
 
             return 0;
         }
-
     }
-
-
 
     public int updateProject(Project aProject)
     {
@@ -312,11 +293,8 @@ public class EditProject extends AppCompatActivity {
             values.put(ProjectColumns.START_DATE,aProject.getStartDate()) ;
             values.put(ProjectColumns.END_DATE,aProject.getEndDate()) ;
             values.put(ProjectColumns.PROJ_MAN_NAME,aProject.getProjManName()) ;
-            //values.put(ProjectColumns.EMAIL,aProject.getEmail()) ;
-
 
             getContentResolver().update(ContentType.PROJECT_CONTENT_URI, values, ProjectColumns._ID+" =?", new String[]{project_id});
-
 
             return 1;
 
@@ -326,10 +304,6 @@ public class EditProject extends AppCompatActivity {
 
             return 0;
         }
-
-    }
-
-    public void showDatePickerDialog(View view) {
     }
 }
 

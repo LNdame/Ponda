@@ -328,17 +328,25 @@ public class NewMeeting extends AppCompatActivity implements NavigationView.OnNa
         Cursor cursor = resolver.query(ContentType.PROJECT_CONTENT_URI, ProjectColumns.PROJECTION, null, null,null);
         ArrayList<Project> activities = new ArrayList<>();
 
+
         if(cursor.moveToFirst()){
             do{
                 Project activity = new Project(
                         ((cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0),
-                        (cursor.getString(cursor.getColumnIndex(ProjectColumns.NAME)))
+                        (cursor.getString(cursor.getColumnIndex(ProjectColumns.NAME))),
+                        (cursor.getInt(cursor.getColumnIndex(ProjectColumns.CLIENT_ID))),
+                        (cursor.getString(cursor.getColumnIndex(ProjectColumns.START_DATE))),
+                        (cursor.getString(cursor.getColumnIndex(ProjectColumns.END_DATE))),
+                        (cursor.getString(cursor.getColumnIndex(ProjectColumns.PROJ_MAN_NAME)))
+                        //(cursor.getString(cursor.getColumnIndex(ClientColumns.EMAIL)))
                 );
 
                 activities.add(activity);
 
             }while(cursor.moveToNext());
         }
+
+
 
         if (cursor != null && !cursor.isClosed()) {
             cursor.close();
