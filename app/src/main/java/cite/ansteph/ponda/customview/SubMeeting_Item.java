@@ -155,20 +155,21 @@ public class SubMeeting_Item extends LinearLayout{
 
 
 
-    public int updateClient(MeetingItem aMeetItem)
+    public int updateMeetingSubItem(MeetingSubItem aMeetSubItem)
     {
-        String meet_id = String.valueOf( aMeetItem.getId());
+        String meet_id = String.valueOf( aMeetSubItem.getId());
 
         try {
             ContentValues values = new ContentValues();
 
 
-            values.put(MeetingItemColumns.MEETING_ID,aMeetItem.getMeeting().getId()) ;
-            values.put(MeetingItemColumns.ITEM_NAME ,aMeetItem.getItemName()) ;
-            values.put(MeetingItemColumns.POSITION,aMeetItem.getPosition()) ;
+            values.put(MeetingSubItemColumns.MEETINGITEM_ID,aMeetSubItem.getMeetingItem().getId()) ;
+            values.put(MeetingSubItemColumns.MEETING_ID,aMeetSubItem.getMeeting().getId()) ;
+            values.put(MeetingSubItemColumns.ITEMNOTE ,aMeetSubItem.getItemNote()) ;
+            values.put(MeetingSubItemColumns.POSITION,aMeetSubItem.getPosition()) ;
 
 
-            mContext.getContentResolver().update(ContentType.MEETINGITEM_CONTENT_URI, values, MeetingItemColumns._ID+" =?", new String[]{meet_id});
+            mContext.getContentResolver().update(ContentType.MEETINGSUBITEM_CONTENT_URI, values, MeetingSubItemColumns._ID+" =?", new String[]{meet_id});
 
 
             return 1;

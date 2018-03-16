@@ -164,7 +164,7 @@ public class Meeting_Item extends LinearLayout {
             txtItemNumber.setText(meetingItem.getPosition());
             txtItemTitle.setText(meetingItem.getItemName());
 
-            int i = insertClient(meetingItem);
+            int i = insertMeetingItem(meetingItem);
             if (i==1)
                 getLastMeetingItemID();
 
@@ -183,7 +183,7 @@ public class Meeting_Item extends LinearLayout {
 
 
 
-    public int insertClient(MeetingItem aMeetItem){
+    public int insertMeetingItem(MeetingItem aMeetItem){
 
         try {
             ContentValues values = new ContentValues();
@@ -232,7 +232,7 @@ public class Meeting_Item extends LinearLayout {
 
 
 
-    public int updateClient(MeetingItem aMeetItem)
+    public int updateMeetingItem(MeetingItem aMeetItem)
     {
         String meet_id = String.valueOf( aMeetItem.getId());
 
