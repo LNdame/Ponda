@@ -1,12 +1,15 @@
 package cite.ansteph.ponda.views.lmeeting;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,8 +19,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -26,6 +32,7 @@ import cite.ansteph.ponda.adapter.CustomClientListAdapter;
 import cite.ansteph.ponda.adapter.CustomProjectListAdapter;
 import cite.ansteph.ponda.api.ContentType;
 import cite.ansteph.ponda.api.columns.ClientColumns;
+import cite.ansteph.ponda.api.columns.MeetingColumns;
 import cite.ansteph.ponda.api.columns.ProjectColumns;
 import cite.ansteph.ponda.customview.Attendee_SubMeeting_Item;
 import cite.ansteph.ponda.customview.Meeting_Item;
@@ -46,13 +53,21 @@ import cite.ansteph.ponda.views.project.ProjectList;
 public class StartMeeting extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    final static String TAG   = StartMeeting.class.getSimpleName();
+
     Spinner mSpinClient, mSpinProject;
     ArrayList<Client> mClientList;
     ArrayList<Project> mProjectList;
     ArrayList<MeetingItem> mMeetingItem;
     CustomClientListAdapter mClientAdapter;
     CustomProjectListAdapter mProjectAdapter;
+    int selectedClientID, selectedProjectID;
+
+    int mLastInserted;
+
     LinearLayout meetItemContainer;
+    Meeting mMeetingAdd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,16 +106,58 @@ public class StartMeeting extends AppCompatActivity
 
 
         mSpinProject = (Spinner)findViewById(R.id.spproject);
-        mProjectList = retrieveProjects();
+        mProjectList =setupList();// retrieveProjects();
         mProjectAdapter = new CustomProjectListAdapter(mProjectList, this);
         mSpinProject.setAdapter(mProjectAdapter);
 
         //end load the spinner
 
+        mSpinClient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Client selected = (Client) parent.getItemAtPosition(position);
+
+                selectedClientID = selected.getId();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        mSpinProject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Project selected = (Project) parent.getItemAtPosition(position);
+
+                selectedProjectID = selected.getId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
     }
 
+
+    ArrayList<Project> setupList()
+    {
+        ArrayList<Project>  arrayL = new ArrayList<>();
+
+        arrayL.add(new Project (1,1, "Tony Company","John Black"));
+        arrayL.add(new Project (2, 2,"Goodwill Construction","Pete Jameson"));
+        arrayL.add(new Project (3,3,"Turin Plet Arch","Jason Jack "));
+
+
+
+        // String duration, String task_date, String start, String end, String project, String description, String realduration, String task_break) {
+        return  arrayL;
+    }
 
 
     public void onStartDateClicked(View view)
@@ -117,6 +174,13 @@ public class StartMeeting extends AppCompatActivity
 
     public void onSaveClicked(View view)
     {
+        prepareSaving();
+        insertNewMeeting(mMeetingAdd);
+
+        getLastMeetingID();
+
+        mMeetingAdd.setId(mLastInserted);
+
         addMeetItem(5);
     }
 
@@ -134,10 +198,6 @@ public class StartMeeting extends AppCompatActivity
     private void addMeetItem(int count)
     {
 
-
-
-
-
         for(int i =0; i<MeetingTemplate.Template.length; i++)
         {
             LinearLayout meeting_item = null;
@@ -147,20 +207,20 @@ public class StartMeeting extends AppCompatActivity
             switch (templateType)
             {
                 case MeetingTemplate.TemplateType.COMMON_ITEM : meeting_item = new Meeting_Item(this);
-                    ((Meeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+                    ((Meeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1), mMeetingAdd));  break;
 
                 case MeetingTemplate.TemplateType.ATTENDEE_ITEM :meeting_item = new Attendee_SubMeeting_Item(this) ;
-                ((Attendee_SubMeeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+                ((Attendee_SubMeeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1), mMeetingAdd ));  break;
 
 
                 case MeetingTemplate.TemplateType.PAYMENT_CERTIFICATE_ITEM :meeting_item = new PaymentCert_MeetingItem(this) ;
-                ((PaymentCert_MeetingItem)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+                ((PaymentCert_MeetingItem)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1), mMeetingAdd ));  break;
 
                 case MeetingTemplate.TemplateType.VARIOUS_ORDER_ITEM : meeting_item = new VariousOrder_MeetingItem(this) ;
-                ((VariousOrder_MeetingItem)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+                ((VariousOrder_MeetingItem)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1), mMeetingAdd ));  break;
 
                 default:meeting_item = new Meeting_Item(this);
-                    ((Meeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1) ));  break;
+                    ((Meeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1), mMeetingAdd ));  break;
 
 
             }
@@ -176,6 +236,73 @@ public class StartMeeting extends AppCompatActivity
 
     }
 
+    private void prepareSaving() {
+
+        mMeetingAdd = new Meeting();
+
+        mMeetingAdd.setProjectManagersRef( ((EditText)findViewById(R.id.edtprojectmgrref)).getText().toString()  );
+        mMeetingAdd.setClientId(selectedClientID);
+        mMeetingAdd.setProjectId(selectedProjectID);
+        mMeetingAdd.setSite( ((EditText)findViewById(R.id.edtsite)).getText().toString()  );
+        mMeetingAdd.setMeetingDate( ((TextView)findViewById(R.id.txtstartdateday)).getText().toString()  );
+        mMeetingAdd.setStartTime( ((TextView)findViewById(R.id.txtstartdatetime)).getText().toString()  );
+        mMeetingAdd.setVenue( ((TextView)findViewById(R.id.edtVenue)).getText().toString()  );
+
+    }
+
+
+
+    private int insertNewMeeting(Meeting aMeeting) {
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(MeetingColumns.PROJECT_MANAGER_REF,aMeeting.getProjectManagersRef()) ;
+            values.put(MeetingColumns.CLIENT_ID,aMeeting.getClientId()) ;
+            values.put(MeetingColumns.PROJECT_ID ,aMeeting.getProjectId()) ;
+            values.put(MeetingColumns.SITE,aMeeting.getSite()) ;
+            values.put(MeetingColumns.START_DATE,aMeeting.getMeetingDate()) ;
+            values.put(MeetingColumns.START_TIME,aMeeting.getStartTime()) ;
+            values.put(MeetingColumns.VENUE,aMeeting.getVenue()) ;
+
+            getContentResolver().insert(ContentType.MEETING_CONTENT_URI, values);
+
+
+            return 1;
+
+        }catch (SQLException e)
+        {
+            e.printStackTrace();
+
+            return 0;
+        }
+    }
+
+
+    /*
+     * get the last save Audit iD
+     */
+
+    public int getLastMeetingID(){
+
+        String [] columns  = new String []{MeetingColumns._ID};
+        ContentResolver resolver = getContentResolver();
+        Cursor cursor = resolver.query(ContentType.MEETING_CONTENT_URI,columns,null,null, MeetingColumns._ID+" DESC LIMIT 1");
+
+        int lastId =0;
+
+        if(cursor !=null && cursor.moveToFirst())
+        {
+            lastId =(cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0;
+            mLastInserted = lastId;
+            //mGlobalRetainer.get_grCurrentAudit().set_id(lastId);
+            Log.d(TAG, String.valueOf(lastId) );
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return lastId;
+    }
 
     @Override
     public void onBackPressed() {

@@ -1,5 +1,9 @@
 package cite.ansteph.ponda.model;
 
+import java.util.ArrayList;
+
+import cite.ansteph.ponda.customview.PaymentCert_MeetingItem;
+
 /**
  * Created by loicstephan on 2018/02/12.
  */
@@ -9,10 +13,24 @@ public class PaymentCertificate {
 
     int id,projectId,meetingId,meetingItemId,meetingSubItemId;
     String paymentcertificate,issueDate,paid,dateDue,dayLate,signedCopy;
+    String amountString;
     double amount;
-
+    public String[] data ;
 
     public PaymentCertificate() {
+    }
+
+    public PaymentCertificate(String paymentcertificate, String issueDate, String paid, String dateDue, String dayLate, String signedCopy, String amount) {
+        this.paymentcertificate = paymentcertificate;
+        this.issueDate = issueDate;
+        this.paid = paid;
+        this.dateDue = dateDue;
+        this.dayLate = dayLate;
+        this.signedCopy = signedCopy;
+        this.amountString = amount;
+        data = new String[]{
+                paymentcertificate, issueDate,  paid,
+                dateDue, dayLate,  signedCopy,  amount};
     }
 
     public PaymentCertificate(int projectId, int meetingId, int meetingItemId, int meetingSubItemId, String paymentcertificate, String issueDate, String paid, String dateDue, String dayLate, String signedCopy, double amount) {
@@ -142,3 +160,5 @@ public class PaymentCertificate {
         this.amount = amount;
     }
 }
+
+

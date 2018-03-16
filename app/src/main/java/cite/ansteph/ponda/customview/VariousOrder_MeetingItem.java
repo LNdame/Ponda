@@ -14,6 +14,7 @@ import com.inqbarna.tablefixheaders.TableFixHeaders;
 
 import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.adapter.tableadapter.MatrixTableAdapter;
+import cite.ansteph.ponda.model.Meeting;
 import cite.ansteph.ponda.model.MeetingItem;
 
 /**
@@ -36,6 +37,8 @@ public class VariousOrder_MeetingItem extends LinearLayout {
 
     private Context mContext;
     private MeetingItem meetingItem;
+    private Meeting mMeeting;
+
     public VariousOrder_MeetingItem(Context context) {
         super(context);
         mContext = context;
@@ -178,4 +181,11 @@ public class VariousOrder_MeetingItem extends LinearLayout {
         }
     }
 
+    public Meeting getmMeeting() {
+        return mMeeting;
+    }
+
+    public void setmMeeting(Meeting mMeeting) {
+        this.mMeeting = mMeeting;
+    }
 }

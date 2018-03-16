@@ -8,10 +8,11 @@ import java.io.Serializable;
 
 public class MeetingItem implements Serializable {
 
-int id, meetingId ;
+    int id, meetingId ;
 
     String itemName,position,status;
 
+    Meeting meeting;
 
     public MeetingItem() {
     }
@@ -19,6 +20,14 @@ int id, meetingId ;
     public MeetingItem(String itemName, String position) {
         this.itemName = itemName;
         this.position = position;
+    }
+
+
+    public MeetingItem( String itemName, String position, Meeting meeting ) {
+
+        this.itemName = itemName;
+        this.position = position;
+        this.meeting = meeting;
     }
 
     //populate
@@ -82,5 +91,14 @@ int id, meetingId ;
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    public Meeting getMeeting() {
+        return meeting;
+    }
+
+    public void setMeeting(Meeting meeting) {
+        this.meeting = meeting;
     }
 }

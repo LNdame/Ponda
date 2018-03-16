@@ -70,7 +70,7 @@ public class ProjectList extends AppCompatActivity
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         projectRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
 
-        mProjectList = retrieveProjects();
+        mProjectList =retrieveProjects();
 
         mProjectAdapter = new ProjectRecyclerAdapter(mProjectList, this);
         projectRecyclerView.setLayoutManager(mLayoutManager);

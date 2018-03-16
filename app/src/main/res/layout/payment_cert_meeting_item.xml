@@ -76,7 +76,7 @@
                 android:layout_height="350dp">
 
                 <com.inqbarna.tablefixheaders.TableFixHeaders
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/table"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -247,7 +247,7 @@
 
             <Button
                 android:layout_gravity="right"
-                android:id="@+id/btnAddSub"
+                android:id="@+id/btnAddtblRow"
                 android:layout_alignParentBottom="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

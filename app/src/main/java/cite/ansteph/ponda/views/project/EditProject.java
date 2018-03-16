@@ -88,8 +88,12 @@ public class EditProject extends AppCompatActivity {
                                 if (dayOfMonth < mDay && year == mYear && monthOfYear == mMonth)
                                     view.updateDate(mYear,mMonth,mDay);
 
-                                endDate.setText(dayOfMonth + "-"
-                                        + (monthOfYear + 1) + "-" + year);
+                                String monthcon = (mMonth<10)? "0"+String.valueOf(mMonth+1):String.valueOf(mMonth+1);
+                                String daycon =  (dayOfMonth<10)? "0"+String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+
+
+                                endDate.setText(daycon + "-"
+                                        + monthcon + "-" + year);
 
                             }
                         }, mYear, mMonth, mDay);
@@ -127,8 +131,11 @@ public class EditProject extends AppCompatActivity {
                                 if (dayOfMonth < mDay && year == mYear && monthOfYear == mMonth)
                                     view.updateDate(mYear,mMonth,mDay);
 
-                                startDate.setText(dayOfMonth + "-"
-                                        + (monthOfYear + 1) + "-" + year);
+                                String monthcon = (mMonth<10)? "0"+String.valueOf(mMonth+1):String.valueOf(mMonth+1);
+                                String daycon =  (dayOfMonth<10)? "0"+String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+
+                                startDate.setText(daycon + "-"
+                                        + monthcon + "-" + year);
 
                             }
                         }, mYear, mMonth, mDay);

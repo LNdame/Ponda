@@ -12,7 +12,8 @@ public interface MeetingColumns extends DataColumns {
     String SITE = "site";
     String START_DATE = "start_date";
     String START_TIME = "end_time";
+    String VENUE = "venue";
 
-    String[]PROJECTION = new String[]{_ID,PROJECT_MANAGER_REF,CLIENT_ID,PROJECT_ID,SITE,START_DATE, START_TIME};
+    String[]PROJECTION = new String[]{_ID,PROJECT_MANAGER_REF,CLIENT_ID,PROJECT_ID,SITE,START_DATE, START_TIME,VENUE};
 
 }

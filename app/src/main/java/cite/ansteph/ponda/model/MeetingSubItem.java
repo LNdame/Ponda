@@ -10,9 +10,20 @@ public class MeetingSubItem {
 
     String itemNote,position,status;
 
+    Meeting meeting; MeetingItem meetingItem;
+
 
     public MeetingSubItem() {
     }
+
+    public MeetingSubItem(int meetingId, int meetingItemId, String itemNote, String position) {
+        this.meetingId = meetingId;
+        this.meetingItemId = meetingItemId;
+        this.itemNote = itemNote;
+        this.position = position;
+
+    }
+
 
     public MeetingSubItem(int meetingId, int meetingItemId, String itemNote, String position, String status) {
         this.meetingId = meetingId;
@@ -77,5 +88,24 @@ public class MeetingSubItem {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    public Meeting getMeeting() {
+        return meeting;
+    }
+
+    public void setMeeting(Meeting meeting) {
+        this.meeting = meeting;
+    }
+
+
+
+    public MeetingItem getMeetingItem() {
+        return meetingItem;
+    }
+
+    public void setMeetingItem(MeetingItem meetingItem) {
+        this.meetingItem = meetingItem;
     }
 }

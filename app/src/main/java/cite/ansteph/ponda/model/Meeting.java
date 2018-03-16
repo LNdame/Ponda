@@ -8,7 +8,7 @@ public class Meeting {
 
     int id,clientId,projectId ;
 
-    String projectManagersRef,site, meetingDate, startTime;
+    String projectManagersRef,site, meetingDate, startTime,venue;
 
 
 
@@ -90,6 +90,15 @@ public class Meeting {
     public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
 
 
 }

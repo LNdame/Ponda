@@ -12,4 +12,10 @@ public interface Tables {
     String PROJECT_TABLE = "project";
     String MEETING_TABLE = "meeting";
 
+    String MEETINGITEM_TABLE = "meetingitem";
+    String MEETINGSUBITEM_TABLE = "meetingsubitem";
+    String PAYMENTCERTIFICATE_TABLE = "paymentcertificate";
+    String VARIATIONORDER_TABLE = "variationorder";
+
+
 }

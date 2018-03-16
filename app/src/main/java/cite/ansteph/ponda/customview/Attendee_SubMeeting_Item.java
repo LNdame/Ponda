@@ -26,6 +26,7 @@ import cite.ansteph.ponda.adapter.AttendingRecyclerAdapter;
 import cite.ansteph.ponda.helper.RecyclerItemTouchHelper;
 import cite.ansteph.ponda.listener.RecyclerViewClickListener;
 import cite.ansteph.ponda.model.Attendee;
+import cite.ansteph.ponda.model.Meeting;
 import cite.ansteph.ponda.model.MeetingItem;
 
 /**
@@ -56,6 +57,8 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
     private Context mContext;
 
     private MeetingItem meetingItem;
+
+    private Meeting mMeeting;
 
     public Attendee_SubMeeting_Item(Context context) {
         super(context);
