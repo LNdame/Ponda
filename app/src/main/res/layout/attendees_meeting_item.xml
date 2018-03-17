@@ -7,12 +7,12 @@
     android:layout_height="match_parent">
 
     <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/meeting_item_back"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:layout_height="80dp">
+        android:paddingRight="16dp">
 
         <TextView
             android:id="@+id/txtItemNumber"
@@ -22,18 +22,17 @@
             android:text="1" />
 
         <TextView
-            android:layout_gravity="center"
             android:id="@+id/txtItemTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Attendees" />
 
         <RelativeLayout
-            android:layout_margin="5dp"
-            android:layout_gravity="right"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_margin="5dp">
 
 
             <ImageButton

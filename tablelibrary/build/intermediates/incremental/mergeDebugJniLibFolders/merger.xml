@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="H:\projects\Ponda\tablelibrary\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="H:\projects\Ponda\tablelibrary\src\debug\jniLibs"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="H:\git\Ponda\tablelibrary\src\main\jniLibs"/></dataSet><dataSet config="debug"><source path="H:\git\Ponda\tablelibrary\src\debug\jniLibs"/></dataSet></merger>
