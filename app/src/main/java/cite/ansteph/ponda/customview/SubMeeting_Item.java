@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,7 +32,7 @@ public class SubMeeting_Item extends LinearLayout{
 
    TextView txtSubNumber;
    EditText edtSubItemContent, edtSubOwner;
-
+Button btnDelete;
    MeetingSubItem meetingSubItem;
     MeetingItem meetingItem;
     private Meeting mMeeting;
@@ -64,7 +66,16 @@ public class SubMeeting_Item extends LinearLayout{
         txtSubNumber = (TextView) findViewById(R.id.txtSubNumber);
          edtSubItemContent= (EditText) findViewById(R.id.txtSubItemContent);
          edtSubOwner= (EditText) findViewById(R.id.edtSubOwner);
+         btnDelete = (Button) findViewById(R.id.btdelete);
+
+         btnDelete.setOnClickListener(new OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 containerLyt.removeView((View) view.getParent());
+             }
+         });
     }
+
 
     public Meeting getmMeeting() {
         return mMeeting;
@@ -182,6 +193,7 @@ public class SubMeeting_Item extends LinearLayout{
         }
 
     }
+
 
 
 
