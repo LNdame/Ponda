@@ -96,4 +96,14 @@ public class MeetingHistoryContentProvider extends ContentProvider {
 
         return retVal;
     }
+
+//    @Override
+//    public int select(Uri uri, ContentValues values, String selection,
+//                      String[] selectionArgs) {
+//        // Implement this to handle requests to update one or more rows.
+//        int retVal = db.select(Tables.MEETING_TABLE, values, selection,selectionArgs);
+//        getContext().getContentResolver().notifyChange(uri, null);
+//
+//        return retVal;
+//    }
 }

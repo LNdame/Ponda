@@ -26,6 +26,7 @@ public class MeetingHistory {
     }
 
 
+
     public MeetingHistory(int clientId, int projectId, String projectManagersRef, String site, String meetingDate) {
         this.clientId = clientId;
         this.projectId = projectId;
@@ -60,9 +61,9 @@ public class MeetingHistory {
         this.projectId = projectId;
     }
 
-    public String getProjectManagersRef() {
-        return projectManagersRef;
-    }
+//    public String getProjectManagersRef() {
+//        return projectManagersRef;
+//    }
 
     public void setProjectManagersRef(String projectManagersRef) {
         this.projectManagersRef = projectManagersRef;

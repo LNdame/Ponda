@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Ponda.iml" filepath="$PROJECT_DIR$/Ponda.iml" />
-      <module fileurl="file://H:\git\Ponda\Ponda.iml" filepath="H:\git\Ponda\Ponda.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://H:\git\Ponda\app\app.iml" filepath="H:\git\Ponda\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/tablelibrary/tablelibrary.iml" filepath="$PROJECT_DIR$/tablelibrary/tablelibrary.iml" />
-      <module fileurl="file://H:\git\Ponda\tablelibrary\tablelibrary.iml" filepath="H:\git\Ponda\tablelibrary\tablelibrary.iml" />
     </modules>
   </component>
 </project>

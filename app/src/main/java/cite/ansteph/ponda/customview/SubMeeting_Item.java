@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -32,10 +33,10 @@ public class SubMeeting_Item extends LinearLayout{
 
    TextView txtSubNumber;
    EditText edtSubItemContent, edtSubOwner;
-Button btnDelete;
+   ImageView btnDelete;
    MeetingSubItem meetingSubItem;
-    MeetingItem meetingItem;
-    private Meeting mMeeting;
+   MeetingItem meetingItem;
+   private Meeting mMeeting;
    LinearLayout containerLyt;
 
 
@@ -66,7 +67,7 @@ Button btnDelete;
         txtSubNumber = (TextView) findViewById(R.id.txtSubNumber);
          edtSubItemContent= (EditText) findViewById(R.id.txtSubItemContent);
          edtSubOwner= (EditText) findViewById(R.id.edtSubOwner);
-         btnDelete = (Button) findViewById(R.id.btdelete);
+         btnDelete = (ImageView) findViewById(R.id.btnDelete);
 
          btnDelete.setOnClickListener(new OnClickListener() {
              @Override

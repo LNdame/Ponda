@@ -20,7 +20,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/padd_10"
-            android:src="@mipmap/ic_delete_white" />
+             />
+        <!--android:src="@mipmap/ic_delete_grey"-->
 
         <TextView
             android:layout_width="wrap_content"

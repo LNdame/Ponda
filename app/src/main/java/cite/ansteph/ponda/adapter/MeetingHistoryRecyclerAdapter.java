@@ -1,16 +1,19 @@
 package cite.ansteph.ponda.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import cite.ansteph.ponda.R;
-import cite.ansteph.ponda.model.MeetingItem;
+import cite.ansteph.ponda.views.meeting.MeetingHistory;
 
 /**
  * Created by Wendy on 2018/02/22.
@@ -18,14 +21,14 @@ import cite.ansteph.ponda.model.MeetingItem;
 
 public class MeetingHistoryRecyclerAdapter extends RecyclerView.Adapter<MeetingHistoryRecyclerAdapter.ViewHolder> {
 
-    public ArrayList<MeetingItem> mMeetingItem;
+    public ArrayList<MeetingHistory> mMeetingHistory;
     Context mContext;
 
-    public MeetingHistoryRecyclerAdapter() {
+    public MeetingHistoryRecyclerAdapter(ArrayList<MeetingHistory> meetingsList, MeetingHistory mContext) {
     }
 
-    public MeetingHistoryRecyclerAdapter(ArrayList<MeetingItem> mMeetingItem, Context mContext) {
-        this.mMeetingItem = mMeetingItem;
+    public MeetingHistoryRecyclerAdapter(ArrayList<MeetingHistory> mMeetingHistory, Context mContext) {
+        this.mMeetingHistory = mMeetingHistory;
         this.mContext = mContext;
     }
 
@@ -38,17 +41,22 @@ public class MeetingHistoryRecyclerAdapter extends RecyclerView.Adapter<MeetingH
 
     @Override
     public void onBindViewHolder(ViewHolder holder,  final int position) {
-        holder.mTextView.setText(mMeetingItem.get(position).getItemName());
+        holder.mTextView.setText(mMeetingHistory.get(position).projectManagersRef());
         //   holder.mIcon.setLetter(mBookList.get(position).getTitle());
+
+        holder.mTextView.setText(String.valueOf(mMeetingHistory.get(position)));
+
+        //holder.mTextView.setText(String.valueOf(mMeetingHistory.get(position).getContactPerson(contactPerson))  );
+
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.d("item", "clicked");
-//                Intent i = new Intent(mContext, EditClient.class);
-//                i.putExtra("meeting", mMeetingItem.get(position));
-//                mContext.startActivity(i);
+                Log.d("item", "clicked");
+                Intent i = new Intent(mContext, MeetingHistory.class);
+                i.putExtra("meeting", (Serializable) mMeetingHistory.get(position));
+                mContext.startActivity(i);
             }
         });
 
@@ -56,7 +64,7 @@ public class MeetingHistoryRecyclerAdapter extends RecyclerView.Adapter<MeetingH
 
     @Override
     public int getItemCount() {
-        return mMeetingItem.size();
+        return mMeetingHistory.size();
     }
 
 
