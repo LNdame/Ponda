@@ -5,6 +5,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.api.ContentType;
@@ -35,10 +40,13 @@ public class SubMeeting_Item extends LinearLayout{
    EditText edtSubItemContent, edtSubOwner;
    ImageView btnDelete;
    MeetingSubItem meetingSubItem;
-   MeetingItem meetingItem;
+  // ArrayList<MeetingSubItem> mMeetingSubItem;
+    MeetingSubItem aMeetSubItem;
+    MeetingItem meetingItem;
    private Meeting mMeeting;
    LinearLayout containerLyt;
-
+   CharSequence noteOutput="", ownerOutput="";
+   int meetingID, meetingItemId;
 
 
     private Context mContext;
@@ -58,16 +66,20 @@ public class SubMeeting_Item extends LinearLayout{
     }
 
 
-    public  void initViews(Context context)
+    public  void initViews(final Context context)
     {
         LayoutInflater.from(context).inflate(R.layout.subitem_layout, this);
         containerLyt = (LinearLayout) findViewById(R.id.submeetingLytContainer);
 
 
         txtSubNumber = (TextView) findViewById(R.id.txtSubNumber);
-         edtSubItemContent= (EditText) findViewById(R.id.txtSubItemContent);
-         edtSubOwner= (EditText) findViewById(R.id.edtSubOwner);
-         btnDelete = (ImageView) findViewById(R.id.btnDelete);
+        edtSubItemContent= (EditText) findViewById(R.id.txtSubItemContent);
+        edtSubItemContent.setHint("Note");
+
+        edtSubOwner= (EditText) findViewById(R.id.edtSubOwner);
+        edtSubOwner.setHint("Owner");
+
+        btnDelete = (ImageView) findViewById(R.id.btnDelete);
 
          btnDelete.setOnClickListener(new OnClickListener() {
              @Override
@@ -75,6 +87,51 @@ public class SubMeeting_Item extends LinearLayout{
                  containerLyt.removeView((View) view.getParent());
              }
          });
+
+        edtSubItemContent.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                noteOutput =  s;
+                prepareSaving();
+                updateMeetingSubItem(aMeetSubItem);
+
+//                mMeetingAdd.setId(mLastInserted);
+            }
+        });
+
+        edtSubOwner.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+            }
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                ownerOutput =  s;
+            }
+        });
+    }
+
+    private void prepareSaving() {
+        aMeetSubItem = new MeetingSubItem();
+
+        aMeetSubItem.setMeetingId(meetingID);
+        aMeetSubItem.setMeetingItemId(meetingItemId);
+        aMeetSubItem.setItemNote(noteOutput.toString() );
+        aMeetSubItem.setPosition(((TextView)findViewById(R.id.txtSubNumber)).getText().toString()  );;
+        //mMeetingSubItemAdd.setStatus();
+
     }
 
 
@@ -97,6 +154,9 @@ public class SubMeeting_Item extends LinearLayout{
         if(meetingSubItem!=null)
         {
             txtSubNumber .setText(meetingSubItem.getPosition());
+
+            meetingItemId = meetingSubItem.getMeetingItemId();
+            meetingID = meetingSubItem.getMeetingId();
 
             int i = insertMeetingSubItem(meetingSubItem);
             if (i==1)
@@ -128,8 +188,6 @@ public class SubMeeting_Item extends LinearLayout{
             values.put(MeetingSubItemColumns.POSITION,aMeetSubItem.getPosition()) ;
 
             mContext. getContentResolver().insert(ContentType.MEETINGSUBITEM_CONTENT_URI, values);
-
-
             return 1;
 
         }catch (Exception e)
