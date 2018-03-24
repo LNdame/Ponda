@@ -14,5 +14,21 @@
     {
         "merged": "H:\\Ponda\\tablelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shadow_top.xml.flat",
         "source": "H:\\Ponda\\tablelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\shadow_top.xml"
+    },
+    {
+        "merged": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shadow_right.xml.flat",
+        "source": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\shadow_right.xml"
+    },
+    {
+        "merged": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shadow_top.xml.flat",
+        "source": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\shadow_top.xml"
+    },
+    {
+        "merged": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shadow_bottom.xml.flat",
+        "source": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\shadow_bottom.xml"
+    },
+    {
+        "merged": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable_shadow_left.xml.flat",
+        "source": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\shadow_left.xml"
     }
 ]
