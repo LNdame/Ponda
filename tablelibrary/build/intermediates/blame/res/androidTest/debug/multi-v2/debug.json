@@ -1,10 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Android\\loic\\Ponda\\tablelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
+            "outputFile": "H:\\Ponda\\tablelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
             "map": [
                 {
-                    "source": "C:\\Android\\loic\\Ponda\\tablelibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "source": "H:\\Ponda\\tablelibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,102,151,194,234,271",
+                        "endColumns": "46,48,42,39,36,42",
+                        "endOffsets": "97,146,189,229,266,309"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\values_values.arsc.flat",
+            "map": [
+                {
+                    "source": "H:\\New folder\\Ponda\\tablelibrary\\build\\intermediates\\bundles\\debug\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",
