@@ -1,10 +1,12 @@
 package cite.ansteph.ponda.model;
 
+import java.io.Serializable;
+
 /**
  * Created by loicstephan on 2018/02/12.
  */
 
-public class MeetingHistory {
+public class MeetingHistory implements Serializable {
 
     int id,clientId,projectId ;
 
