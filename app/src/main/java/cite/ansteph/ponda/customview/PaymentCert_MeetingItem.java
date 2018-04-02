@@ -33,6 +33,7 @@ import cite.ansteph.ponda.adapter.tableadapter.PaymentCertRecAdapter;
 import cite.ansteph.ponda.adapter.tableadapter.PaymentCertTableAdapter;
 import cite.ansteph.ponda.adapter.tableadapter.VariationOrderRecAdapter;
 import cite.ansteph.ponda.api.ContentType;
+import cite.ansteph.ponda.api.columns.MeetingItemColumns;
 import cite.ansteph.ponda.api.columns.MeetingSubItemColumns;
 import cite.ansteph.ponda.api.columns.PaymentCertificateColumns;
 import cite.ansteph.ponda.helper.PaymentCertRecyclerItemTouchHelper;
@@ -66,7 +67,9 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
 
     ArrayList<PaymentCertificate> mPaymentCertificates ;
 
-
+    Button btnAddSub;
+    private ArrayList<SubMeeting_Item> SubItemLayoutList;
+    int subMeetingItemCount=0;
 
     RecyclerView PayCertRecyclerView;
     HashMap<Integer, PaymentCertificate> PayCertAdded;
@@ -98,7 +101,7 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
         super(context, attrs, defStyleAttr);
     }
 
-    public void initViews(Context context)
+    public void initViews(final Context context)
     {
         LayoutInflater.from(context).inflate(R.layout.payment_cert_meeting_item, this);
         containerLyt = (LinearLayout) findViewById(R.id.meetingLytContainer);
@@ -109,6 +112,9 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
 
         txtItemNumber= (TextView) findViewById(R.id.txtItemNumber);
         txtItemTitle= (TextView) findViewById(R.id.txtItemTitle);
+
+
+        SubItemLayoutList = new ArrayList<>();
 
         edtPayment=(EditText) findViewById(R.id.edtPayment) ;
                 edtIssueDate=(EditText) findViewById(R.id.edtIssueDate) ;
@@ -212,17 +218,315 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
                 PayCertAdded.put(positionCount, pay);
 
 
+
+
+                int i = insertPaymentCertificate(pay);
+                if(i==1)
+                 pay.setId(getLastPayCertItemID());
+
+
                 mPaymentCertificates.add(pay);
                 // refreshing recycler view
                 mPayCertAdapter.notifyDataSetChanged();
                 // String ct = "(" + (3 - mPrefCount) + " more)";
 
-
                 //redrawTable(pay);
             }
         });
 
+
+        btnAddSub = (Button) findViewById(R.id.btnAddSub) ;
+
+        btnAddSub.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                SubMeeting_Item subMeeting_item = new SubMeeting_Item(context);
+                subMeeting_item.setmMeeting(getMeetingItem().getMeeting());
+                subMeeting_item.setMeetingItem(getMeetingItem());
+
+
+                MeetingSubItem meetingSubItem = new MeetingSubItem(getMeetingItem().getMeeting().getId(),
+                        getMeetingItem().getId(),"",String.valueOf(subMeetingItemCount+1) );
+                meetingSubItem.setMeeting(getMeetingItem().getMeeting());
+                meetingSubItem.setMeetingItem(getMeetingItem());
+
+                subMeeting_item.setMeetingSubItem(meetingSubItem);
+
+                SubItemLayoutList.add(subMeeting_item);
+                //subItem[0] = new SubMeeting_Item(context);
+
+                lytSubItemMeeting.addView(SubItemLayoutList.get(subMeetingItemCount));
+                subMeetingItemCount ++;
+            }
+        });
+
+
     }
+
+
+
+
+
+
+
+
+    public int insertPaymentCertificate(PaymentCertificate aPaymentCertificate){
+
+        try {
+            ContentValues values = new ContentValues();
+
+
+            values.put(PaymentCertificateColumns.PAYMENTCERTIFICATE,aPaymentCertificate.getPaymentcertificate()) ;
+            values.put(PaymentCertificateColumns.ISSUE_DATE,aPaymentCertificate.getIssueDate()) ;
+            values.put(PaymentCertificateColumns.PAID ,aPaymentCertificate.getPaid()) ;
+            values.put(PaymentCertificateColumns.DATE_DUE ,aPaymentCertificate.getDateDue()) ;
+            values.put(PaymentCertificateColumns.DAY_LATE ,aPaymentCertificate.getDayLate()) ;
+            values.put(PaymentCertificateColumns.SIGNED_COPY ,aPaymentCertificate.getSignedCopy()) ;
+            values.put(PaymentCertificateColumns.AMOUNT ,aPaymentCertificate.getAmount()) ;
+
+           values.put(PaymentCertificateColumns.PROJECT_ID, meetingItem.getMeeting().getProjectId()) ; // ***reactivate when meeting has a proper proejct id
+            values.put(PaymentCertificateColumns.MEETING_ID,meetingItem.getMeeting().getId()) ;
+            values.put(PaymentCertificateColumns.MEETINGITEM_ID,meetingItem.getId()) ;
+            //values.put(PaymentCertificateColumns.MEETINGSUBITEM_ID,aPaymentCertificate.getMeetingItem().getId()) ;
+
+            mContext. getContentResolver().insert(ContentType.PAYMENTCERTIFICATE_CONTENT_URI, values);
+
+
+
+            return 1;
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+
+            return 0;
+        }
+
+    }
+
+
+
+    public void deletePaymentCertificate(PaymentCertificate aPaymentCertificate){
+
+        String item_id = String.valueOf( aPaymentCertificate.getId());
+
+        mContext. getContentResolver().delete(ContentType.PAYMENTCERTIFICATE_CONTENT_URI, PaymentCertificateColumns._ID+" =?", new String[]{item_id});
+
+        Log.d(TAG, item_id+" deleted" );
+
+    }
+
+
+
+    /*String PAYMENTCERTIFICATE  = "paymentcertificate";
+    String ISSUE_DATE  = "issue_date";
+    String PAID = "paid";
+    String DATE_DUE = "date_due";
+    String DAY_LATE = "day_late";
+    String SIGNED_COPY = "signed_copy";
+    String AMOUNT = "amount";
+    String PROJECT_ID = "project_id";
+
+    String MEETING_ID = "meeting_id";
+    String MEETINGITEM_ID  = "meetingitem_id";
+    String MEETINGSUBITEM_ID  = "meetingsubitem_id";*/
+
+
+    public int getLastPayCertItemID(){
+
+        String [] columns  = new String []{PaymentCertificateColumns._ID};
+        ContentResolver resolver =  mContext. getContentResolver();
+        Cursor cursor = resolver.query(ContentType.PAYMENTCERTIFICATE_CONTENT_URI,columns,null,null, PaymentCertificateColumns._ID+" DESC LIMIT 1");
+
+        int lastId =0;
+
+        if(cursor !=null && cursor.moveToFirst())
+        {
+            lastId =(cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0;
+           // meetingItem.setId( lastId); in this case should be the last payment certificate row
+            //mGlobalRetainer.get_grCurrentAudit().set_id(lastId);
+            Log.d(TAG, String.valueOf(lastId) );
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return lastId;
+    }
+
+
+
+
+
+    //mainly unused
+    public int updatePaymentCertItem(PaymentCertificate aPaymentCertificate)
+    {
+        //String meet_id = String.valueOf( aMeetSubItem.getId());
+
+        try {
+            ContentValues values = new ContentValues();
+
+
+
+            values.put(PaymentCertificateColumns.PAYMENTCERTIFICATE,aPaymentCertificate.getPaymentcertificate()) ;
+            values.put(PaymentCertificateColumns.ISSUE_DATE,aPaymentCertificate.getIssueDate()) ;
+            values.put(PaymentCertificateColumns.PAID ,aPaymentCertificate.getPaid()) ;
+            values.put(PaymentCertificateColumns.DATE_DUE ,aPaymentCertificate.getDateDue()) ;
+            values.put(PaymentCertificateColumns.DAY_LATE ,aPaymentCertificate.getDayLate()) ;
+            values.put(PaymentCertificateColumns.SIGNED_COPY ,aPaymentCertificate.getSignedCopy()) ;
+            values.put(PaymentCertificateColumns.AMOUNT ,aPaymentCertificate.getAmount()) ;
+
+            // values.put(PaymentCertificateColumns.PROJECT_ID, aPaymentCertificate.getMeetingItem().getId()) ;
+            values.put(PaymentCertificateColumns.MEETING_ID,mMeeting.getId()) ;
+            values.put(PaymentCertificateColumns.MEETINGITEM_ID,meetingItem.getId()) ;
+
+
+            mContext.getContentResolver().update(ContentType.PAYMENTCERTIFICATE_CONTENT_URI, values, MeetingSubItemColumns._ID+" =?", new String[]{""});
+
+
+            return 1;
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+
+            return 0;
+        }
+
+    }
+
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if(viewHolder instanceof PaymentCertRecAdapter.PayViewHolder)
+        {
+            // get the removed item name to display it in snack bar
+            String name = mPaymentCertificates.get(viewHolder.getAdapterPosition()).getPaymentcertificate();
+
+            // backup of removed item for undo purpose
+            final PaymentCertificate deletedItem = mPaymentCertificates.get(viewHolder.getAdapterPosition());
+            final int deletedIndex = viewHolder.getAdapterPosition();
+
+
+            // remove the item from recycler view
+            mPayCertAdapter.removeItem(viewHolder.getAdapterPosition());
+
+            //remove from database
+            deletePaymentCertificate(deletedItem);
+
+           /* mPrefCount--;
+          //  String ct = "(" +(3-mPrefCount)+" more)";
+           // txtPrefCount.setText(ct);
+
+            // showing snack bar with Undo option
+            Snackbar snackbar = Snackbar
+                    .make(container, name + " removed from cart!", Snackbar.LENGTH_LONG);
+            snackbar.setAction("UNDO", new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    // undo is selected, restore the deleted item
+                    mPrefBeerAdapter.restoreItem(deletedItem, deletedIndex);
+
+                    mPrefCount++;
+                    String ct = "(" +(3-mPrefCount)+" more)";
+                    txtPrefCount.setText(ct);
+                }
+            });
+            snackbar.setActionTextColor(Color.YELLOW);
+            snackbar.show();
+            */
+        }
+    }
+
+
+
+
+    //////******************** Meeting Housekeeping *******/////////////
+    //this should have been overrriden from Meeting (This is lane Design////////
+
+    //Do not forget that payment certificate is just a special meeting object (Maybe u should have use a decorator here)
+
+    public MeetingItem getMeetingItem() {
+        return meetingItem;
+    }
+
+    public void setMeetingItem(MeetingItem meetingItem) {
+        this.meetingItem = meetingItem;
+        if(meetingItem!=null)
+        {
+            txtItemNumber.setText(meetingItem.getPosition());
+            txtItemTitle.setText(meetingItem.getItemName());
+
+            int i = insertMeetingItem(meetingItem);
+            if (i==1)
+                getLastMeetingItemID();
+
+        }
+    }
+
+    public Meeting getmMeeting() {
+        return mMeeting;
+    }
+
+    public void setmMeeting(Meeting mMeeting) {
+        this.mMeeting = mMeeting;
+    }
+
+
+
+    public int insertMeetingItem(MeetingItem aMeetItem){
+
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(MeetingItemColumns.MEETING_ID,aMeetItem.getMeeting().getId()) ;
+            values.put(MeetingItemColumns.ITEM_NAME ,aMeetItem.getItemName()) ;
+            values.put(MeetingItemColumns.POSITION,aMeetItem.getPosition()) ;
+
+            mContext. getContentResolver().insert(ContentType.MEETINGITEM_CONTENT_URI, values);
+
+
+            return 1;
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+
+            return 0;
+        }
+
+    }
+
+
+
+
+    public int getLastMeetingItemID(){
+
+        String [] columns  = new String []{MeetingItemColumns._ID};
+        ContentResolver resolver =  mContext. getContentResolver();
+        Cursor cursor = resolver.query(ContentType.MEETINGITEM_CONTENT_URI,columns,null,null, MeetingItemColumns._ID+" DESC LIMIT 1");
+
+        int lastId =0;
+
+        if(cursor !=null && cursor.moveToFirst())
+        {
+            lastId =(cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0;
+            meetingItem.setId( lastId);
+            //mGlobalRetainer.get_grCurrentAudit().set_id(lastId);
+            Log.d(TAG, String.valueOf(lastId) );
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return lastId;
+    }
+
+
+
+
 
 
 
@@ -231,7 +535,7 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
 
 
 
-       String payNo= edtPayment.getText().toString();
+        String payNo= edtPayment.getText().toString();
         String issudate=edtIssueDate.getText().toString();
         String f3=edtPaid.getText().toString();
         String f4=edtDateDue.getText().toString();
@@ -240,7 +544,7 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
         String f7=edtAmount.getText().toString();
 
         mPaymentCertificates.add(new cite.ansteph.ponda.model.PaymentCertificate(payNo, issudate, f3, f4, f5, f6, f6));
-      // mPaymentCertificates.add(pay);
+        // mPaymentCertificates.add(pay);
 
         tblAdapter = new PaymentCertTableAdapter(mContext,mPaymentCertificates);
         mPaymentCertTable.setAdapter(tblAdapter);
@@ -321,145 +625,4 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
         mPaymentCertTable.setAdapter(matrixTableAdapter);
     }
 
-    public MeetingItem getMeetingItem() {
-        return meetingItem;
-    }
-
-    public void setMeetingItem(MeetingItem meetingItem) {
-        this.meetingItem = meetingItem;
-        if(meetingItem!=null)
-        {
-            txtItemNumber.setText(meetingItem.getPosition());
-            txtItemTitle.setText(meetingItem.getItemName());
-        }
-    }
-
-    public Meeting getmMeeting() {
-        return mMeeting;
-    }
-
-    public void setmMeeting(Meeting mMeeting) {
-        this.mMeeting = mMeeting;
-    }
-
-
-
-    public int insertPaymentCertificate(PaymentCertificate aPaymentCertificate){
-
-        try {
-            ContentValues values = new ContentValues();
-
-
-            values.put(PaymentCertificateColumns.PAYMENTCERTIFICATE,aPaymentCertificate.getPaymentcertificate()) ;
-            values.put(PaymentCertificateColumns.ISSUE_DATE,aPaymentCertificate.getIssueDate()) ;
-            values.put(PaymentCertificateColumns.PAID ,aPaymentCertificate.getPaid()) ;
-            values.put(PaymentCertificateColumns.DATE_DUE ,aPaymentCertificate.getDateDue()) ;
-            values.put(PaymentCertificateColumns.DAY_LATE ,aPaymentCertificate.getDayLate()) ;
-            values.put(PaymentCertificateColumns.SIGNED_COPY ,aPaymentCertificate.getSignedCopy()) ;
-            values.put(PaymentCertificateColumns.AMOUNT ,aPaymentCertificate.getAmount()) ;
-
-           // values.put(PaymentCertificateColumns.PROJECT_ID, aPaymentCertificate.getMeetingItem().getId()) ;
-            values.put(PaymentCertificateColumns.MEETING_ID,mMeeting.getId()) ;
-            values.put(PaymentCertificateColumns.MEETINGITEM_ID,meetingItem.getId()) ;
-            //values.put(PaymentCertificateColumns.MEETINGSUBITEM_ID,aPaymentCertificate.getMeetingItem().getId()) ;
-
-            mContext. getContentResolver().insert(ContentType.PAYMENTCERTIFICATE_CONTENT_URI, values);
-            return 1;
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-
-            return 0;
-        }
-
-    }
-
-
-
-    public void DeletePaymentCertificate(PaymentCertificate aPaymentCertificate){
-
-    }
-
-
-
-    /*String PAYMENTCERTIFICATE  = "paymentcertificate";
-    String ISSUE_DATE  = "issue_date";
-    String PAID = "paid";
-    String DATE_DUE = "date_due";
-    String DAY_LATE = "day_late";
-    String SIGNED_COPY = "signed_copy";
-    String AMOUNT = "amount";
-    String PROJECT_ID = "project_id";
-
-    String MEETING_ID = "meeting_id";
-    String MEETINGITEM_ID  = "meetingitem_id";
-    String MEETINGSUBITEM_ID  = "meetingsubitem_id";*/
-
-
-    public int getLastMeetingItemID(){
-
-        String [] columns  = new String []{MeetingSubItemColumns._ID};
-        ContentResolver resolver =  mContext. getContentResolver();
-        Cursor cursor = resolver.query(ContentType.MEETINGSUBITEM_CONTENT_URI,columns,null,null, MeetingSubItemColumns._ID+" DESC LIMIT 1");
-
-        int lastId =0;
-
-        if(cursor !=null && cursor.moveToFirst())
-        {
-            lastId =(cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0;
-            meetingItem.setId( lastId);
-            //mGlobalRetainer.get_grCurrentAudit().set_id(lastId);
-            Log.d(TAG, String.valueOf(lastId) );
-        }
-        if (cursor != null && !cursor.isClosed()) {
-            cursor.close();
-        }
-
-        return lastId;
-    }
-
-
-
-    public int updateMeetingSubItem(PaymentCertificate aPaymentCertificate)
-    {
-        //String meet_id = String.valueOf( aMeetSubItem.getId());
-
-        try {
-            ContentValues values = new ContentValues();
-
-
-
-            values.put(PaymentCertificateColumns.PAYMENTCERTIFICATE,aPaymentCertificate.getPaymentcertificate()) ;
-            values.put(PaymentCertificateColumns.ISSUE_DATE,aPaymentCertificate.getIssueDate()) ;
-            values.put(PaymentCertificateColumns.PAID ,aPaymentCertificate.getPaid()) ;
-            values.put(PaymentCertificateColumns.DATE_DUE ,aPaymentCertificate.getDateDue()) ;
-            values.put(PaymentCertificateColumns.DAY_LATE ,aPaymentCertificate.getDayLate()) ;
-            values.put(PaymentCertificateColumns.SIGNED_COPY ,aPaymentCertificate.getSignedCopy()) ;
-            values.put(PaymentCertificateColumns.AMOUNT ,aPaymentCertificate.getAmount()) ;
-
-            // values.put(PaymentCertificateColumns.PROJECT_ID, aPaymentCertificate.getMeetingItem().getId()) ;
-            values.put(PaymentCertificateColumns.MEETING_ID,mMeeting.getId()) ;
-            values.put(PaymentCertificateColumns.MEETINGITEM_ID,meetingItem.getId()) ;
-
-
-            mContext.getContentResolver().update(ContentType.MEETINGSUBITEM_CONTENT_URI, values, MeetingSubItemColumns._ID+" =?", new String[]{""});
-
-
-            return 1;
-
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-
-            return 0;
-        }
-
-    }
-
-
-    @Override
-    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-
-    }
 }

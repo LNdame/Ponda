@@ -17,7 +17,7 @@ public class ContentType {
     public static final Uri MEETINGITEM_CONTENT_URI =  Uri.parse("content://cite.ansteph.ponda.contentprovider.meetingitemcontentprovider/ponda");
     public static final Uri MEETINGSUBITEM_CONTENT_URI = Uri.parse("content://cite.ansteph.ponda.contentprovider.meetingsubitemcontentprovider/ponda");
     public static final Uri PAYMENTCERTIFICATE_CONTENT_URI = Uri.parse("content://cite.ansteph.ponda.contentprovider.paymentcertificatecontentprovider/ponda");
-    public static final Uri VARIATIONCERTIFICATE_CONTENT_URI = Uri.parse("content://cite.ansteph.ponda.contentprovider.variationordercontentprovider/ponda");
+    public static final Uri VARIATIONORDER_CONTENT_URI = Uri.parse("content://cite.ansteph.ponda.contentprovider.variationordercontentprovider/ponda");
 
 
 

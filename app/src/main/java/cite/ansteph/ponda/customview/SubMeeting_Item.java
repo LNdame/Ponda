@@ -212,7 +212,7 @@ public class SubMeeting_Item extends LinearLayout{
         if(cursor !=null && cursor.moveToFirst())
         {
             lastId =(cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0;
-            meetingItem.setId( lastId);
+            meetingSubItem.setId( lastId);
             //mGlobalRetainer.get_grCurrentAudit().set_id(lastId);
             Log.d(TAG, String.valueOf(lastId) );
         }
