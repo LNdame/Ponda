@@ -74,9 +74,95 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="350dp">
+                <RelativeLayout
+                    android:id="@+id/view_foreground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="15dp"
+                    android:background="@color/colorAccent"
+                    >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/lnVarOrder"
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:text="Payment Certificate No" />
+
+                        <TextView
+                            android:id="@+id/lnMotivation"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Issue Date" />
+
+                        <TextView
+                            android:id="@+id/lnApproved"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pay" />
+
+
+                        <TextView
+                            android:id="@+id/lnOmit"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date Due" />
+
+
+                        <TextView
+                            android:id="@+id/lnAdd"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Days Late" />
+
+                        <TextView
+                            android:id="@+id/lnBalance"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Signed Copy on File" />
+
+                        <TextView
+                            android:id="@+id/lnAmount"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Amount" />
+
+
+                    </LinearLayout>
+
+
+
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/payCertrecyclerview"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                </android.support.v7.widget.RecyclerView>
 
                 <com.inqbarna.tablefixheaders.TableFixHeaders
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:id="@+id/table"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -84,6 +170,30 @@
 
 
             </LinearLayout>
+
+            <FrameLayout
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="Total Certified to Date" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="right"
+                    android:text="R 0.00" />
+
+            </FrameLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -127,7 +237,7 @@
                         android:text="Issue Date" />
 
                     <EditText
-                        android:id="@+id/edtDatePaid"
+                        android:id="@+id/edtIssueDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -245,13 +355,54 @@
 
             </LinearLayout>
 
-            <Button
-                android:layout_gravity="right"
-                android:id="@+id/btnAddtblRow"
-                android:layout_alignParentBottom="true"
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add Row" />
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <Button
+
+                        android:id="@+id/btnDeletetblRow"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Delete Row" />
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:text="Row Number:" />
+
+                    <EditText
+                        android:id="@+id/edtRowNumber"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:text="" />
+
+
+
+                </LinearLayout>
+                <Button
+
+                    android:id="@+id/btnAddtblRow"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add Row" />
+            </RelativeLayout>
+
+
+
+
+
 
         </LinearLayout>
 
