@@ -159,6 +159,14 @@ public class PaymentCertificate {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public String getAmountString() {
+        return amountString;
+    }
+
+    public void setAmountString(String amountString) {
+        this.amountString = amountString;
+    }
 }
 
 
