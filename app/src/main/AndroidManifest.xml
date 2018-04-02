@@ -23,8 +23,12 @@
             android:name=".views.meeting.NewMeeting"
             android:label="@string/title_activity_new_meeting"
             android:theme="@style/AppTheme.NoActionBar" />
+        <!--<activity-->
+            <!--android:name=".views.meeting.MeetingHistory"-->
+            <!--android:label="@string/title_activity_meeting_history"-->
+            <!--android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
-            android:name=".views.meeting.MeetingHistory"
+            android:name=".views.meeting.History"
             android:label="@string/title_activity_meeting_history"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -99,6 +103,12 @@
         <provider
             android:name=".contentprovider.MeetingContentProvider"
             android:authorities="cite.ansteph.ponda.contentprovider.meetingcontentprovider"
+            android:enabled="true"
+            android:exported="false" />
+
+        <provider
+            android:name=".contentprovider.MeetingHistoryContentProvider"
+            android:authorities="cite.ansteph.ponda.contentprovider.meetinghistorycontentprovider"
             android:enabled="true"
             android:exported="false" />
 

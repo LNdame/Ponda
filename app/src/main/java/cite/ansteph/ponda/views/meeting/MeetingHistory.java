@@ -43,7 +43,7 @@ public class MeetingHistory extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(activity_meeting_history);
+        //setContentView(activity_meeting_history);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -71,7 +71,7 @@ public class MeetingHistory extends AppCompatActivity
         meetingHistoryRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         meetingsList = retrieveMeetings();
 
-        meetingHistoryRecyclerAdapter = new MeetingHistoryRecyclerAdapter(meetingsList, this);
+        //meetingHistoryRecyclerAdapter = new MeetingHistoryRecyclerAdapter(meetingsList, this);
         meetingHistoryRecyclerView.setLayoutManager(layoutManager);
         meetingHistoryRecyclerView.setAdapter(meetingHistoryRecyclerAdapter);
     }
