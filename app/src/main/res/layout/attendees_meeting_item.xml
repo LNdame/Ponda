@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/meetingLytContainer"
+    android:layout_marginBottom="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,6 +13,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/meeting_item_back"
         android:paddingLeft="16dp"
+        android:elevation="8dp"
         android:paddingRight="16dp">
 
         <TextView
@@ -19,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
+            style="@style/meeting_item_text"
             android:text="1" />
 
         <TextView
@@ -26,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            style="@style/meeting_item_text"
             android:text="Attendees" />
 
         <RelativeLayout

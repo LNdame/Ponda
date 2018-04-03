@@ -47,6 +47,7 @@ import cite.ansteph.ponda.views.attendee.AttendeeList;
 import cite.ansteph.ponda.views.client.ClientList;
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordDatePickerFragment;
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordTimePickerFragment;
+import cite.ansteph.ponda.views.meeting.History;
 import cite.ansteph.ponda.views.meeting.MeetingHistory;
 import cite.ansteph.ponda.views.project.ProjectList;
 
@@ -150,8 +151,8 @@ public class StartMeeting extends AppCompatActivity
     {
         ArrayList<Project>  arrayL = new ArrayList<>();
 
-//        arrayL.add(new Project (1,1, "Tony Company","John Black"));
-//        arrayL.add(new Project (2, 2,"Goodwill Construction","Pete Jameson"));
+      // arrayL.add(new Project (1,1, "Tony Company","John Black"));
+       //arrayL.add(new Project (2, 2,"Goodwill Construction","Pete Jameson"));
 //        arrayL.add(new Project (3,3,"Turin Plet Arch","Jason Jack "));
 
 
@@ -345,7 +346,7 @@ public class StartMeeting extends AppCompatActivity
 
         if (id == R.id.nav_meet_hist) {
             // Handle the camera action
-            startActivity(new Intent(getApplicationContext(), MeetingHistory.class));
+            startActivity(new Intent(getApplicationContext(), History.class));
         } else if (id == R.id.nav_new_meeting) {
          //   startActivity(new Intent(getApplicationContext(), StartMeeting.class));
         } else if (id == R.id.nav_attendee) {

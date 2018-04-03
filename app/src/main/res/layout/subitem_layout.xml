@@ -27,7 +27,7 @@
                     android:id="@+id/txtSubNumber"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-
+                    style="@style/header_text"
                     android:text="1" />
 
                 <EditText
@@ -37,6 +37,7 @@
                     android:gravity="top"
                     android:layout_weight="1"
                     android:ems="10"
+                    style="@style/edit_box"
                     android:inputType="textPersonName"
                     />
 
@@ -52,7 +53,7 @@
                     android:id="@+id/textView3"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
-
+                    style="@style/header_text"
                     android:text="Owner" />
 
                 <EditText
@@ -60,6 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    style="@style/edit_box"
                     android:ems="10"
                     android:inputType="textPersonName" />
 

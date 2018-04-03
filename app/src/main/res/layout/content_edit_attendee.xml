@@ -10,72 +10,128 @@
     tools:context="cite.ansteph.ponda.views.attendee.AttendeeList"
     tools:showIn="@layout/activity_edit_attendee">
 
+        <TextView
+            style="@style/header_text"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Name" />
 
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Name"
+
             android:ems="10"
             android:inputType="textPersonName"
             />
+
+        <TextView
+            style="@style/header_text"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Surname" />
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtsurnname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Surname"
+
             android:ems="10"
             android:inputType="textPersonName"
             />
+
+        <TextView
+            style="@style/header_text"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Organization Representing" />
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtorganisation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Organization Representing"
+
             android:inputType="text" />
 
+        <TextView
+            style="@style/header_text"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Telephone" />
+
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edttelephone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Telephone"
+
             android:ems="10"
             android:layout_marginBottom="16dp"
             android:inputType="numberSigned" />
 
+        <TextView
+            style="@style/header_text"
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Cellphone" />
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtcellphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Cellphone"
+
             android:inputType="numberSigned" />
 
+        <TextView
+            style="@style/header_text"
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Fax" />
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtfax"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Fax"
+
             android:inputType="numberSigned" />
 
+        <TextView
+            style="@style/header_text"
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Email" />
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Email"
+
             android:ems="10"
             android:inputType="textEmailAddress"
             />

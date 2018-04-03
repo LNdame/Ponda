@@ -35,7 +35,7 @@ public class Splash extends AppCompatActivity {
                      * logged in
                      * */
                   //  sessionManager.checkLogin();
-                    Intent intent = new Intent(getApplicationContext(), History.class);
+                    Intent intent = new Intent(getApplicationContext(), StartMeeting.class);
                     startActivity(intent);
 
                 }

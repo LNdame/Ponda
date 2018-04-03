@@ -42,7 +42,7 @@
     <string name="title_pop_general">General</string>
     <string name="title_pop_meetings">Meetings</string>
     <string name="title_pop_approval_of_meeting">Approval of Minutes</string>
-    <string name="title_activity_start_meeting">start meeting</string>
+    <string name="title_activity_start_meeting">New Meeting</string>
     <string name="delete">Delete</string>
 
 

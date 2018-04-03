@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
     android:id="@+id/meetingLytContainer"
    android:orientation="vertical">
 
@@ -12,6 +13,7 @@
         android:paddingRight="16dp"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
+        android:elevation="8dp"
         android:layout_height="80dp">
 
         <TextView
@@ -19,11 +21,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
+            style="@style/meeting_item_text"
             android:text="1" />
 
         <TextView
             android:layout_gravity="center"
             android:id="@+id/txtItemTitle"
+            style="@style/meeting_item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Various Order Meeting" />
@@ -66,6 +70,7 @@
         <LinearLayout
             android:paddingBottom="50dp"
             android:orientation="vertical"
+            android:padding="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -82,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="15dp"
-                    android:background="@color/colorAccent"
+                    android:background="@color/light_greenish_blue"
                     >
 
                     <LinearLayout
@@ -94,6 +99,7 @@
 
                         <TextView
                             android:id="@+id/lnVarOrder"
+                            style="@style/title_text"
                             android:layout_weight="1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -102,6 +108,7 @@
 
                         <TextView
                             android:id="@+id/lnMotivation"
+                            style="@style/title_text"
                             android:layout_weight="1"
                             android:textSize="12sp"
                             android:layout_width="wrap_content"
@@ -112,6 +119,7 @@
                             android:id="@+id/lnApproved"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Approved" />
@@ -121,6 +129,7 @@
                             android:id="@+id/lnOmit"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Omit" />
@@ -130,6 +139,7 @@
                             android:id="@+id/lnAdd"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Add" />
@@ -138,6 +148,7 @@
                             android:id="@+id/lnBalance"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Balance" />
@@ -170,6 +181,7 @@
             </LinearLayout>
 
             <LinearLayout
+
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -177,7 +189,7 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -193,6 +205,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        style="@style/edit_box"
                         android:inputType="textPersonName"
                         android:text="" />
                 </LinearLayout>
@@ -215,6 +228,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        style="@style/edit_box"
                         android:inputType="textPersonName"
                         android:text="" />
                 </LinearLayout>
@@ -237,6 +251,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        style="@style/edit_box"
                         android:inputType="textPersonName"
                         android:text="" />
                 </LinearLayout>
@@ -257,6 +272,7 @@
                         android:id="@+id/edtOmit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/edit_box"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:text="" />
@@ -279,6 +295,7 @@
                         android:id="@+id/edtAdd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/edit_box"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:text="" />
@@ -302,6 +319,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        style="@style/edit_box"
                         android:inputType="textPersonName"
                         android:text="" />
                 </LinearLayout>
@@ -316,6 +334,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/button_style"
                 android:text="Add Row" />
 
             <LinearLayout
@@ -336,6 +355,7 @@
                 <Button
                     android:layout_gravity="right"
                     android:id="@+id/btnAddSub"
+                    style="@style/button_style_actract"
                     android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

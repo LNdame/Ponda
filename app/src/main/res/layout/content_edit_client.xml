@@ -12,66 +12,114 @@
 
 
 
+        <TextView
+            style="@style/header_text"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Name" />
+
 
         <EditText
             android:id="@+id/edtname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Name"
+            style="@style/edit_box"
+
             android:ems="10"
             android:inputType="textPersonName"
             />
 
+    <TextView
+        style="@style/header_text"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Website Url" />
+
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtweburl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Website Url"
             android:ems="10"
             android:inputType="text"
             />
 
+    <TextView
+        style="@style/header_text"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Telephone" />
+
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edttelephone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Telephone"
+
             android:ems="10"
             android:layout_marginBottom="16dp"
             android:inputType="numberSigned" />
 
+    <TextView
+        style="@style/header_text"
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Contact Person Name" />
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtcontactname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Contact Person Name"
+
             android:ems="10"
             android:inputType="text"
             />
 
+    <TextView
+        style="@style/header_text"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Contact Person Telephone" />
 
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtcontacttel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Contact Person Telephone"
+
             android:ems="10"
             android:layout_marginBottom="16dp"
             android:inputType="numberSigned" />
 
+    <TextView
+        style="@style/header_text"
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:text="Email" />
         <EditText
+            style="@style/edit_box"
             android:id="@+id/edtemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Email"
+
             android:ems="10"
             android:inputType="textEmailAddress"
             />

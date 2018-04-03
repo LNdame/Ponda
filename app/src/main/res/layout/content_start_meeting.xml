@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+        android:background="@color/light_grey_back"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="cite.ansteph.ponda.views.lmeeting.StartMeeting"
     tools:showIn="@layout/app_bar_start_meeting">
@@ -19,22 +19,22 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:background="@color/colorAccent"
+            android:background="@color/colorWhite"
             android:elevation="12dp"
 
             android:padding="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
-               android:fontFamily="sans-serif"
-                android:layout_margin="2dp"
+                style="@style/header_text"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/headline"
-                android:textStyle="bold"
+
+
                 android:text="Project Manager Reference" />
 
             <EditText
@@ -45,13 +45,14 @@
                 android:layout_weight="1"
                 android:hint="DoEEC/02/17"
                 android:ems="10"
+                android:layout_marginBottom="8dp"
                 android:inputType="text"
                 />
 
 
 
                 <TextView
-                    style="@style/title_text"
+                    style="@style/header_text"
                     android:id="@+id/tvclient"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,7 +65,7 @@
                     android:background="@drawable/spin_back"
                     android:layout_height="?android:listPreferredItemHeight"
                     android:layout_width="match_parent"
-
+                    android:layout_marginBottom="8dp"
                     />
 
 
@@ -72,7 +73,7 @@
 
 
                 <TextView
-                    style="@style/title_text"
+                    style="@style/header_text"
                     android:id="@+id/tvproject"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -83,12 +84,12 @@
                     android:layout_height="?android:listPreferredItemHeight"
                     android:background="@drawable/spin_back"
                     android:layout_width="match_parent"
-
+                    android:layout_marginBottom="8dp"
                    />
 
 
             <TextView
-                style="@style/title_text"
+                style="@style/header_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -103,7 +104,7 @@
 
                 android:hint="Site"
                 android:ems="10"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="10dp"
                 android:inputType="text" />
 
             <LinearLayout
@@ -124,6 +125,7 @@
                     android:text="2018-03-01"
                     android:clickable="true"
                     android:onClick="onStartDateClicked"
+                    android:textSize="18sp"
                     android:gravity="center"
                     android:drawableLeft="@drawable/ic_date_range_black_24dp"
                     android:drawableRight="@drawable/ic_arrow_down_black_24dp"
@@ -141,6 +143,7 @@
                     android:clickable="true"
                     android:onClick="onStartTimeClicked"
                     android:gravity="center"
+                    android:textSize="18sp"
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:drawableLeft="@drawable/ic_access_time_black_24dp"
@@ -151,7 +154,7 @@
             </LinearLayout>
 
             <TextView
-                style="@style/title_text"
+                style="@style/header_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -165,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="10"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="10dp"
                 android:inputType="text" />
 
 
@@ -174,20 +177,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
                 android:layout_weight="1">
 
                 <Button
+                    style="@style/button_style"
                     android:id="@+id/btnCancel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="17dp"
+android:layout_marginRight="4dp"
                     android:layout_weight="1"
                     android:text="Cancel" />
 
                 <Button
+                    style="@style/button_style_actract"
                     android:id="@+id/btnSave"
                     android:text="Save"
+                    android:layout_marginLeft="4dp"
+
                     android:onClick="onSaveClicked"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

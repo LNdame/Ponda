@@ -10,24 +10,28 @@
     tools:context="cite.ansteph.ponda.views.project.EditProject"
     tools:showIn="@layout/activity_edit_project">
 
-        <LinearLayout
-            android:padding="16dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+
 
                 <LinearLayout
-                    android:padding="@dimen/activity_vertical_margin"
+
                     android:layout_marginBottom="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
+                        <TextView
+                            style="@style/header_text"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:text="Name" />
 
                         <EditText
                             android:id="@+id/edtname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            style="@style/edit_box"
                             android:layout_weight="1"
                             android:hint="Name"
                             android:ems="10"
@@ -35,7 +39,7 @@
                             />
 
                         <TextView
-                            style="@style/title_text"
+                            style="@style/header_text"
                             android:id="@+id/tvclient"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -45,8 +49,9 @@
                         <Spinner
                             android:id="@+id/edtcleintid"
                             android:layout_width="match_parent"
+                            android:background="@drawable/spin_back"
                             android:layout_height="?android:listPreferredItemHeight"
-
+                            android:layout_marginBottom="10dp"
                             />
 
 
@@ -67,6 +72,7 @@
                                     android:layout_weight="1"
                                     android:text="2018-03-01"
                                     android:clickable="true"
+                                    android:textSize="18sp"
                                     android:onClick="onStartDateClicked"
                                     android:gravity="center"
                                     android:drawableLeft="@drawable/ic_date_range_black_24dp"
@@ -79,6 +85,7 @@
                                     android:layout_height="?android:listPreferredItemHeight"
                                     android:layout_marginTop="5dp"
                                     android:layout_weight="1"
+                                    android:textSize="18sp"
                                     android:text="2018-03-01"
                                     android:clickable="true"
                                     android:onClick="onEndDateClicked"
@@ -90,25 +97,46 @@
 
                         </LinearLayout>
 
+
+                    <TextView
+                        style="@style/header_text"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="Project Manager Name" />
+
                         <EditText
                             android:id="@+id/edtprojectmanname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:hint="Project Man Name"
+                            style="@style/edit_box"
+
                             android:ems="10"
                             android:inputType="textPersonName"
                             />
+
+                    <TextView
+                        style="@style/header_text"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:text="Status" />
 
                         <EditText
                             android:id="@+id/edtstatus"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:hint="Status"
+                            style="@style/edit_box"
+
                             android:ems="10"
                             android:inputType="text"
                             />
+
+
 
 
                 </LinearLayout>
@@ -121,6 +149,8 @@
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:orientation="horizontal">-->
+
+
 
                 <!--<TextView-->
                     <!--android:id="@+id/edtstartdate"-->
@@ -164,4 +194,3 @@
 
 
 
-</LinearLayout>

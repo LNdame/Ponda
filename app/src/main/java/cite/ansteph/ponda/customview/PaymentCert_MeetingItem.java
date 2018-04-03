@@ -56,7 +56,7 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
 
     ImageButton btnOpenSub, btnCloseSub;
 
-    TextView txtItemNumber, txtItemTitle;
+    TextView txtItemNumber, txtItemTitle,txtPayAmount;
 
     LinearLayout lytSubItemMeeting;//subItemContainer
 
@@ -112,7 +112,7 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
 
         txtItemNumber= (TextView) findViewById(R.id.txtItemNumber);
         txtItemTitle= (TextView) findViewById(R.id.txtItemTitle);
-
+        txtPayAmount= (TextView) findViewById(R.id.txtpayAmount);
 
         SubItemLayoutList = new ArrayList<>();
 
@@ -212,7 +212,7 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
                 pay.setDateDue(edtDateDue.getText().toString());
                 pay.setDayLate(edtDayLate.getText().toString());
                 pay.setSignedCopy(edtSigned.getText().toString());
-                pay.setAmountString(edtAmount.getText().toString());
+                pay.setAmount(Double.valueOf(edtAmount.getText().toString()));
 
                 //  mPrefCount++;
                 PayCertAdded.put(positionCount, pay);
@@ -229,6 +229,9 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
                 // refreshing recycler view
                 mPayCertAdapter.notifyDataSetChanged();
                 // String ct = "(" + (3 - mPrefCount) + " more)";
+
+                //update total
+                txtPayAmount.setText("R "+ calculateTotal(mPaymentCertificates));
 
                 //redrawTable(pay);
             }
@@ -266,6 +269,21 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
 
 
 
+
+    double calculateTotal(ArrayList<PaymentCertificate> paymentCertificates)
+    {
+
+        double total=0;
+
+        for(PaymentCertificate apay:paymentCertificates){
+
+            total += apay.getAmount();
+        }
+
+
+        return total;
+
+    }
 
 
 
@@ -414,6 +432,10 @@ public class PaymentCert_MeetingItem  extends LinearLayout implements PaymentCer
 
             //remove from database
             deletePaymentCertificate(deletedItem);
+
+            //update total
+            txtPayAmount.setText("R "+ calculateTotal(mPaymentCertificates));
+
 
            /* mPrefCount--;
           //  String ct = "(" +(3-mPrefCount)+" more)";

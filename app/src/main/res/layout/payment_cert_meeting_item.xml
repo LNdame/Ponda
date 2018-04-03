@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
     android:id="@+id/meetingLytContainer"
     android:orientation="vertical">
 
@@ -12,6 +13,7 @@
         android:paddingRight="16dp"
         android:layout_width="match_parent"
         android:layout_marginBottom="10dp"
+        android:elevation="8dp"
         android:layout_height="80dp">
 
         <TextView
@@ -19,11 +21,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
+            style="@style/meeting_item_text"
             android:text="1" />
 
         <TextView
             android:layout_gravity="center"
             android:id="@+id/txtItemTitle"
+            style="@style/meeting_item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Payment Certificates" />
@@ -65,6 +69,7 @@
 
         <LinearLayout
             android:paddingBottom="50dp"
+            android:padding="8dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -79,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="15dp"
-                    android:background="@color/colorAccent"
+                    android:background="@color/light_greenish_blue"
                     >
 
                     <LinearLayout
@@ -95,12 +100,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:text="Payment Certificate No" />
 
                         <TextView
                             android:id="@+id/lnMotivation"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Issue Date" />
@@ -109,6 +116,7 @@
                             android:id="@+id/lnApproved"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Pay" />
@@ -118,6 +126,7 @@
                             android:id="@+id/lnOmit"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Date Due" />
@@ -127,6 +136,7 @@
                             android:id="@+id/lnAdd"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Days Late" />
@@ -135,6 +145,7 @@
                             android:id="@+id/lnBalance"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Signed Copy on File" />
@@ -143,6 +154,7 @@
                             android:id="@+id/lnAmount"
                             android:layout_weight="1"
                             android:textSize="12sp"
+                            style="@style/title_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Amount" />
@@ -182,14 +194,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    style="@style/title_text"
                     android:text="Total Certified to Date" />
 
                 <TextView
-
+                    android:id="@+id/txtpayAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
+                    style="@style/title_text"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginRight="10dp"
                     android:layout_gravity="right"
                     android:text="R 0.00" />
 
@@ -203,7 +218,7 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -212,12 +227,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
-                        android:text="Payment Certificate No." />
+                        style="@style/title_text"
+                        android:text="Payment Cert No." />
 
                     <EditText
                         android:id="@+id/edtPayment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/edit_box"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:text="" />
@@ -234,6 +251,7 @@
                         android:textSize="12sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/title_text"
                         android:text="Issue Date" />
 
                     <EditText
@@ -241,6 +259,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        style="@style/edit_box"
                         android:inputType="textPersonName"
                         android:text="" />
                 </LinearLayout>
@@ -249,6 +268,7 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_weight="1"
+                    style="@style/title_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -256,6 +276,8 @@
                         android:textSize="12sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/title_text"
+
                         android:text="Paid" />
 
                     <EditText
@@ -263,6 +285,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        style="@style/edit_box"
                         android:inputType="textPersonName"
                         android:text="" />
                 </LinearLayout>
@@ -277,12 +300,14 @@
                         android:textSize="12sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/title_text"
                         android:text="Date Due" />
 
                     <EditText
                         android:id="@+id/edtDateDue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/edit_box"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:text="" />
@@ -299,6 +324,7 @@
                         android:textSize="12sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/title_text"
                         android:text="Days Late" />
 
                     <EditText
@@ -306,6 +332,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        style="@style/edit_box"
                         android:inputType="textPersonName"
                         android:text="" />
                 </LinearLayout>
@@ -313,7 +340,7 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -321,13 +348,15 @@
                         android:textSize="12sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Signed Copy on file" />
+                        style="@style/title_text"
+                        android:text="Signed Copy " />
 
                     <EditText
                         android:id="@+id/edtSigned"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        style="@style/edit_box"
                         android:inputType="textPersonName"
                         android:text="" />
                 </LinearLayout>
@@ -342,6 +371,7 @@
                         android:textSize="12sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/title_text"
                         android:text="Amount" />
 
                     <EditText
@@ -349,6 +379,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        style="@style/edit_box"
                         android:inputType="textPersonName"
                         android:text="" />
                 </LinearLayout>
@@ -397,6 +428,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/button_style"
                     android:text="Add Row" />
 
 
@@ -424,6 +456,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/button_style_actract"
                     android:text="Add Sub Item" />
             </LinearLayout>
 
