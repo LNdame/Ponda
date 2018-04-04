@@ -74,25 +74,25 @@ public class MeetingHistoryRecyclerAdapter extends RecyclerView.Adapter<MeetingH
     }
 
     private String getProject(Integer projectID) {
-        String project = "";
+        String project_name = "";
         for(Project P: mProjectList){
             if(P.getId() == projectID ){
-                project = P.getName();
+                project_name = P.getName();
 
             }
         }
-        return project;
+        return project_name;
     }
 
     private String getClient(Integer clientID) {
-        String client = "";
+        String client_name = "";
         for(Client C: mClientList){
             if(C.getId() == clientID ){
-                client = C.getName();
+                client_name = C.getName();
 
             }
         }
-        return client;
+        return client_name;
 
     }
 
