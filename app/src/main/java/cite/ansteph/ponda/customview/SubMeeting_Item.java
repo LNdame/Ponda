@@ -5,28 +5,28 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.api.ContentType;
-import cite.ansteph.ponda.api.columns.MeetingItemColumns;
 import cite.ansteph.ponda.api.columns.MeetingSubItemColumns;
 import cite.ansteph.ponda.model.Meeting;
 import cite.ansteph.ponda.model.MeetingItem;
 import cite.ansteph.ponda.model.MeetingSubItem;
+import cite.ansteph.ponda.views.lmeeting.datetimepicker.SubMeetingDatePickerFragment;
 
 /**
  * Created by loicstephan on 2018/03/01.
@@ -36,17 +36,19 @@ public class SubMeeting_Item extends LinearLayout{
 
     final static String TAG   = SubMeeting_Item.class.getSimpleName();
 
-   TextView txtSubNumber;
-   EditText edtSubItemContent, edtSubOwner;
-   ImageView btnDelete;
-   MeetingSubItem meetingSubItem;
-  // ArrayList<MeetingSubItem> mMeetingSubItem;
+    TextView txtSubNumber, txtdate;
+    EditText edtSubItemContent, edtSubOwner;
+    ImageView btnDelete;
+    MeetingSubItem meetingSubItem;
+    // ArrayList<MeetingSubItem> mMeetingSubItem;
     MeetingSubItem aMeetSubItem;
     MeetingItem meetingItem;
-   private Meeting mMeeting;
-   LinearLayout containerLyt;
-   CharSequence noteOutput="", ownerOutput="";
-   int meetingID, meetingItemId;
+    private Meeting mMeeting;
+    LinearLayout containerLyt;
+    CharSequence noteOutput="", ownerOutput="";
+    int meetingID, meetingItemId;
+    private AppCompatActivity appCompatActivity;
+    private Meeting_Item meeting_item;
 
 
     private Context mContext;
@@ -73,6 +75,8 @@ public class SubMeeting_Item extends LinearLayout{
 
 
         txtSubNumber = (TextView) findViewById(R.id.txtSubNumber);
+        txtdate= (TextView) findViewById(R.id.txtdate);
+
         edtSubItemContent= (EditText) findViewById(R.id.txtSubItemContent);
         edtSubItemContent.setHint("Note");
 
@@ -81,12 +85,15 @@ public class SubMeeting_Item extends LinearLayout{
 
         btnDelete = (ImageView) findViewById(R.id.btnDelete);
 
-         btnDelete.setOnClickListener(new OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 containerLyt.removeView((View) view.getParent());
-             }
-         });
+        btnDelete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                containerLyt.removeView((View) view.getParent());
+                //meeting_item.UpdatePositions();
+
+                // deleteMeetingItem(aMeetSubItem);
+            }
+        });
 
         edtSubItemContent.addTextChangedListener(new TextWatcher() {
 
@@ -103,7 +110,6 @@ public class SubMeeting_Item extends LinearLayout{
                 prepareSaving();
                 updateMeetingSubItem(aMeetSubItem);
 
-//                mMeetingAdd.setId(mLastInserted);
             }
         });
 
@@ -119,8 +125,40 @@ public class SubMeeting_Item extends LinearLayout{
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 ownerOutput =  s;
+                prepareSaving();
+                updateMeetingSubItem(aMeetSubItem);
             }
         });
+
+        txtdate.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment nf = new SubMeetingDatePickerFragment();
+                FragmentManager fragmentManager;
+                nf.show( fragmentManager= ((FragmentActivity)context).getSupportFragmentManager(), "Date");
+                prepareSaving();
+                updateMeetingSubItem(aMeetSubItem);
+            }
+        });
+    }
+
+    private int deleteMeetingItem(MeetingSubItem aMeetSubItem)
+    {
+        String meet_id = String.valueOf( aMeetSubItem.getId());
+        try {
+            ContentValues values = new ContentValues();
+            // mContext. getContentResolver().delete(ContentType.MEETINGSUBITEM_CONTENT_URI, values);
+
+
+            mContext.getContentResolver().delete(ContentType.MEETINGSUBITEM_CONTENT_URI, MeetingSubItemColumns._ID+" =?", new String[]{meet_id});
+            return 1;
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+
+            return 0;
+        }
     }
 
     private void prepareSaving() {
@@ -129,10 +167,19 @@ public class SubMeeting_Item extends LinearLayout{
         aMeetSubItem.setMeetingId(meetingID);
         aMeetSubItem.setMeetingItemId(meetingItemId);
         aMeetSubItem.setItemNote(noteOutput.toString() );
-        aMeetSubItem.setPosition(((TextView)findViewById(R.id.txtSubNumber)).getText().toString()  );;
+        aMeetSubItem.setPosition(((TextView)findViewById(R.id.txtSubNumber)).getText().toString()  );
+        aMeetSubItem.setOwner(ownerOutput.toString());
+        aMeetSubItem.setDoneByDate(txtdate.getText().toString());
         //mMeetingSubItemAdd.setStatus();
 
     }
+//    public void onOwnerDateClicked(View v){
+//        DialogFragment nf = new RecordTimePickerFragment();
+//        FragmentManager fragmentManager;
+//        nf.show(getActivity().getSupportFragmentManager(), "Start Date");
+//
+//
+//    }
 
 
     public Meeting getmMeeting() {
@@ -186,6 +233,9 @@ public class SubMeeting_Item extends LinearLayout{
             values.put(MeetingSubItemColumns.MEETING_ID,aMeetSubItem.getMeeting().getId()) ;
             values.put(MeetingSubItemColumns.ITEMNOTE ,aMeetSubItem.getItemNote()) ;
             values.put(MeetingSubItemColumns.POSITION,aMeetSubItem.getPosition()) ;
+            values.put(MeetingSubItemColumns.OWNER,aMeetSubItem.getOwner()) ;
+            values.put(MeetingSubItemColumns.DONE_BY_DATE,aMeetSubItem.getDoneByDate()) ;
+
 
             mContext. getContentResolver().insert(ContentType.MEETINGSUBITEM_CONTENT_URI, values);
             return 1;

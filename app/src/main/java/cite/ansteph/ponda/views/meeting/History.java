@@ -107,6 +107,8 @@ public class History extends AppCompatActivity
         meetingHistoryAdapter  = new MeetingHistoryRecyclerAdapter(mMeetingHistoryList, mClientList, mProjectList,  this);
         meetingHistoryRecyclerView.setLayoutManager(mLayoutManager);
         meetingHistoryRecyclerView.setAdapter(meetingHistoryAdapter);
+
+
     }
 
     private ArrayList<Project> retrieveProjects() {
