@@ -8,7 +8,7 @@ public class MeetingSubItem {
 
     int id, meetingId, meetingItemId;
 
-    String itemNote,position,status;
+    String itemNote,position,status, owner, done_by_date;
 
     Meeting meeting; MeetingItem meetingItem;
 
@@ -16,30 +16,37 @@ public class MeetingSubItem {
     public MeetingSubItem() {
     }
 
-    public MeetingSubItem(int meetingId, int meetingItemId, String itemNote, String position) {
+    public MeetingSubItem(int meetingId, int meetingItemId, String itemNote, String position, String owner, String done_by_date) {
         this.meetingId = meetingId;
         this.meetingItemId = meetingItemId;
         this.itemNote = itemNote;
         this.position = position;
+        this.owner = owner;
+        this.done_by_date = done_by_date;
 
     }
 
 
-    public MeetingSubItem(int meetingId, int meetingItemId, String itemNote, String position, String status) {
+    public MeetingSubItem(int meetingId, int meetingItemId, String itemNote, String position, String status, String owner, String done_by_date) {
         this.meetingId = meetingId;
         this.meetingItemId = meetingItemId;
         this.itemNote = itemNote;
         this.position = position;
         this.status = status;
+        this.owner = owner;
+        this.done_by_date = done_by_date;
     }
 
-    public MeetingSubItem(int id, int meetingId, int meetingItemId, String itemNote, String position, String status) {
+    public MeetingSubItem(int id, int meetingId, int meetingItemId, String itemNote, String position, String status, String owner, String done_by_date) {
         this.id = id;
         this.meetingId = meetingId;
         this.meetingItemId = meetingItemId;
         this.itemNote = itemNote;
         this.position = position;
         this.status = status;
+        this.owner = owner;
+        this.done_by_date = done_by_date;
+
     }
 
     public int getId() {
@@ -90,6 +97,23 @@ public class MeetingSubItem {
         this.status = status;
     }
 
+
+    public String getDoneByDate() {
+        return done_by_date;
+    }
+
+    public void setDoneByDate(String done_by_date) {
+        this.done_by_date = done_by_date;
+    }
+
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
     public Meeting getMeeting() {
         return meeting;

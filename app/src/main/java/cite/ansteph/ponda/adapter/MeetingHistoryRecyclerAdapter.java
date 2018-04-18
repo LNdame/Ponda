@@ -51,13 +51,11 @@ public class MeetingHistoryRecyclerAdapter extends RecyclerView.Adapter<MeetingH
 
     @Override
     public void onBindViewHolder(ViewHolder holder,  final int position) {
-        //holder.mTextView.setText(mMeetingHistory.get(position).getClientId());
-        //holder.mTextView.setText(String.valueOf(mMeetingHistory.get(position).getClientId()));
         clientID = mMeetingHistory.get(position).getClientId();
         projectID = mMeetingHistory.get(position).getProjectId();
 
-        client = mClientList.get(clientID).getName();
-        project = mProjectList.get(projectID).getName();
+        client = getClient(clientID);
+        project = getProject(projectID);
 
         holder.mTextView.setText(client);
         holder.mTextView1.setText(String.valueOf(mMeetingHistory.get(position).getMeetingDate()));
@@ -72,6 +70,29 @@ public class MeetingHistoryRecyclerAdapter extends RecyclerView.Adapter<MeetingH
 //                mContext.startActivity(i);
 //            }
 //        });
+
+    }
+
+    private String getProject(Integer projectID) {
+        String project_name = "";
+        for(Project P: mProjectList){
+            if(P.getId() == projectID ){
+                project_name = P.getName();
+
+            }
+        }
+        return project_name;
+    }
+
+    private String getClient(Integer clientID) {
+        String client_name = "";
+        for(Client C: mClientList){
+            if(C.getId() == clientID ){
+                client_name = C.getName();
+
+            }
+        }
+        return client_name;
 
     }
 

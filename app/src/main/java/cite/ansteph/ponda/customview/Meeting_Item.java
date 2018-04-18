@@ -15,18 +15,14 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.api.ContentType;
-import cite.ansteph.ponda.api.columns.MeetingColumns;
 import cite.ansteph.ponda.api.columns.MeetingItemColumns;
-import cite.ansteph.ponda.model.Client;
 import cite.ansteph.ponda.model.Meeting;
 import cite.ansteph.ponda.model.MeetingItem;
 import cite.ansteph.ponda.model.MeetingSubItem;
-import cite.ansteph.ponda.views.lmeeting.StartMeeting;
 
 /**
  * Created by loicstephan on 2018/03/01.
@@ -38,7 +34,7 @@ public class Meeting_Item extends LinearLayout {
 
     ImageButton btnOpenSub, btnCloseSub;
 
-    TextView txtItemNumber, txtItemTitle;
+    TextView txtItemNumber, txtItemTitle, txtdate;
 
     LinearLayout lytSubItemMeeting;//subItemContainer
 
@@ -93,6 +89,8 @@ public class Meeting_Item extends LinearLayout {
         btnOpenSub = (ImageButton) findViewById(R.id.imgbtnOpenSub);
         btnCloseSub= (ImageButton) findViewById(R.id.imgbtnCloseSub);
 
+        txtdate = (TextView) findViewById(R.id.txtdate);
+
 
         btnCloseSub.setOnClickListener(new OnClickListener() {
             @Override
@@ -126,7 +124,7 @@ public class Meeting_Item extends LinearLayout {
 
 
                 MeetingSubItem meetingSubItem = new MeetingSubItem(getMeetingItem().getMeeting().getId(),
-                        getMeetingItem().getId(),"",String.valueOf(subMeetingItemCount+1) );
+                        getMeetingItem().getId(),"",String.valueOf(subMeetingItemCount+1), "","" );
                 meetingSubItem.setMeeting(getMeetingItem().getMeeting());
                 meetingSubItem.setMeetingItem(getMeetingItem());
 
@@ -140,6 +138,16 @@ public class Meeting_Item extends LinearLayout {
             }
         });
 
+//        txtdate.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                DialogFragment nf = new RecordTimePickerFragment();
+//                nf.show(appCompatActivity.getSupportFragmentManager(), "Start Date");
+//
+//
+//            }
+//        });
+
         //SubMeeting_Item subItem = new SubMeeting_Item(context);
         //lytSubItemMeeting.addView(subItem);
 
@@ -147,6 +155,7 @@ public class Meeting_Item extends LinearLayout {
 
 
     }
+
 
 
     private void initViews(Context context , AttributeSet attrs)
@@ -182,7 +191,29 @@ public class Meeting_Item extends LinearLayout {
         this.mMeeting = mMeeting;
     }
 
-
+    public void UpdatePositions(){
+//        SubMeeting_Item subMeeting_item = new SubMeeting_Item(mContext);
+//        subMeeting_item.setmMeeting(getMeetingItem().getMeeting());
+//        subMeeting_item.setMeetingItem(getMeetingItem());
+//
+//
+//        MeetingSubItem meetingSubItem = new MeetingSubItem(getMeetingItem().getMeeting().getId(),
+//                getMeetingItem().getId(),"",String.valueOf(subMeetingItemCount+1) );
+//        meetingSubItem.setMeeting(getMeetingItem().getMeeting());
+//        meetingSubItem.setMeetingItem(getMeetingItem());
+//
+//        subMeeting_item.setMeetingSubItem(meetingSubItem);
+//
+//        SubItemLayoutList.add(subMeeting_item);
+//        //subItem[0] = new SubMeeting_Item(context);
+//
+//        lytSubItemMeeting.addView(SubItemLayoutList.get(subMeetingItemCount));
+//        //subMeetingItemCount ++;
+//
+//        for (int i = 0; i<subMeetingItemCount; i++){
+//
+//        }
+    }
 
 
     public int insertMeetingItem(MeetingItem aMeetItem){
@@ -260,12 +291,6 @@ public class Meeting_Item extends LinearLayout {
         }
 
     }
-
-
-
-
-
-
 
 
 

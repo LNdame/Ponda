@@ -9,9 +9,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.text.TextUtils;
 
+import java.util.Calendar;
+
 import cite.ansteph.ponda.api.Tables;
 import cite.ansteph.ponda.api.columns.MeetingColumns;
 import cite.ansteph.ponda.helper.DbHelper;
+import cite.ansteph.ponda.model.Meeting;
 
 public class MeetingHistoryContentProvider extends ContentProvider {
 
@@ -80,8 +83,20 @@ public class MeetingHistoryContentProvider extends ContentProvider {
         }else {
             orderBy =sortOrder;
         }
+        final Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        Cursor c = db.query(Tables.MEETING_TABLE, projection,selection,selectionArgs,null,null,orderBy);
+        String monthcon = (month<10)? "0"+String.valueOf(month+1):String.valueOf(month+1);
+        String daycon =  (day<10)? "0"+String.valueOf(day):String.valueOf(day);
+
+        String currentdate = (String.valueOf(year) +"-"+ monthcon +"-"+  daycon);
+
+        selection = MeetingColumns.START_DATE+ "< ?";
+        String [] selectionArg = {currentdate};
+
+        Cursor c = db.query(Tables.MEETING_TABLE, projection,selection, selectionArg,null,null,orderBy);
         c.setNotificationUri(getContext().getContentResolver(), uri);
 
         return c;

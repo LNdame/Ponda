@@ -91,7 +91,7 @@ public class VariousOrder_MeetingItem extends LinearLayout implements VariationR
     public VariousOrder_MeetingItem(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-      //  initViews( context, attrs);
+        //  initViews( context, attrs);
     }
 
     public VariousOrder_MeetingItem(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -206,7 +206,7 @@ public class VariousOrder_MeetingItem extends LinearLayout implements VariationR
 
 
                 MeetingSubItem meetingSubItem = new MeetingSubItem(getMeetingItem().getMeeting().getId(),
-                        getMeetingItem().getId(),"",String.valueOf(subMeetingItemCount+1) );
+                        getMeetingItem().getId(),"",String.valueOf(subMeetingItemCount+1), "","" );
                 meetingSubItem.setMeeting(getMeetingItem().getMeeting());
                 meetingSubItem.setMeetingItem(getMeetingItem());
 
