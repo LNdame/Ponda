@@ -44,6 +44,7 @@
     <string name="title_pop_approval_of_meeting">Approval of Minutes</string>
     <string name="title_activity_start_meeting">New Meeting</string>
     <string name="delete">Delete</string>
+    <string name="title_activity_view_meeting_history">View Meeting History</string>
 
 
 </resources>

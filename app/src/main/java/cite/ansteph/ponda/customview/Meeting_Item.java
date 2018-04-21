@@ -138,20 +138,6 @@ public class Meeting_Item extends LinearLayout {
             }
         });
 
-//        txtdate.setOnClickListener(new OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                DialogFragment nf = new RecordTimePickerFragment();
-//                nf.show(appCompatActivity.getSupportFragmentManager(), "Start Date");
-//
-//
-//            }
-//        });
-
-        //SubMeeting_Item subItem = new SubMeeting_Item(context);
-        //lytSubItemMeeting.addView(subItem);
-
-
 
 
     }
@@ -170,7 +156,7 @@ public class Meeting_Item extends LinearLayout {
 
     public void setMeetingItem(MeetingItem meetingItem) {
         this.meetingItem = meetingItem;
-        if(meetingItem!=null)
+        if(meetingItem!=null && meetingItem.getId()==0)
         {
             txtItemNumber.setText(meetingItem.getPosition());
             txtItemTitle.setText(meetingItem.getItemName());
@@ -191,29 +177,6 @@ public class Meeting_Item extends LinearLayout {
         this.mMeeting = mMeeting;
     }
 
-    public void UpdatePositions(){
-//        SubMeeting_Item subMeeting_item = new SubMeeting_Item(mContext);
-//        subMeeting_item.setmMeeting(getMeetingItem().getMeeting());
-//        subMeeting_item.setMeetingItem(getMeetingItem());
-//
-//
-//        MeetingSubItem meetingSubItem = new MeetingSubItem(getMeetingItem().getMeeting().getId(),
-//                getMeetingItem().getId(),"",String.valueOf(subMeetingItemCount+1) );
-//        meetingSubItem.setMeeting(getMeetingItem().getMeeting());
-//        meetingSubItem.setMeetingItem(getMeetingItem());
-//
-//        subMeeting_item.setMeetingSubItem(meetingSubItem);
-//
-//        SubItemLayoutList.add(subMeeting_item);
-//        //subItem[0] = new SubMeeting_Item(context);
-//
-//        lytSubItemMeeting.addView(SubItemLayoutList.get(subMeetingItemCount));
-//        //subMeetingItemCount ++;
-//
-//        for (int i = 0; i<subMeetingItemCount; i++){
-//
-//        }
-    }
 
 
     public int insertMeetingItem(MeetingItem aMeetItem){

@@ -1,14 +1,21 @@
 package cite.ansteph.ponda.customview;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -23,11 +30,17 @@ import java.util.HashMap;
 import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.adapter.AttendeesPoolRecyclerAdapter;
 import cite.ansteph.ponda.adapter.AttendingRecyclerAdapter;
+import cite.ansteph.ponda.api.ContentType;
+import cite.ansteph.ponda.api.columns.AttendeeColumns;
+import cite.ansteph.ponda.api.columns.MeetingItemColumns;
+import cite.ansteph.ponda.api.columns.VariationOrderColumns;
 import cite.ansteph.ponda.helper.RecyclerItemTouchHelper;
 import cite.ansteph.ponda.listener.RecyclerViewClickListener;
 import cite.ansteph.ponda.model.Attendee;
 import cite.ansteph.ponda.model.Meeting;
 import cite.ansteph.ponda.model.MeetingItem;
+import cite.ansteph.ponda.model.VariationOrder;
+import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordTimePickerFragment;
 
 /**
  * Created by loicstephan on 2018/03/04.
@@ -35,7 +48,7 @@ import cite.ansteph.ponda.model.MeetingItem;
 
 public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerViewClickListener,RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
-
+    final static String TAG   = Attendee_SubMeeting_Item.class.getSimpleName();
 
     ImageButton btnOpenSub, btnCloseSub;
 
@@ -74,18 +87,7 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
         super(context, attrs, defStyleAttr);
     }
 
-    public MeetingItem getMeetingItem() {
-        return meetingItem;
-    }
 
-    public void setMeetingItem(MeetingItem meetingItem) {
-        this.meetingItem = meetingItem;
-        if(meetingItem!=null)
-        {
-            txtItemNumber.setText(meetingItem.getPosition());
-            txtItemTitle.setText(meetingItem.getItemName());
-        }
-    }
     public  void initViews(Context context)
     {
         LayoutInflater.from(context).inflate(R.layout.attendees_meeting_item, this);
@@ -115,8 +117,12 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
             @Override
             public void onClick(View v) {
                 lytSubItemContainer.setVisibility(VISIBLE);
+
             }
         });
+
+
+         FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
 
         AttendeePresent = new HashMap<>();
         //recycler view init
@@ -131,7 +137,7 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
         attendeeRecyclerView.setLayoutManager(mLayoutManager);
         poolRecyclerView.setLayoutManager(new LinearLayoutManager(poolRecyclerView.getContext()));
 
-        mAttendeesPool=setupList();
+        mAttendeesPool=retrieveAttendee();
 
         mAttendeesPoolAdapter= new AttendeesPoolRecyclerAdapter(this,mAttendeesPool,context);
         poolRecyclerView.setAdapter(mAttendeesPoolAdapter);
@@ -169,6 +175,7 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
             }
         };
 
+
         // attaching the touch helper to recycler view
         new ItemTouchHelper(itemTouchHelperCallback1).attachToRecyclerView(attendeeRecyclerView);
     }
@@ -190,6 +197,8 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
     }
 
 
+
+
     @Override
     public void onRecyclerViewItemClicked(View v, int position) {
 
@@ -204,8 +213,15 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
           //  mPrefCount++;
             AttendeePresent.put(position, mAttendeesPool.get(position));
 
+            Attendee mAtt = mAttendeesPool.get(position);
 
-            mAttendingPool.add(mAttendeesPool.get(position));
+            //adding to DB
+            int i = insertAttendeeItem(mAttendeesPool.get(position));
+            if(i==1)
+                mAtt.setId(getLastAttendeeID());
+
+
+            mAttendingPool.add(mAtt);
             // refreshing recycler view
             mAttendingAdapter.notifyDataSetChanged();
            // String ct = "(" + (3 - mPrefCount) + " more)";
@@ -231,7 +247,7 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
 
             // remove the item from recycler view
             mAttendingAdapter.removeItem(viewHolder.getAdapterPosition());
-
+            deleteAttendee(deletedItem);
            /* mPrefCount--;
           //  String ct = "(" +(3-mPrefCount)+" more)";
            // txtPrefCount.setText(ct);
@@ -256,6 +272,193 @@ public class Attendee_SubMeeting_Item  extends LinearLayout implements RecyclerV
             */
         }
     }
+
+
+
+    private ArrayList<Attendee> retrieveAttendee()
+    {
+        ContentResolver resolver =mContext. getContentResolver();
+
+        Cursor cursor = resolver.query(ContentType.ATTENDEE_CONTENT_URI, AttendeeColumns.PROJECTION, null, null,null);
+        ArrayList<Attendee> attendees = new ArrayList<>();
+
+        if(cursor.moveToFirst()){
+            do{
+                Attendee item = new Attendee(
+                        ((cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.FIRSTNAME))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.SURNAME))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.ORGANSATION))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.TELEPHONE))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.CELLPHONE))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.FAX))),
+                        (cursor.getString(cursor.getColumnIndex(AttendeeColumns.EMAIL)))
+                );
+//int id, String firstname, String surname, String organisation, String telephone, String cellphone, String fax, String email
+                attendees.add(item);
+
+            }while(cursor.moveToNext());
+        }
+
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return attendees;
+    }
+
+
+
+
+    public int insertAttendeeItem(Attendee attendee){
+
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(AttendeeColumns.FIRSTNAME,attendee.getFirstname()) ;
+            values.put(AttendeeColumns.SURNAME , attendee.getSurname()) ;
+            values.put(AttendeeColumns.ORGANSATION, attendee.getOrganisation()) ;
+            values.put(AttendeeColumns.TELEPHONE, attendee.getTelephone()) ;
+            values.put(AttendeeColumns.CELLPHONE, attendee.getCellphone()) ;
+            values.put(AttendeeColumns.FAX, attendee.getFax()) ;
+            values.put(AttendeeColumns.EMAIL,attendee.getEmail()) ;
+
+
+            mContext. getContentResolver().insert(ContentType.ATTENDEE_CONTENT_URI, values);
+
+
+            return 1;
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+
+            return 0;
+        }
+
+    }
+
+
+
+    public int getLastAttendeeID(){
+
+        String [] columns  = new String []{AttendeeColumns._ID};
+        ContentResolver resolver =  mContext. getContentResolver();
+        Cursor cursor = resolver.query(ContentType.ATTENDEE_CONTENT_URI,columns,null,null, AttendeeColumns._ID+" DESC LIMIT 1");
+
+        int lastId =0;
+
+        if(cursor !=null && cursor.moveToFirst())
+        {
+            lastId =(cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0;
+
+            //mGlobalRetainer.get_grCurrentAudit().set_id(lastId);
+            Log.d(TAG, String.valueOf(lastId) );
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return lastId;
+    }
+
+
+    public void deleteAttendee(Attendee attendee){
+
+        String item_id = String.valueOf( attendee.getId());
+
+        mContext. getContentResolver().delete(ContentType.ATTENDEE_CONTENT_URI, AttendeeColumns._ID+" =?", new String[]{item_id});
+
+        Log.d(TAG, item_id+" deleted" );
+
+    }
+
+
+
+    //////******************** Meeting Housekeeping *******/////////////
+    //this should have been overrriden from Meeting (This is lane Design////////
+
+    //Do not forget that Variation Order is just a special meeting object (Maybe u should have use a decorator here)
+
+
+
+
+    public MeetingItem getMeetingItem() {
+        return meetingItem;
+    }
+
+    public void setMeetingItem(MeetingItem meetingItem) {
+        this.meetingItem = meetingItem;
+        if(meetingItem!=null)
+        {
+            txtItemNumber.setText(meetingItem.getPosition());
+            txtItemTitle.setText(meetingItem.getItemName());
+
+            int i = insertMeetingItem(meetingItem);
+            if (i==1)
+                getLastMeetingItemID();
+
+        }
+    }
+
+    public Meeting getmMeeting() {
+        return mMeeting;
+    }
+
+    public void setmMeeting(Meeting mMeeting) {
+        this.mMeeting = mMeeting;
+    }
+
+
+
+    public int insertMeetingItem(MeetingItem aMeetItem){
+
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(MeetingItemColumns.MEETING_ID,aMeetItem.getMeeting().getId()) ;
+            values.put(MeetingItemColumns.ITEM_NAME ,aMeetItem.getItemName()) ;
+            values.put(MeetingItemColumns.POSITION,aMeetItem.getPosition()) ;
+
+            mContext. getContentResolver().insert(ContentType.MEETINGITEM_CONTENT_URI, values);
+
+
+            return 1;
+
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+
+            return 0;
+        }
+
+    }
+
+
+
+
+    public int getLastMeetingItemID(){
+
+        String [] columns  = new String []{MeetingItemColumns._ID};
+        ContentResolver resolver =  mContext. getContentResolver();
+        Cursor cursor = resolver.query(ContentType.MEETINGITEM_CONTENT_URI,columns,null,null, MeetingItemColumns._ID+" DESC LIMIT 1");
+
+        int lastId =0;
+
+        if(cursor !=null && cursor.moveToFirst())
+        {
+            lastId =(cursor.getString(0))!=null ? Integer.parseInt(cursor.getString(0)):0;
+            meetingItem.setId( lastId);
+            //mGlobalRetainer.get_grCurrentAudit().set_id(lastId);
+            Log.d(TAG, String.valueOf(lastId) );
+        }
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        }
+
+        return lastId;
+    }
+
 
 
 

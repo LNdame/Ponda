@@ -1,10 +1,12 @@
 package cite.ansteph.ponda.model;
 
+import java.io.Serializable;
+
 /**
  * Created by loicstephan on 2018/02/12.
  */
 
-public class Meeting {
+public class Meeting implements Serializable{
 
     int id,clientId,projectId ;
 
@@ -15,12 +17,13 @@ public class Meeting {
     public Meeting() {
     }
 
-    public Meeting(int id, int clientId, int projectId, String projectManagersRef, String site, String meetingDate, String startTime) {
+    public Meeting(int id, int clientId, int projectId, String projectManagersRef, String site, String venue, String meetingDate, String startTime) {
         this.id = id;
         this.clientId = clientId;
         this.projectId = projectId;
         this.projectManagersRef = projectManagersRef;
         this.site = site;
+        this.venue= venue;
         this.meetingDate = meetingDate;
         this.startTime = startTime;
 

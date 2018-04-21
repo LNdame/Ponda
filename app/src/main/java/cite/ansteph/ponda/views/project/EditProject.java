@@ -34,6 +34,7 @@ import cite.ansteph.ponda.api.columns.ClientColumns;
 import cite.ansteph.ponda.api.columns.ProjectColumns;
 import cite.ansteph.ponda.model.Client;
 import cite.ansteph.ponda.model.Project;
+import cite.ansteph.ponda.utils.DateTimeUtils;
 
 public class EditProject extends AppCompatActivity implements NavigationView.OnCreateContextMenuListener  {
 
@@ -55,6 +56,10 @@ public class EditProject extends AppCompatActivity implements NavigationView.OnC
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        Bundle bundle = getIntent().getExtras();
+
+
+
         //Start Date
         //final TextView pickStartDate = (TextView)findViewById(R.id.edtstartdate);
         final TextView startDate = (TextView) findViewById(R.id.start_date);
@@ -67,8 +72,8 @@ public class EditProject extends AppCompatActivity implements NavigationView.OnC
 
         Date now = new Date();
         SimpleDateFormat dateFormatter;
-        dateFormatter = new SimpleDateFormat("MM-dd-yyyy");
-        startDate.setText(dateFormatter.format(now));
+        dateFormatter = new SimpleDateFormat(DateTimeUtils.LONGDATEDASH);
+             startDate.setText(dateFormatter.format(now));
             endDate.setText(dateFormatter.format(now));
 
         endDate.setOnClickListener(new View.OnClickListener() {
@@ -101,13 +106,12 @@ public class EditProject extends AppCompatActivity implements NavigationView.OnC
                                 String monthcon = (mMonth<10)? "0"+String.valueOf(mMonth+1):String.valueOf(mMonth+1);
                                 String daycon =  (dayOfMonth<10)? "0"+String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
 
-
-                                endDate.setText(daycon + "-"
-                                        + monthcon + "-" + year);
+                                String setDate =year +"-"+monthcon+"-"+daycon;
+                                endDate.setText(setDate);
 
                             }
                         }, mYear, mMonth, mDay);
-                dpd.getDatePicker().setMinDate(System.currentTimeMillis());
+              //  dpd.getDatePicker().setMinDate(System.currentTimeMillis());
                 dpd.show();
             }
         });
@@ -143,27 +147,19 @@ public class EditProject extends AppCompatActivity implements NavigationView.OnC
 
                                 String monthcon = (mMonth<10)? "0"+String.valueOf(mMonth+1):String.valueOf(mMonth+1);
                                 String daycon =  (dayOfMonth<10)? "0"+String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                                String setDate =year +"-"+monthcon+"-"+daycon;
 
-                                startDate.setText(daycon + "-"
-                                        + monthcon + "-" + year);
+                                startDate.setText(setDate);
 
                             }
                         }, mYear, mMonth, mDay);
-                dpd.getDatePicker().setMinDate(System.currentTimeMillis());
+               // dpd.getDatePicker().setMinDate(System.currentTimeMillis());
                 dpd.show();
 
             }
         });
 
-        Bundle bundle = getIntent().getExtras();
 
-        if(bundle!= null)
-        {
-            mProjectEdited =(Project) bundle.getSerializable("project");
-            fillFields();
-        }else{
-            mProjectEdited = new Project();
-        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -215,6 +211,15 @@ public class EditProject extends AppCompatActivity implements NavigationView.OnC
 
             }
         });
+
+
+        if(bundle!= null)
+        {
+            mProjectEdited =(Project) bundle.getSerializable("project");
+            fillFields();
+        }else{
+            mProjectEdited = new Project();
+        }
     }
 
     private ArrayList<Client> populatelist() {
@@ -247,8 +252,11 @@ public class EditProject extends AppCompatActivity implements NavigationView.OnC
     {
         //retrieving the corresponding value
         mProjectEdited.setName( ((EditText)findViewById(R.id.edtname)).getText().toString()  );
-        mProjectEdited.setClientId(selectedClient);
+        mProjectEdited.setClientId(((Client)mSpinClient.getSelectedItem()).getId() );
         mProjectEdited.setProjManName( ((EditText)findViewById(R.id.edtprojectmanname)).getText().toString()  );
+
+        mProjectEdited.setEndDate(((TextView)findViewById(R.id.end_date)).getText().toString() );
+        mProjectEdited.setStartDate(((TextView)findViewById(R.id.start_date)).getText().toString() );
     }
 
     void fillFields()
@@ -256,6 +264,12 @@ public class EditProject extends AppCompatActivity implements NavigationView.OnC
         //filling the corresponding value
         ((EditText)findViewById(R.id.edtname)).setText(mProjectEdited.getName());
         ((EditText)findViewById(R.id.edtprojectmanname)).setText(mProjectEdited.getProjManName());
+
+        mSpinClient.setSelection(getClientPosition(mProjectEdited.getClientId()));
+        ((TextView)findViewById(R.id.end_date)).setText(mProjectEdited.getEndDate());
+       ((TextView)findViewById(R.id.start_date)).setText(mProjectEdited.getStartDate());
+
+
     }
 
     public int insertProject(Project aProject){
@@ -304,6 +318,22 @@ public class EditProject extends AppCompatActivity implements NavigationView.OnC
 
             return 0;
         }
+    }
+
+
+    private int getClientPosition(Integer clientID) {
+        int position = -1;
+
+        for(int i=0;i< mClientlist.size(); i++)
+        {
+            if(mClientlist.get(i).getId()== clientID)
+            {
+                return i;
+            }
+        }
+
+        return position;
+
     }
 }
 

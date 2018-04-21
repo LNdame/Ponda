@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:gravity="center_vertical"
+    android:padding="@dimen/activity_horizontal_margin"
     android:minHeight="87dp"
     android:layout_height="87dp">
 

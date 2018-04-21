@@ -25,7 +25,9 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.adapter.CustomClientListAdapter;
@@ -43,6 +45,7 @@ import cite.ansteph.ponda.model.Meeting;
 import cite.ansteph.ponda.model.MeetingItem;
 import cite.ansteph.ponda.model.Project;
 import cite.ansteph.ponda.template.MeetingTemplate;
+import cite.ansteph.ponda.utils.DateTimeUtils;
 import cite.ansteph.ponda.views.attendee.AttendeeList;
 import cite.ansteph.ponda.views.client.ClientList;
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordDatePickerFragment;
@@ -112,6 +115,15 @@ public class StartMeeting extends AppCompatActivity
         mProjectAdapter = new CustomProjectListAdapter(mProjectList, this);
         mSpinProject.setAdapter(mProjectAdapter);
 
+        Date now = new Date();
+
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(DateTimeUtils.LONGDATEDASH);
+
+        ((TextView)findViewById(R.id.txtstartdateday)).setText(dateFormatter.format(now));
+
+
+
+
         //end load the spinner
 
         mSpinClient.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -120,7 +132,7 @@ public class StartMeeting extends AppCompatActivity
                 Client selected = (Client) parent.getItemAtPosition(position);
 
                 selectedClientID = selected.getId();
-
+                Log.d(TAG, ""+selectedClientID);
             }
 
             @Override
@@ -135,6 +147,7 @@ public class StartMeeting extends AppCompatActivity
                 Project selected = (Project) parent.getItemAtPosition(position);
 
                 selectedProjectID = selected.getId();
+                Log.d(TAG, ""+selectedProjectID);
             }
 
             @Override
@@ -162,6 +175,9 @@ public class StartMeeting extends AppCompatActivity
     }
 
 
+
+
+
     public void onStartDateClicked(View view)
     {
         DialogFragment nf = new RecordDatePickerFragment();
@@ -187,15 +203,7 @@ public class StartMeeting extends AppCompatActivity
     }
 
 
-    void addAttMeetingItem()
-    {
-        Attendee_SubMeeting_Item attendee_subMeeting_item = new Attendee_SubMeeting_Item(this);
-        VariousOrder_MeetingItem variousOrder_meetingItem = new VariousOrder_MeetingItem(this);
-        PaymentCert_MeetingItem paymentCert_meetingItem = new PaymentCert_MeetingItem(this);
-        meetItemContainer.addView(paymentCert_meetingItem);
-        meetItemContainer.addView(variousOrder_meetingItem);
-        meetItemContainer.addView(attendee_subMeeting_item);
-    }
+
 
     private void addMeetItem(int count)
     {
@@ -243,12 +251,12 @@ public class StartMeeting extends AppCompatActivity
         mMeetingAdd = new Meeting();
 
         mMeetingAdd.setProjectManagersRef( ((EditText)findViewById(R.id.edtprojectmgrref)).getText().toString()  );
-        mMeetingAdd.setClientId(selectedClientID);
-        mMeetingAdd.setProjectId(selectedProjectID);
+        mMeetingAdd.setClientId(((Client)mSpinClient.getSelectedItem()).getId() ) ;
+        mMeetingAdd.setProjectId(((Project)mSpinProject.getSelectedItem()).getId());
         mMeetingAdd.setSite( ((EditText)findViewById(R.id.edtsite)).getText().toString()  );
         mMeetingAdd.setMeetingDate( ((TextView)findViewById(R.id.txtstartdateday)).getText().toString()  );
         mMeetingAdd.setStartTime( ((TextView)findViewById(R.id.txtstartdatetime)).getText().toString()  );
-        mMeetingAdd.setVenue( ((TextView)findViewById(R.id.edtVenue)).getText().toString()  );
+        mMeetingAdd.setVenue( ((EditText)findViewById(R.id.edtVenue)).getText().toString()  );
 
     }
 

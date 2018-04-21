@@ -193,7 +193,7 @@ public class VariousOrder_MeetingItem extends LinearLayout implements VariationR
             }
         });
 
-        setupTable();
+
         btnAddSub = (Button) findViewById(R.id.btnAddSub) ;
 
         btnAddSub.setOnClickListener(new OnClickListener() {
@@ -260,75 +260,6 @@ public class VariousOrder_MeetingItem extends LinearLayout implements VariationR
     }
 
 
-    void setupTable()
-    {
-        MatrixTableAdapter<String> matrixTableAdapter = new MatrixTableAdapter<String>(mContext, new String[][] {
-                {
-                        "Header 1",
-                        "Header 2",
-                        "Header 3",
-                        "Header 4",
-                        "Header 5",
-                        "Header 6" },
-                {
-                        "Lorem",
-                        "sed",
-                        "do",
-                        "eiusmod",
-                        "tempor",
-                        "incididunt" },
-                {
-                        "ipsum",
-                        "irure",
-                        "occaecat",
-                        "enim",
-                        "laborum",
-                        "reprehenderit" },
-                {
-                        "dolor",
-                        "fugiat",
-                        "nulla",
-                        "reprehenderit",
-                        "laborum",
-                        "consequat" },
-                {
-                        "sit",
-                        "consequat",
-                        "laborum",
-                        "fugiat",
-                        "eiusmod",
-                        "enim" },
-                {
-                        "amet",
-                        "nulla",
-                        "Excepteur",
-                        "voluptate",
-                        "occaecat",
-                        "et" },
-                {
-                        "consectetur",
-                        "occaecat",
-                        "fugiat",
-                        "dolore",
-                        "consequat",
-                        "eiusmod" },
-                {
-                        "adipisicing",
-                        "fugiat",
-                        "Excepteur",
-                        "occaecat",
-                        "fugiat",
-                        "laborum" },
-                {
-                        "elit",
-                        "voluptate",
-                        "reprehenderit",
-                        "Excepteur",
-                        "fugiat",
-                        "nulla" },
-        });
-        variousOrderTable.setAdapter(matrixTableAdapter);
-    }
 
 
 

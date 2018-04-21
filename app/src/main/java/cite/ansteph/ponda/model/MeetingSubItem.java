@@ -1,10 +1,12 @@
 package cite.ansteph.ponda.model;
 
+import java.io.Serializable;
+
 /**
  * Created by loicstephan on 2018/02/12.
  */
 
-public class MeetingSubItem {
+public class MeetingSubItem implements Serializable{
 
     int id, meetingId, meetingItemId;
 
@@ -16,6 +18,17 @@ public class MeetingSubItem {
     public MeetingSubItem() {
     }
 
+
+    public MeetingSubItem(int id,int meetingId, int meetingItemId, String itemNote, String position, String owner, String done_by_date) {
+        this.meetingId = meetingId;
+        this.meetingItemId = meetingItemId;
+        this.itemNote = itemNote;
+        this.position = position;
+        this.owner = owner;
+        this.done_by_date = done_by_date;
+
+    }
+
     public MeetingSubItem(int meetingId, int meetingItemId, String itemNote, String position, String owner, String done_by_date) {
         this.meetingId = meetingId;
         this.meetingItemId = meetingItemId;
@@ -23,6 +36,15 @@ public class MeetingSubItem {
         this.position = position;
         this.owner = owner;
         this.done_by_date = done_by_date;
+
+    }
+
+    public MeetingSubItem(int meetingId, int meetingItemId, String itemNote, String position) {
+        this.meetingId = meetingId;
+        this.meetingItemId = meetingItemId;
+        this.itemNote = itemNote;
+        this.position = position;
+
 
     }
 

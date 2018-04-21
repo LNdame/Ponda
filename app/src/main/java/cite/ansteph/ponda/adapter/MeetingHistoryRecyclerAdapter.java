@@ -16,6 +16,7 @@ import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.model.Client;
 import cite.ansteph.ponda.model.Meeting;
 import cite.ansteph.ponda.model.Project;
+import cite.ansteph.ponda.views.lmeeting.ViewMeetingHistory;
 import cite.ansteph.ponda.views.meeting.MeetingHistory;
 
 /**
@@ -57,19 +58,19 @@ public class MeetingHistoryRecyclerAdapter extends RecyclerView.Adapter<MeetingH
         client = getClient(clientID);
         project = getProject(projectID);
 
-        holder.mTextView.setText(client);
-        holder.mTextView1.setText(String.valueOf(mMeetingHistory.get(position).getMeetingDate()));
-        holder.mTextView2.setText(project  );
+        holder.client.setText(client);
+        holder.meetingDate.setText(String.valueOf(mMeetingHistory.get(position).getMeetingDate()));
+        holder.project.setText(project  );
 
-//        holder.mView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d("item", "clicked");
-//                Intent i = new Intent(mContext, MeetingHistory.class);
-//                i.putExtra("meeting", (Serializable) mMeetingHistory.get(position));
-//                mContext.startActivity(i);
-//            }
-//        });
+      holder.mView.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+                Log.d("item", "clicked");
+               Intent i = new Intent(mContext, ViewMeetingHistory.class);
+               i.putExtra("meeting",  mMeetingHistory.get(position));
+                mContext.startActivity(i);
+           }
+       });
 
     }
 
@@ -106,15 +107,15 @@ public class MeetingHistoryRecyclerAdapter extends RecyclerView.Adapter<MeetingH
 
 
         public final View mView;
-        public final TextView mTextView, mTextView1, mTextView2;
+        public final TextView client, meetingDate, project;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.mView = itemView;
 
-            mTextView = (TextView) itemView.findViewById(R.id.client);
-            mTextView1 = (TextView) itemView.findViewById(R.id.meetingDate);
-            mTextView2 = (TextView) itemView.findViewById(R.id.project);
+            client = (TextView) itemView.findViewById(R.id.client);
+            meetingDate = (TextView) itemView.findViewById(R.id.meetingDate);
+            project = (TextView) itemView.findViewById(R.id.project);
             mView.setOnClickListener(this);
         }
 

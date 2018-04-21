@@ -6,7 +6,8 @@ package cite.ansteph.ponda.api;
 
 public interface Tables {
 ;
-
+    String APOLOGY_TABLE = "apology_meeting";
+    String ATTENDANCE_TABLE = "attendee_meeting";
     String ATTENDEE_TABLE = "attendee";
     String CLIENT_TABLE = "client";
     String PROJECT_TABLE = "project";

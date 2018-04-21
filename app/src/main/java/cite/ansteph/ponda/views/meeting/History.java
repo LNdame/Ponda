@@ -56,6 +56,7 @@ import cite.ansteph.ponda.model.Attendee;
 import cite.ansteph.ponda.model.Client;
 import cite.ansteph.ponda.model.Meeting;
 import cite.ansteph.ponda.model.Project;
+import cite.ansteph.ponda.views.attendee.AttendeeList;
 import cite.ansteph.ponda.views.client.ClientList;
 import cite.ansteph.ponda.views.lmeeting.StartMeeting;
 import cite.ansteph.ponda.views.meeting.MeetingHistory;
@@ -173,8 +174,8 @@ public class History extends AppCompatActivity
     {
         ContentResolver resolver = getContentResolver();
 
-        Cursor cursor = resolver.query(ContentType.MEETING_HISTORY_CONTENT_URI, MeetingColumns.PROJECTION, null, null,null);
-        ArrayList<Meeting> activities = new ArrayList<>();
+        Cursor cursor = resolver.query(ContentType.MEETING_CONTENT_URI, MeetingColumns.PROJECTION, null, null,null);
+        ArrayList<Meeting> elements = new ArrayList<>();
 
         if(cursor.moveToFirst()){
             do{
@@ -184,11 +185,12 @@ public class History extends AppCompatActivity
                         (cursor.getInt(cursor.getColumnIndex(MeetingColumns.PROJECT_ID))),
                         (cursor.getString(cursor.getColumnIndex(MeetingColumns.PROJECT_MANAGER_REF))),
                         (cursor.getString(cursor.getColumnIndex(MeetingColumns.SITE))),
+                        (cursor.getString(cursor.getColumnIndex(MeetingColumns.VENUE))),
                         (cursor.getString(cursor.getColumnIndex(MeetingColumns.START_DATE))),
                         (cursor.getString(cursor.getColumnIndex(MeetingColumns.START_TIME)))
                 );
 
-                activities.add(activity);
+                elements.add(activity);
 
             }while(cursor.moveToNext());
         }
@@ -197,7 +199,7 @@ public class History extends AppCompatActivity
             cursor.close();
         }
 
-        return activities;
+        return elements;
     }
 
     @Override
@@ -240,11 +242,11 @@ public class History extends AppCompatActivity
 
         if (id == R.id.nav_meet_hist) {
             // Handle the camera action
-            startActivity(new Intent(getApplicationContext(), MeetingHistory.class));
+          //  startActivity(new Intent(getApplicationContext(), MeetingHistory.class));
         } else if (id == R.id.nav_new_meeting) {
             startActivity(new Intent(getApplicationContext(), StartMeeting.class));
         } else if (id == R.id.nav_attendee) {
-            //    startActivity(new Intent(getApplicationContext(), AttendeeList.class));
+                startActivity(new Intent(getApplicationContext(), AttendeeList.class));
         } else if (id == R.id.nav_client) {
             startActivity(new Intent(getApplicationContext(), ClientList.class));
         } else if (id == R.id.nav_project) {

@@ -24,8 +24,7 @@
         <EditText
             android:id="@+id/edtname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="100dp"
             style="@style/edit_box"
 
             android:ems="10"
@@ -44,8 +43,8 @@
             style="@style/edit_box"
             android:id="@+id/edtweburl"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="100dp"
+
             android:ems="10"
             android:inputType="text"
             />
@@ -62,8 +61,8 @@
             style="@style/edit_box"
             android:id="@+id/edttelephone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="100dp"
+
 
             android:ems="10"
             android:layout_marginBottom="16dp"
@@ -80,8 +79,8 @@
             style="@style/edit_box"
             android:id="@+id/edtcontactname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="100dp"
+
 
             android:ems="10"
             android:inputType="text"
@@ -99,8 +98,8 @@
             style="@style/edit_box"
             android:id="@+id/edtcontacttel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="100dp"
+
 
             android:ems="10"
             android:layout_marginBottom="16dp"
@@ -117,8 +116,8 @@
             style="@style/edit_box"
             android:id="@+id/edtemail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="100dp"
+
 
             android:ems="10"
             android:inputType="textEmailAddress"

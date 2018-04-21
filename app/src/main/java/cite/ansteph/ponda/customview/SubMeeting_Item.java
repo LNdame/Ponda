@@ -198,7 +198,7 @@ public class SubMeeting_Item extends LinearLayout{
     public void setMeetingSubItem(MeetingSubItem meetingSubItem) {
         this.meetingSubItem = meetingSubItem;
 
-        if(meetingSubItem!=null)
+        if(meetingSubItem!=null && meetingSubItem.getId()>0)
         {
             txtSubNumber .setText(meetingSubItem.getPosition());
 
