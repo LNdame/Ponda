@@ -41,6 +41,7 @@ import cite.ansteph.ponda.model.MeetingItem;
 import cite.ansteph.ponda.model.MeetingSubItem;
 import cite.ansteph.ponda.model.PaymentCertificate;
 import cite.ansteph.ponda.model.VariationOrder;
+import cite.ansteph.ponda.template.MeetingTemplate;
 
 /**
  * Created by loicstephan on 2018/03/05.
@@ -407,15 +408,21 @@ public class VariousOrder_MeetingItem extends LinearLayout implements VariationR
 
     public void setMeetingItem(MeetingItem meetingItem) {
         this.meetingItem = meetingItem;
-        if(meetingItem!=null)
+        if(meetingItem!=null && meetingItem.getId()==0)
         {
             txtItemNumber.setText(meetingItem.getPosition());
             txtItemTitle.setText(meetingItem.getItemName());
-
+            meetingItem.setType_id(MeetingTemplate.TemplateType.VARIOUS_ORDER_ITEM);
             int i = insertMeetingItem(meetingItem);
             if (i==1)
                 getLastMeetingItemID();
 
+        }else{
+
+            if(meetingItem!=null){
+                txtItemNumber.setText(meetingItem.getPosition());
+                txtItemTitle.setText(meetingItem.getItemName());
+            }
         }
     }
 
@@ -434,9 +441,10 @@ public class VariousOrder_MeetingItem extends LinearLayout implements VariationR
         try {
             ContentValues values = new ContentValues();
 
-            values.put(MeetingItemColumns.MEETING_ID,aMeetItem.getMeeting().getId()) ;
-            values.put(MeetingItemColumns.ITEM_NAME ,aMeetItem.getItemName()) ;
-            values.put(MeetingItemColumns.POSITION,aMeetItem.getPosition()) ;
+            values.put(MeetingItemColumns.MEETING_ID, aMeetItem.getMeeting().getId()) ;
+            values.put(MeetingItemColumns.ITEM_NAME , aMeetItem.getItemName()) ;
+            values.put(MeetingItemColumns.POSITION, aMeetItem.getPosition()) ;
+            values.put(MeetingItemColumns.MEEETINGITEM_TYPE_ID, aMeetItem.getType_id()) ;
 
             mContext. getContentResolver().insert(ContentType.MEETINGITEM_CONTENT_URI, values);
 

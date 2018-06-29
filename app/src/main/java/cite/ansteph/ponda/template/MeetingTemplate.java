@@ -72,10 +72,10 @@ public class MeetingTemplate {
 
     public interface TemplateType{
 
-        public static final int COMMON_ITEM=0;
-        public static final int ATTENDEE_ITEM=1;
-        public static final int PAYMENT_CERTIFICATE_ITEM=2;
-        public static final int VARIOUS_ORDER_ITEM=3;
+        public static final int COMMON_ITEM=1;
+        public static final int ATTENDEE_ITEM=2;
+        public static final int PAYMENT_CERTIFICATE_ITEM=3;
+        public static final int VARIOUS_ORDER_ITEM=4;
 
     }
 

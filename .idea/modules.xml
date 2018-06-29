@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Ponda.iml" filepath="$PROJECT_DIR$/Ponda.iml" />
       <module fileurl="file://H:\Ponda\Ponda.iml" filepath="H:\Ponda\Ponda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-pdf-viewer/android-pdf-viewer.iml" filepath="$PROJECT_DIR$/android-pdf-viewer/android-pdf-viewer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://H:\Ponda\app\app.iml" filepath="H:\Ponda\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/tablelibrary/tablelibrary.iml" filepath="$PROJECT_DIR$/tablelibrary/tablelibrary.iml" />

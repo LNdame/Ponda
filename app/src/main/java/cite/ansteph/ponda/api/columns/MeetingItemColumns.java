@@ -10,8 +10,9 @@ public interface MeetingItemColumns extends DataColumns {
     String MEETING_ID  = "meeting_id";
     String POSITION = "position";
     String STATUS = "status";
+    String MEEETINGITEM_TYPE_ID = "meetingitem_type_id";
 
 
-    String[]PROJECTION = new String[]{_ID,ITEM_NAME,MEETING_ID,POSITION,STATUS};
+    String[]PROJECTION = new String[]{_ID,ITEM_NAME,MEETING_ID,POSITION,STATUS,MEEETINGITEM_TYPE_ID };
 
 }

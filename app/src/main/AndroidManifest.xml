@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cite.ansteph.ponda">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-permission android:name="android.permission.READ_HISTORY_BOOKMARKS" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
 
@@ -156,7 +159,12 @@
             android:name=".contentprovider.AttendanceContentProvider"
             android:authorities="cite.ansteph.ponda.contentprovider.attendancecontentprovider"
             android:enabled="true"
-            android:exported="false"></provider>
+            android:exported="false" />
+
+        <activity
+            android:name=".views.pdfviewer.Previewer"
+            android:label="@string/title_activity_previewer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

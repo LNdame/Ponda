@@ -52,6 +52,7 @@ import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordDatePickerFragment
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordTimePickerFragment;
 import cite.ansteph.ponda.views.meeting.History;
 import cite.ansteph.ponda.views.meeting.MeetingHistory;
+import cite.ansteph.ponda.views.pdfviewer.Previewer;
 import cite.ansteph.ponda.views.project.ProjectList;
 
 public class StartMeeting extends AppCompatActivity
@@ -366,7 +367,7 @@ public class StartMeeting extends AppCompatActivity
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(getApplicationContext(), StartMeeting.class));
         }else if (id == R.id.nav_about) {
-            startActivity(new Intent(getApplicationContext(), StartMeeting.class));
+            startActivity(new Intent(getApplicationContext(), Previewer.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

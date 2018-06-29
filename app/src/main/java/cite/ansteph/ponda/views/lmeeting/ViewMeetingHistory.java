@@ -2,22 +2,51 @@ package cite.ansteph.ponda.views.lmeeting;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import cite.ansteph.ponda.R;
 import cite.ansteph.ponda.adapter.CustomClientListAdapter;
@@ -48,6 +77,8 @@ import cite.ansteph.ponda.model.VariationOrder;
 import cite.ansteph.ponda.template.MeetingTemplate;
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordDatePickerFragment;
 import cite.ansteph.ponda.views.lmeeting.datetimepicker.RecordTimePickerFragment;
+import cite.ansteph.ponda.views.pdfviewer.PdfCustFooter;
+import cite.ansteph.ponda.views.pdfviewer.Previewer;
 
 public class ViewMeetingHistory extends AppCompatActivity {
 
@@ -73,6 +104,10 @@ public class ViewMeetingHistory extends AppCompatActivity {
     LinearLayout meetItemContainer;
     Meeting mCurrentMeetingAdd;
 
+    String mPDFFilePath;
+    public static final String KEY_FILE_PATH = "filepath";
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,10 +115,9 @@ public class ViewMeetingHistory extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        requestPermission();
 
         Bundle bundle = getIntent().getExtras();
-
-
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -149,10 +183,13 @@ public class ViewMeetingHistory extends AppCompatActivity {
         {
             mCurrentMeetingAdd  =(Meeting) bundle.getSerializable("meeting");
             displayMeetingData(mCurrentMeetingAdd);
+
+            loadMeetingItem(String.valueOf(mCurrentMeetingAdd.getId()));
         }else{
 
             finish();
         }
+
 
 
     }
@@ -164,43 +201,41 @@ public class ViewMeetingHistory extends AppCompatActivity {
         int meetingItemCounter=0;
         mMeetingItem = retrieveMeetingItem(meetingID);
         mPaymentCertificates = retrievePayCertItem(meetingID);
-        mVariationOrders = retrieveVariationOrderItem(meetingID);
+      //  mVariationOrders = retrieveVariationOrderItem(meetingID);
 
-        for(int i = 0; i< MeetingTemplate.Template.length; i++)
+        for(int i = 0; i< mMeetingItem.size(); i++ )
         {
             LinearLayout meeting_item = null;
-
-            int templateType= MeetingTemplate.TemplateTypeOrder[i];
+            int templateType=  mMeetingItem.get(i).getType_id();
 
             switch (templateType)
             {
                 case MeetingTemplate.TemplateType.COMMON_ITEM :
 
                     meeting_item = new Meeting_Item(this);
-                    ((Meeting_Item)meeting_item).setMeetingItem(mMeetingItem.get(meetingItemCounter)); meetingItemCounter++;  break;
+                    ((Meeting_Item)meeting_item).setMeetingItem(mMeetingItem.get(i)); meetingItemCounter++;  break;
 
                 case MeetingTemplate.TemplateType.ATTENDEE_ITEM :meeting_item = new Attendee_SubMeeting_Item(this) ;
-                    ((Attendee_SubMeeting_Item)meeting_item).setMeetingItem(new MeetingItem(MeetingTemplate.Template[i],String.valueOf(i+1), mCurrentMeetingAdd ));  break;
+                    ((Attendee_SubMeeting_Item)meeting_item).setMeetingItem(mMeetingItem.get(i));  break;
 
 
                 case MeetingTemplate.TemplateType.PAYMENT_CERTIFICATE_ITEM :meeting_item = new PaymentCert_MeetingItem(this) ;
-                    ((PaymentCert_MeetingItem)meeting_item).setMeetingItem(mMeetingItem.get(meetingItemCounter)); meetingItemCounter++;  break;
+                    ((PaymentCert_MeetingItem)meeting_item).setMeetingItem(mMeetingItem.get(i)); meetingItemCounter++;  break;
 
                 case MeetingTemplate.TemplateType.VARIOUS_ORDER_ITEM : meeting_item = new VariousOrder_MeetingItem(this) ;
-                    ((VariousOrder_MeetingItem)meeting_item).setMeetingItem(mMeetingItem.get(meetingItemCounter)); meetingItemCounter++;  break;
+                    ((VariousOrder_MeetingItem)meeting_item).setMeetingItem(mMeetingItem.get(i)); meetingItemCounter++;  break;
 
                 default:meeting_item = new Meeting_Item(this);
-                    ((Meeting_Item)meeting_item).setMeetingItem(mMeetingItem.get(meetingItemCounter)); meetingItemCounter++;;  break;
+                    ((Meeting_Item)meeting_item).setMeetingItem(mMeetingItem.get(i)); meetingItemCounter++;;  break;
 
 
             }
 
-
             meetItemContainer.addView(meeting_item);
 
-
-
         }
+
+
 
 
 
@@ -264,7 +299,7 @@ public class ViewMeetingHistory extends AppCompatActivity {
         nf.show(getSupportFragmentManager(),"Start Time");
     }
 
-    public void onSaveClicked(View view)
+    public void onUpdateClicked(View view)
     {
        /* prepareSaving();
         insertNewMeeting(mCurrentMeetingAdd);
@@ -445,8 +480,8 @@ public class ViewMeetingHistory extends AppCompatActivity {
                         (cursor.getString(cursor.getColumnIndex(MeetingItemColumns.MEETING_ID)) !=null ? Integer.parseInt(cursor.getString(cursor.getColumnIndex(MeetingItemColumns.MEETING_ID))):0),
                         (cursor.getString(cursor.getColumnIndex(MeetingItemColumns.ITEM_NAME))),
                         (cursor.getString(cursor.getColumnIndex(MeetingItemColumns.POSITION))),
-                        (cursor.getString(cursor.getColumnIndex(MeetingItemColumns.STATUS)))
-
+                        (cursor.getString(cursor.getColumnIndex(MeetingItemColumns.STATUS))),
+                        (cursor.getString(cursor.getColumnIndex(MeetingItemColumns.MEEETINGITEM_TYPE_ID)) !=null ? Integer.parseInt(cursor.getString(cursor.getColumnIndex(MeetingItemColumns.MEEETINGITEM_TYPE_ID))):0)
                 );
                 elements.add(item);
 //int id, int meetingId, String itemName, String position, String status
@@ -678,6 +713,278 @@ public class ViewMeetingHistory extends AppCompatActivity {
         return position;
 
     }
+
+    private void requestPermission()
+    {
+        if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE_ASK_PERMISSIONS);
+        }
+    }
+
+
+    /**
+     * Listener for response to user permission request
+     *
+     * @param requestCode  Check that permission request code matches
+     * @param permissions  Permissions that requested
+     * @param grantResults Whether permissions granted
+     */
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        switch (requestCode)
+        {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT)
+                            .show();
+                }else{
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT)
+                            .show();
+                }break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+
+
+       /* if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            Log.i(TAG, "Permission " +permissions[0]+ " was " +grantResults[0]);
+        }*/
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.view_meeting_hist_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_export) {
+            viewPreview();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*****************************************************Create PDF**************************************************************/
+    private void viewPreview()
+    {
+        try {
+            createPDF();
+
+            Intent i = new Intent(getApplicationContext(), Previewer.class);
+
+            i.putExtra(KEY_FILE_PATH, mPDFFilePath);
+
+            startActivity(i);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createPDF () throws FileNotFoundException, DocumentException
+    {
+        //****************************************** Housekeeping  *****************************/
+
+
+        ///step 1 create the file
+        File pdfStatRepfolder = new File (Environment.getExternalStorageDirectory(), "Ponda_meeting");
+
+        if(!pdfStatRepfolder.exists())   //this what should be used
+        {
+            pdfStatRepfolder.mkdir();
+            Log.i(TAG, "PDF 2 directory created");
+        }
+
+        Date date = new Date();
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(date);
+
+        File newdoc = new File(pdfStatRepfolder +File.separator+"Meeting_"+ timeStamp+".pdf");
+
+        try {
+            newdoc.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        OutputStream output = new FileOutputStream(newdoc);
+
+        Document document = new Document(PageSize.A4);
+
+        ///step 2 retrieve the document
+        PdfWriter writer= PdfWriter.getInstance(document, output);
+
+
+        PdfCustFooter reportFooter =  new PdfCustFooter();
+        reportFooter.setFooterMsg("");
+        reportFooter.setHeaderMsg("");
+        writer.setPageEvent(reportFooter);
+
+
+        ///step 3 open the document
+        document.open();
+
+        ///step 4 add content
+
+        //the fonts
+        Font fontTitle= new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD);
+        Font fontSubtitle= new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
+
+        //end of fonts
+
+
+        //****************************************** Meeting Summary header goes here *****************************/
+
+        BaseColor blue_grey_color = new BaseColor(207,216,220);
+
+        PdfPTable tableUserSum = new PdfPTable(5);
+
+
+        PdfPCell cellSeparator = new PdfPCell(new Phrase(" " ));
+        cellSeparator.setRowspan(2);
+        cellSeparator.setColspan(5);
+        //cellSeparator.setBackgroundColor(blue_grey_color);
+        cellSeparator.setMinimumHeight(30);
+
+        cellSeparator.setBorder(Rectangle.NO_BORDER);
+        cellSeparator.setHorizontalAlignment(Element.ALIGN_CENTER);
+        // table.addCell(cellSeparator);
+
+
+
+        PdfPCell cellRepTitle = new PdfPCell(new Phrase("SITE MEETING",fontTitle));
+        cellRepTitle.setRowspan(2);
+        cellRepTitle.setColspan(5);
+        cellRepTitle.setBackgroundColor(blue_grey_color);
+        cellRepTitle.setMinimumHeight(25);
+        cellRepTitle.setBorder(Rectangle.NO_BORDER);
+        cellRepTitle.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cellRepTitle.setVerticalAlignment(Element.ALIGN_CENTER);
+        tableUserSum.addCell(cellRepTitle);
+
+
+        PdfPCell cellLeft = new PdfPCell(new Phrase("Project managers Ref: " ));
+        cellLeft.setRowspan(2);
+        cellLeft.setColspan(1);
+        cellLeft.setMinimumHeight(20);
+        cellLeft.setBackgroundColor(blue_grey_color);
+        //cellSite.setBorder(Rectangle.NO_BORDER);
+        cellLeft.setHorizontalAlignment(Element.ALIGN_LEFT);
+        tableUserSum.addCell(cellLeft);
+
+
+        PdfPCell cellRight = new PdfPCell(new Phrase(mCurrentMeetingAdd.getProjectManagersRef() ));
+        cellRight.setRowspan(2);
+        cellRight.setColspan(4);
+        cellRight.setMinimumHeight(20);
+        // cellSummaryinfo.setBorder(Rectangle.NO_BORDER);
+        cellRight.setHorizontalAlignment(Element.ALIGN_CENTER);
+        tableUserSum.addCell(cellRight);
+
+
+        cellLeft.setPhrase(new Phrase("Client: " ));
+        cellRight.setPhrase(new Phrase(mClientList.get(getClientPosition(mCurrentMeetingAdd.getClientId())).getName() ));
+        tableUserSum.addCell(cellLeft);
+        tableUserSum.addCell(cellRight);
+
+
+        cellLeft.setPhrase(new Phrase("Site: " ));
+        cellRight.setPhrase(new Phrase(mCurrentMeetingAdd.getSite() ));
+        tableUserSum.addCell(cellLeft);
+        tableUserSum.addCell(cellRight);
+
+
+        cellLeft.setPhrase(new Phrase("Project: " ));
+        cellRight.setPhrase(new Phrase(mProjectList.get(getProjectPosition(mCurrentMeetingAdd.getProjectId())).getName()   ));
+        tableUserSum.addCell(cellLeft);
+        tableUserSum.addCell(cellRight);
+
+
+
+        String datetime= mCurrentMeetingAdd.getMeetingDate()+" "+ mCurrentMeetingAdd.getStartTime();
+        cellLeft.setPhrase(new Phrase("Date & Time: " ));
+        cellRight.setPhrase(new Phrase(datetime ));
+        tableUserSum.addCell(cellLeft);
+        tableUserSum.addCell(cellRight);
+
+        cellLeft.setPhrase(new Phrase("Venue: " ));
+        cellRight.setPhrase(new Phrase(mCurrentMeetingAdd.getVenue() ));
+        tableUserSum.addCell(cellLeft);
+        tableUserSum.addCell(cellRight);
+
+        tableUserSum.addCell(cellSeparator);
+        //******************************************End meeting Summary header goes here ********************************/
+
+
+        //****************************************** Meeting Items Summary header goes here *****************************/
+
+        PdfPTable tableMeetingItems = new PdfPTable(5);
+
+        for(int i=0; i<mMeetingItem.size(); i++)
+        {
+
+            String title = mMeetingItem.get(i).getPosition() +"    "+mMeetingItem.get(i).getItemName();
+
+
+            PdfPCell cellMeetingItemTitle = new PdfPCell(new Phrase(title,fontTitle));
+            cellRepTitle.setRowspan(2);
+            cellRepTitle.setColspan(5);
+            cellRepTitle.setBackgroundColor(blue_grey_color);
+            cellRepTitle.setMinimumHeight(25);
+            cellRepTitle.setBorder(Rectangle.NO_BORDER);
+            cellRepTitle.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cellRepTitle.setVerticalAlignment(Element.ALIGN_CENTER);
+
+            tableMeetingItems.addCell(cellMeetingItemTitle);
+
+            tableMeetingItems.addCell(cellSeparator);
+
+
+
+        }
+
+
+
+
+
+
+        /****adding the table to the document*****/
+        document.add( tableUserSum);
+       // document.add(tableStatChart);
+
+        ///step 5 close the document
+        document.close();
+
+        ///step 6 extract the file path
+        mPDFFilePath =newdoc.getPath();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class MeetingItem implements Serializable {
 
-    int id, meetingId ;
+    int id, meetingId , type_id;
 
     String itemName,position,status;
 
@@ -37,12 +37,13 @@ public class MeetingItem implements Serializable {
         this.itemName = itemName;
     }
 
-    public MeetingItem(int id, int meetingId, String itemName, String position, String status) {
+    public MeetingItem(int id, int meetingId, String itemName, String position, String status, int type_id) {
         this.id = id;
         this.meetingId = meetingId;
         this.itemName = itemName;
         this.position = position;
         this.status = status;
+        this.type_id = type_id;
     }
 
 
@@ -100,5 +101,13 @@ public class MeetingItem implements Serializable {
 
     public void setMeeting(Meeting meeting) {
         this.meeting = meeting;
+    }
+
+    public int getType_id() {
+        return type_id;
+    }
+
+    public void setType_id(int type_id) {
+        this.type_id = type_id;
     }
 }
